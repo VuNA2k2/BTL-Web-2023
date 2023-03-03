@@ -10,8 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
+@WebServlet(name = "helloServlet", value = "/todos")
+public class TodoController extends HttpServlet {
     private String message;
     private final Gson GSON = new GsonBuilder().create();
     public void init() {
@@ -21,9 +21,9 @@ public class HelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
         System.out.println(uri);
-//        Long id = Long.parseLong(uri.substring("/todos/".length()));
+        Long id = Long.parseLong(request.getParameter("id"));
 
-        String json = GSON.toJson(Todos.todos.get(1L));
+        String json = GSON.toJson(Todos.todos.get(id));
 
         response.setStatus(200);
         response.setHeader("Content-Type", "application/json");
