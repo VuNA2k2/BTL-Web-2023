@@ -1,5 +1,6 @@
 package com.example.webs2023.controller;
 
+import com.example.webs2023.base.Response;
 import com.example.webs2023.config.DatabaseConnection;
 import com.example.webs2023.dao.Todos;
 import com.example.webs2023.model.User;
@@ -8,9 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -25,7 +24,7 @@ public class TodoController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            connection = DatabaseConnection.initializeDatabase();
+            connection = DatabaseConnection.getInstance();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -36,14 +35,24 @@ public class TodoController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
-        System.out.println(uri);
         Long id = Long.parseLong(request.getParameter("id"));
 
-        String json = GSON.toJson(Todos.todos.get(id));
+//        String json = GSON.toJson(Todos.todos.get(id));
 
-        response.setStatus(200);
-        response.setHeader("Content-Type", "application/json");
-        response.getOutputStream().println(json);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE id=?");
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            response.setStatus(200);
+            response.setHeader("Content-Type", "application/json");
+            if (resultSet.next()) {
+                response.getOutputStream().println(GSON.toJson(new User(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getString("date_of_birth"))));
+            } else {
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -53,8 +62,7 @@ public class TodoController extends HttpServlet {
         resp.setHeader("Content-Type", "application/json");
         try {
             User user = GSON.fromJson(JsonFromInputConverter.getInputStream(req.getReader()), User.class);
-            PreparedStatement st = connection
-                    .prepareStatement("insert into users values(?, ?)");
+            PreparedStatement st = connection.prepareStatement("insert into users values(?, ?)");
             st.setString(2, user.getName());
             st.setString(1, user.getDateOfBirth());
             st.execute();
@@ -69,11 +77,6 @@ public class TodoController extends HttpServlet {
 
         }
 
-    }
-
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.service(req, resp);
     }
 
     public void destroy() {
