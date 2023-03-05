@@ -1,14 +1,14 @@
-package com.example.webs2023.entity;
+package com.example.webs2023.dto.user;
 
-public class UserEntity {
+public class UserOutput {
     private Long id;
     private String name;
     private String dateOfBirth;
 
-    public UserEntity() {
+    public UserOutput() {
     }
 
-    public UserEntity(Long id, String name, String dateOfBirth) {
+    public UserOutput(Long id, String name, String dateOfBirth) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -40,7 +40,7 @@ public class UserEntity {
 
     @Override
     public String toString() {
-        return "UserEntity{" +
+        return "UserOutput{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
