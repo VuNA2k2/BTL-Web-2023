@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("SqlDialectInspection")
 public class BaseRepository<E, T> {
 
     private final Connection connection;
@@ -26,67 +27,67 @@ public class BaseRepository<E, T> {
         tableName = StringUtils.camelToSnake(entityClass.getName().toLowerCase().substring(entityClass.getName().lastIndexOf(".") + 1, entityClass.getName().indexOf("Entity"))) + "s";
     }
 
-    public <E> E save(E e) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public E save(E e) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException {
         String sql = "INSERT INTO " + tableName + " ? VALUES ?";
-        try {
+        StringBuilder columnLabel = new StringBuilder("(");
+        StringBuilder columnValues = new StringBuilder("(");
+        List<String> columnLabelList = new ArrayList<>();
+        List<Object> columnValueList = new ArrayList<>();
+        E finalE = e;
+        Arrays.stream(entityClass.getDeclaredFields()).map(Field::getName).forEach((name) -> {
+            try {
+                PropertyDescriptor valueDescriptor = new PropertyDescriptor(name, entityClass);
+                Method readMethod = valueDescriptor.getReadMethod();
+                Object data = readMethod.invoke(finalE);
 
-            String columnLabel = "(";
-            String columnValues = "(";
-            List<String> columnLabelList = new ArrayList<>();
-            List<Object> columnValueList = new ArrayList<>();
-            Arrays.stream(entityClass.getDeclaredFields()).map(Field::getName).forEach((name) -> {
-                try {
-                    PropertyDescriptor valueDescriptor = new PropertyDescriptor(name, entityClass);
-                    Method readMethod = valueDescriptor.getReadMethod();
-                    Object data = readMethod.invoke(e);
-                    if (data != null) {
-                        columnValueList.add(data);
-                        columnLabelList.add(StringUtils.camelToSnake(name));
-                    }
-                } catch (IntrospectionException | InvocationTargetException | IllegalAccessException ex) {
-                    throw new RuntimeException(ex);
+                if (data != null) {
+                    columnValueList.add(data);
+                    columnLabelList.add(StringUtils.camelToSnake(name));
                 }
+            } catch (IntrospectionException | InvocationTargetException | IllegalAccessException ex) {
+                throw new RuntimeException(ex);
+            }
 
-            });
-            for (int i = 0; i < columnLabelList.size() - 1; i++) {
-                columnLabel += columnLabelList.get(i) + ", ";
-                columnValues += "?, ";
-            }
-            columnValues += "?)";
-            columnLabel += columnLabelList.get(columnLabelList.size() - 1) + ")";
-            sql = sql.replaceFirst("\\?", columnLabel);
-            sql = sql.replaceFirst("\\?", columnValues);
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            for (int i = 0; i < columnValueList.size(); i++) {
-                if (columnValueList.get(i) instanceof String) {
-                    preparedStatement.setString(i + 1, columnValueList.get(i).toString());
-                } else if (columnValueList.get(i) instanceof Date) {
-                    preparedStatement.setDate(i + 1, (Date) columnValueList.get(i));
-                } else if (columnValueList.get(i) instanceof Long) {
-                    preparedStatement.setLong(i + 1, (Long) columnValueList.get(i));
-                } else if (columnValueList.get(i) instanceof Integer) {
-                    preparedStatement.setInt(i + 1, (Integer) columnValueList.get(i));
-                } else if (columnValueList.get(i) instanceof Timestamp) {
-                    preparedStatement.setTimestamp(i + 1, (Timestamp) columnValueList.get(i));
-                }
-            }
-            preparedStatement.executeUpdate();
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-            if (resultSet.next()) return getEntityFromResultSet(resultSet);
-            preparedStatement.close();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+        });
+        for (int i = 0; i < columnLabelList.size() - 1; i++) {
+            columnLabel.append(columnLabelList.get(i)).append(", ");
+            columnValues.append("?, ");
         }
-        return null;
+        columnValues.append("?)");
+        columnLabel.append(columnLabelList.get(columnLabelList.size() - 1)).append(")");
+        sql = sql.replaceFirst("\\?", columnLabel.toString());
+        sql = sql.replaceFirst("\\?", columnValues.toString());
+        PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        for (int i = 0; i < columnValueList.size(); i++) {
+            if (columnValueList.get(i) instanceof String) {
+                preparedStatement.setString(i + 1, columnValueList.get(i).toString());
+            } else if (columnValueList.get(i) instanceof Date) {
+                preparedStatement.setDate(i + 1, (Date) columnValueList.get(i));
+            } else if (columnValueList.get(i) instanceof Long) {
+                preparedStatement.setLong(i + 1, (Long) columnValueList.get(i));
+            } else if (columnValueList.get(i) instanceof Integer) {
+                preparedStatement.setInt(i + 1, (Integer) columnValueList.get(i));
+            } else if (columnValueList.get(i) instanceof Timestamp) {
+                preparedStatement.setTimestamp(i + 1, (Timestamp) columnValueList.get(i));
+            }
+        }
+        preparedStatement.executeUpdate();
+        ResultSet resultSet = preparedStatement.getGeneratedKeys();
+        System.out.println(preparedStatement);
+        if (resultSet.next()) e = getEntityFromResultSet(resultSet);
+        else e = null;
+        preparedStatement.close();
+
+        return e;
     }
 
-    public <E, T> E getById(T id) throws NoSuchMethodException, InvocationTargetException, InstantiationException, SQLException, IllegalAccessException {
+    public E getById(T id) throws NoSuchMethodException, InvocationTargetException, InstantiationException, SQLException, IllegalAccessException {
         E entity;
         String sql = "SELECT * FROM " + tableName + " WHERE id = ?";
-
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setLong(1, (Long) id);
         ResultSet resultSet = preparedStatement.executeQuery();
+        System.out.println(preparedStatement);
         if (resultSet.next()) entity = getEntityFromResultSet(resultSet);
         else {
             preparedStatement.close();
@@ -96,11 +97,12 @@ public class BaseRepository<E, T> {
         return entity;
     }
 
-    public <E> List<E> getAll(String orderQuery) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public List<E> getAll(String orderQuery) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<E> listEntity = new ArrayList<>();
-        String sql = "SELECT * FROM "+tableName+" " + (orderQuery != null ? orderQuery : "");
+        String sql = "SELECT * FROM " + tableName + " " + (orderQuery != null ? orderQuery : "");
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
+        System.out.println(preparedStatement);
         while (resultSet.next()) {
             listEntity.add(getEntityFromResultSet(resultSet));
         }
@@ -108,19 +110,20 @@ public class BaseRepository<E, T> {
         return listEntity;
     }
 
-    public <E> List<E> getAll() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public List<E> getAll() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return this.getAll(null);
     }
 
-    public <E, T> E updateById(T id, E entity) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public E updateById(T id, E entity) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String sql = "UPDATE " + tableName + " SET ? WHERE id=?";
         List<String> columnLabelList = new ArrayList<>();
         List<Object> columnValueList = new ArrayList<>();
+        E finalEntity = entity;
         Arrays.stream(entityClass.getDeclaredFields()).map(Field::getName).forEach((name) -> {
             try {
                 PropertyDescriptor valueDescriptor = new PropertyDescriptor(name, entityClass);
                 Method readMethod = valueDescriptor.getReadMethod();
-                Object data = readMethod.invoke(entity);
+                Object data = readMethod.invoke(finalEntity);
                 if (data != null) {
                     columnValueList.add(data);
                     columnLabelList.add(StringUtils.camelToSnake(name));
@@ -129,14 +132,14 @@ public class BaseRepository<E, T> {
                 throw new RuntimeException(ex);
             }
         });
-        String listSet = "";
-        for(int i = 0; i < columnLabelList.size() - 1; i ++) {
-            listSet += (columnLabelList.get(i) + "=?, ");
+        StringBuilder listSet = new StringBuilder();
+        for (int i = 0; i < columnLabelList.size() - 1; i++) {
+            listSet.append(columnLabelList.get(i)).append("=?, ");
         }
-        listSet += (columnLabelList.get(columnLabelList.size()-1)+ "=?");
-        sql = sql.replaceFirst("\\?", listSet);
+        listSet.append(columnLabelList.get(columnLabelList.size() - 1)).append("=?");
+        sql = sql.replaceFirst("\\?", listSet.toString());
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        for(int i = 0; i < columnValueList.size(); i ++) {
+        for (int i = 0; i < columnValueList.size(); i++) {
             if (columnValueList.get(i) instanceof String) {
                 preparedStatement.setString(i + 1, columnValueList.get(i).toString());
             } else if (columnValueList.get(i) instanceof Date) {
@@ -152,14 +155,18 @@ public class BaseRepository<E, T> {
         preparedStatement.setLong(columnValueList.size() + 1, (Long) id);
         preparedStatement.executeUpdate();
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        if(resultSet.next()) {
-            return getEntityFromResultSet(resultSet);
+        System.out.println(preparedStatement);
+        if (resultSet.next()) {
+            entity = getEntityFromResultSet(resultSet);
+            preparedStatement.close();
+            return entity;
         }
+        preparedStatement.close();
         return null;
     }
 
-    protected <E> E getEntityFromResultSet(ResultSet resultSet) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException {
-        E entity = (E) entityClass.getDeclaredConstructor().newInstance();
+    protected E getEntityFromResultSet(ResultSet resultSet) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        E entity = entityClass.getDeclaredConstructor().newInstance();
         Arrays.stream(entityClass.getDeclaredFields()).collect(Collectors.toMap(Field::getName, Function.identity())).forEach((name, field) -> {
             try {
                 PropertyDescriptor propertyDescriptor = new PropertyDescriptor(name, entityClass);
@@ -178,5 +185,17 @@ public class BaseRepository<E, T> {
             }
         });
         return entity;
+    }
+
+    public List<E> rawQuery(String sql) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<E> listEntity = new ArrayList<>();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        System.out.println(preparedStatement);
+        while (resultSet.next()) {
+            listEntity.add(getEntityFromResultSet(resultSet));
+        }
+        preparedStatement.close();
+        return listEntity;
     }
 }
