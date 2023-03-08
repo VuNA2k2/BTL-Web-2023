@@ -1,17 +1,13 @@
 package com.example.webs2023.base;
 
-public class BaseService<E, T> {
-    private static BaseService instance;
+public abstract class BaseService<E, T, I, O> {
+    protected BaseRepository<E, T> repository;
 
-    private BaseRepository<E, T> repository;
+    protected BaseMapper<E, I, O> mapper;
 
-    private BaseService() {
+    protected BaseService() {
 
     }
-    public static BaseService getInstance() {
-        if(instance == null) {
-            instance = new BaseService();
-        }
-        return instance;
-    }
+
+
 }

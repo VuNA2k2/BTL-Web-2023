@@ -9,9 +9,7 @@ import com.example.webs2023.repository.UserRepository;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
-public class UserService {
-    private final UserRepository repository;
-    private final UserMapper mapper;
+public class UserService extends BaseService<UserEntity, Long, UserInput, UserOutput> {
 
     public UserService(UserRepository repository) {
         super();
