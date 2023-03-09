@@ -8,6 +8,7 @@ import com.example.webs2023.repository.UserRepository;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserService extends BaseService<UserEntity, Long, UserInput, UserOutput> {
 
@@ -23,5 +24,9 @@ public class UserService extends BaseService<UserEntity, Long, UserInput, UserOu
 
     public UserOutput save(UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return mapper.getOutputFromEntity(repository.save(mapper.getEntityFromInput(userInput)));
+    }
+
+    public List<UserOutput> getUserByDateOfBirth(String dateOfBirth) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return ((UserRepository) repository).getUserByDateOfBirth("20-09-2002").stream().map((e) -> (UserOutput) mapper.getOutputFromEntity(e)).toList();
     }
 }

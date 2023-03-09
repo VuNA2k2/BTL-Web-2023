@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 @SuppressWarnings("SqlDialectInspection")
 public class BaseRepository<E, T> {
 
-    private final Connection connection;
-    private final Class<E> entityClass;
-    private final String tableName;
+    protected final Connection connection;
+    protected final Class<E> entityClass;
+    protected final String tableName;
 
-    public BaseRepository(Class<E> entityClass) throws SQLException, ClassNotFoundException {
+    protected BaseRepository(Class<E> entityClass) throws SQLException, ClassNotFoundException {
         connection = DatabaseConnection.getInstance();
         this.entityClass = entityClass;
         tableName = StringUtils.camelToSnake(entityClass.getName().toLowerCase().substring(entityClass.getName().lastIndexOf(".") + 1, entityClass.getName().indexOf("Entity"))) + "s";

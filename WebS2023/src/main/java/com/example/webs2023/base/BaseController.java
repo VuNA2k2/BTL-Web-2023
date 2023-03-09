@@ -1,26 +1,54 @@
 package com.example.webs2023.base;
 
-import com.example.webs2023.config.DatabaseConnection;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import java.sql.Connection;
-import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public class BaseController extends HttpServlet {
-    protected final Gson GSON = new GsonBuilder().create();
-    protected Connection connection;
+public abstract class BaseController<E, T, I, O> extends HttpServlet {
+
+    protected BaseService<E, T, I, O> service;
 
     @Override
-    public void init() throws ServletException {
-        try {
-            connection = DatabaseConnection.getInstance();
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        super.init();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setStatus(200);
+        resp.setHeader("Content-Type", "application/json");
+        resp.getOutputStream().println(getMethod(req, resp).toJson());
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setStatus(200);
+        resp.setHeader("Content-Type", "application/json");
+        resp.getOutputStream().println(postMethod(req, resp).toJson());
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setStatus(200);
+        resp.setHeader("Content-Type", "application/json");
+        resp.getOutputStream().println(putMethod(req, resp).toJson());
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setStatus(200);
+        resp.setHeader("Content-Type", "application/json");
+        resp.getOutputStream().println(deleteMethod(req, resp).toJson());
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
+    }
+
+    protected abstract Response<O> getMethod(HttpServletRequest request, HttpServletResponse response);
+
+    protected abstract Response<O> postMethod(HttpServletRequest request, HttpServletResponse response);
+
+    protected abstract Response<O> putMethod(HttpServletRequest request, HttpServletResponse response);
+
+    protected abstract Response<O> deleteMethod(HttpServletRequest request, HttpServletResponse response);
 }
 
