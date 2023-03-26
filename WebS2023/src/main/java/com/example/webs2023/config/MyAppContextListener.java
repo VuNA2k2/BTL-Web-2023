@@ -24,7 +24,7 @@ public class MyAppContextListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
+        DependencyInjector.destroy();
     }
 }
 

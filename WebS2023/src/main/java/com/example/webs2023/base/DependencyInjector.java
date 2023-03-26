@@ -21,5 +21,9 @@ public class DependencyInjector {
     public static void unregisterDependency(Class<?> type) {
         dependencies.remove(type);
     }
+
+    public static void destroy() {
+        dependencies.clear();
+    }
 }
 
