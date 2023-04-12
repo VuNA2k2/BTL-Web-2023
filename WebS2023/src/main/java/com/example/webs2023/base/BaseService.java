@@ -24,6 +24,12 @@ public abstract class BaseService<E, T, I, O> {
     public List<O> getAll() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return (List<O>) repository.getAll().stream().map(mapper::getOutputFromEntity).toList();
     }
-
-
+    
+    public O updateById(T id, I input) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return mapper.getOutputFromEntity(repository.updateById(id, mapper.getEntityFromInput(input)));
+    }
+    
+    public boolean deleteById(T id) throws SQLException {
+        return repository.deleteById(id);
+    }
 }

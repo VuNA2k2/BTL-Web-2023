@@ -165,6 +165,16 @@ public class BaseRepository<E, T> {
         return null;
     }
 
+    public boolean deleteById(T id) throws SQLException {
+        String sql = "DELETE FROM " + tableName + " WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setLong(1, (Long) id);
+        int result = preparedStatement.executeUpdate();
+        System.out.println(preparedStatement);
+        preparedStatement.close();
+        return result > 0;
+    }
+
     protected E getEntityFromResultSet(ResultSet resultSet) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         E entity = entityClass.getDeclaredConstructor().newInstance();
         Arrays.stream(entityClass.getDeclaredFields()).collect(Collectors.toMap(Field::getName, Function.identity())).forEach((name, field) -> {

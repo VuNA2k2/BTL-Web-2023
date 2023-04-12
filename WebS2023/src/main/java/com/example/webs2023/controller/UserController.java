@@ -30,9 +30,10 @@ public class UserController extends BaseController {
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
+//            TODO: Using more methods here and return result
         } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {
-            return new Response("success", "Thanh Cong", null);
+            return new Response("fail", "That bai", null);
         }
     }
 
@@ -42,6 +43,7 @@ public class UserController extends BaseController {
             UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
             UserOutput userOutput = (UserOutput) service.save(userInput);
             return new Response("success", "Thanh Cong", userOutput);
+//            TODO: Using more methods here and return result
         } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
                  InstantiationException | IllegalAccessException e) {
             return new Response("fail", "That bai", null);
@@ -50,11 +52,24 @@ public class UserController extends BaseController {
 
     @Override
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
+            UserOutput userOutput = (UserOutput) service.updateById(Long.parseLong(request.getParameter("id")), userInput);
+            return new Response("success", "Thanh Cong", userOutput);
+//        TODO: Using more methods here and return result
+        } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
+                 InstantiationException | IllegalAccessException e) {
+            return new Response("fail", "That bai", null);
+        }
     }
 
     @Override
     protected Response deleteMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            return new Response("success", "Thanh Cong", service.deleteById(Long.parseLong(request.getParameter("id"))));
+//        TODO: Using more methods here and return result
+        } catch (SQLException e) {
+            return new Response("fail", "That bai", null);
+        }
     }
 }
