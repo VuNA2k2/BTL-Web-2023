@@ -3,12 +3,16 @@ package com.example.webs2023.controller;
 import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
+import com.example.webs2023.dto.user.UserInput;
+import com.example.webs2023.dto.user.UserOutput;
 import com.example.webs2023.service.user.UserService;
+import com.example.webs2023.utils.JsonFromInputConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
@@ -28,13 +32,20 @@ public class UserController extends BaseController {
             return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
         } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {
-            throw new RuntimeException(e);
+            return new Response("success", "Thanh Cong", null);
         }
     }
 
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
+            UserOutput userOutput = (UserOutput) service.save(userInput);
+            return new Response("success", "Thanh Cong", userOutput);
+        } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
+                 InstantiationException | IllegalAccessException e) {
+            return new Response("fail", "That bai", null);
+        }
     }
 
     @Override
