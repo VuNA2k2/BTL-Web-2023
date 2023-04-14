@@ -1,0 +1,65 @@
+#dang_ki {
+    width: 30%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.nhap {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.nhap input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.nhap i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #aaa;
+}
+
+.center {
+    display: flex;
+    float: left;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.tieu_de {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.tieu_de p {
+    margin: 0 0 10px 0;
+    font-size: large;
+
+}
+
+.dang_ki_nut {
+    display: block;
+    background-color: green;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    padding: 10px;
+}
