@@ -1,17 +1,27 @@
 package com.example.webs2023.dto.product;
 
-public class ProductInputDto {
+public class ProductInput {
     private String name;
     private String description;
     private Long price;
+    private Long categoryId;
 
-    public ProductInputDto() {
+    public ProductInput() {
     }
 
-    public ProductInputDto(String name, String description, Long price) {
+    public ProductInput(String name, String description, Long price, Long categoryId) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.categoryId = categoryId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

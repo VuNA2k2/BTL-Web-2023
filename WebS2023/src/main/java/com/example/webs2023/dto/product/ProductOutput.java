@@ -1,28 +1,28 @@
-package com.example.webs2023.entity;
+package com.example.webs2023.dto.product;
 
-public class ProductEntity {
+import com.example.webs2023.dto.category.CategoryOutput;
+
+public class ProductOutput {
     private Long id;
     private String name;
     private String description;
     private Long price;
-    private Long categoryId;
-    public ProductEntity() {
+    private CategoryOutput category;
+    public ProductOutput() {
     }
-
-    public ProductEntity(Long id, String name, String description, Long price, Long categoryId) {
+    public ProductOutput(Long id, String name, String description, Long price, CategoryOutput category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.categoryId = categoryId;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public CategoryOutput getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(CategoryOutput category) {
+        this.category = category;
     }
 
     public Long getId() {

@@ -11,4 +11,9 @@ CREATE TABLE IF NOT EXISTS public.products
 (
     id
 )
-    )
+    );
+ALTER TABLE public.products
+    ADD COLUMN category_id integer NOT NULL;
+
+ALTER TABLE public.products
+    ADD CONSTRAINT products_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.categorys(id);

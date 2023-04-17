@@ -17,30 +17,26 @@ public abstract class BaseController<E, T, I, O> extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setStatus(200);
-        resp.setHeader("Content-Type", "application/json");
-        resp.getOutputStream().println(getMethod(req, resp).toJson());
+        String result = getMethod(req, resp).toJson();
+        resp.getWriter().print(result);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setStatus(200);
-        resp.setHeader("Content-Type", "application/json");
-        resp.getOutputStream().println(postMethod(req, resp).toJson());
+        String result = postMethod(req, resp).toJson();
+        resp.getWriter().print(result);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setStatus(200);
-        resp.setHeader("Content-Type", "application/json");
-        resp.getOutputStream().println(putMethod(req, resp).toJson());
+        String result = putMethod(req, resp).toJson();
+        resp.getWriter().print(result);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setStatus(200);
-        resp.setHeader("Content-Type", "application/json");
-        resp.getOutputStream().println(deleteMethod(req, resp).toJson());
+        String result = deleteMethod(req, resp).toJson();
+        resp.getWriter().print(result);
     }
 
     @Override
@@ -49,6 +45,9 @@ public abstract class BaseController<E, T, I, O> extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
         resp.setHeader("Access-Control-Max-Age", "86400");
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setStatus(200);
         super.service(req, resp);
     }
 

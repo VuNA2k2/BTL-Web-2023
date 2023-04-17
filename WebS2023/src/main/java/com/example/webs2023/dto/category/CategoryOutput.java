@@ -1,17 +1,17 @@
-package com.example.webs2023.dto.product;
+package com.example.webs2023.dto.category;
 
-public class ProductOutputDto {
+public class CategoryOutput {
     private Long id;
     private String name;
     private String description;
-    private Long price;
-    ProductOutputDto() {
+
+    public CategoryOutput() {
     }
-    ProductOutputDto(Long id, String name, String description, Long price) {
+
+    public CategoryOutput(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
     }
 
     public Long getId() {
@@ -36,13 +36,5 @@ public class ProductOutputDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
     }
 }

@@ -29,7 +29,12 @@ public class UserController extends BaseController {
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
+            if(request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
+                return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
+            } else if(request.getParameter("dateOfBirth") != null && !request.getParameter("dateOfBirth").isEmpty()) {
+
+            }
+            return null;
 //            TODO: Using more methods here and return result
         } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {

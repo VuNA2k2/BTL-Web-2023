@@ -6,8 +6,7 @@ import com.example.webs2023.entity.ProductEntity;
 import java.sql.SQLException;
 
 public class ProductRepository extends BaseRepository<ProductEntity, Long> {
-    protected ProductRepository(Class<ProductEntity> entityClass) throws SQLException, ClassNotFoundException {
+    public ProductRepository(Class<ProductEntity> entityClass) throws SQLException, ClassNotFoundException {
         super(entityClass);
     }
-
 }

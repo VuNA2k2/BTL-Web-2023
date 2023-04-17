@@ -1,28 +1,16 @@
 package com.example.webs2023.entity;
 
-public class ProductEntity {
+public class CategoryEntity {
     private Long id;
     private String name;
     private String description;
-    private Long price;
-    private Long categoryId;
-    public ProductEntity() {
-    }
 
-    public ProductEntity(Long id, String name, String description, Long price, Long categoryId) {
+    public CategoryEntity() {
+    }
+    public CategoryEntity(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.price = price;
-        this.categoryId = categoryId;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
     }
 
     public Long getId() {
@@ -47,13 +35,5 @@ public class ProductEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
     }
 }
