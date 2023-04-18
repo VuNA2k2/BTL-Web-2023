@@ -22,11 +22,12 @@
         }).then(response => response.json()).then(data => {
             console.log(data);
             let output = '';
-            for(let i = 0; i < data.data.length; i++)
+            for (let i = 0; i < data.data.length; i++)
                 output += JSON.stringify(data.data[i], null, 2) + "<br/>";
             document.getElementById("data").innerHTML = output;
         });
     }
+
     callApi();
 </script>
 </html>
