@@ -1,4 +1,4 @@
-#dang_nhap {
+#login {
     width: 30%;
     border: 1px solid #ccc;
     padding: 20px;
@@ -9,12 +9,12 @@
     transform: translate(-50%, -50%);
 }
 
-.nhap {
+.input_data {
     position: relative;
     margin-bottom: 20px;
 }
 
-.nhap input {
+.input_data input {
     width: 100%;
     padding: 10px 10px 10px 30px;
     font-size: 16px;
@@ -23,26 +23,26 @@
     box-sizing: border-box;
 }
 
-.nhap i {
+.input_data i {
     position: absolute;
     top: 10px;
     left: 10px;
     color: #aaa;
 }
 
-#dang_nhap .tieu_de {
+#login .title {
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
 }
 
-.tieu_de p {
+.title p {
     margin: 0 0 20px 0;
     font-size: 27px;
 }
 
-.dang_nhap_btn {
+.login_btn {
     background-color: green;
     color: white;
     width: 100%;
