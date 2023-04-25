@@ -1,4 +1,4 @@
-#dang_ki {
+#register {
     width: 30%;
     border: 1px solid #ccc;
     padding: 20px;
@@ -10,12 +10,12 @@
 
 }
 
-.nhap {
+.input_data {
     position: relative;
     margin-bottom: 20px;
 }
 
-.nhap input {
+.input_data input {
     width: 100%;
     padding: 10px 10px 10px 30px;
     font-size: 16px;
@@ -24,7 +24,7 @@
     box-sizing: border-box;
 }
 
-.nhap i {
+.input_data i {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -32,7 +32,7 @@
 }
 
 
-#dang_ki .tieu_de {
+#register .tieu_de {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +44,7 @@
     font-size: 27px;
 }
 
-.dang_ki_btn {
+.register_btn {
     background-color: green;
     color: white;
     width: 100%;
