@@ -41,7 +41,7 @@ header {
 }
 
 .header-menu li a {
-	
+
 	color: white;
 	text-decoration: none;
 	font-size: 14px;
@@ -49,8 +49,9 @@ header {
 }
 
 .header-menu li:hover {
-    background-color: #333;
+	background-color: #333;
 }
+
 .logo {
 
 	display: flex;
@@ -297,14 +298,61 @@ h2 {
 	background-color: #0fb771;
 }
 
-.product-description
-{
+.product-description {
 	margin: 20px 0;
 }
 
-.product-description p
-{
+.product-description p {
 	margin: 7px 0;
+}
+
+
+.product-qa {
+	border: 1px solid #ccc;
+	padding: 20px;
+	width: 70%;
+	margin: 40px auto;
+	
+}
+
+.product-qa h3 {
+	margin-top: 0;
+	text-align: center;
+	color: black ;
+
+}
+
+.form-group {
+	
+	margin-bottom: 10px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	color: black ;
+}
+
+input,
+textarea {
+	display: block;
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	color: black ;
+}
+
+button {
+	background-color: #007bff;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0069d9;
 }
 
 /* Footer */
