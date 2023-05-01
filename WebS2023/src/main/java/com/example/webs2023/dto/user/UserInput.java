@@ -1,30 +1,50 @@
 package com.example.webs2023.dto.user;
 
 public class UserInput {
-    private String name;
-    private String dateOfBirth;
+    private String username;
+    private String password;
+    private String fullName;
+    private String email;
+    private String phone;
+    private String address;
+    private String role;
 
     public UserInput() {
     }
 
-    public UserInput(String name, String dateOfBirth) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
+    public UserInput(String username, String password, String fullName, String email, String phone, String address, String role) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPassword() {
+        return password;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getAddress() { return address; }
+
+    public String getRole() {
+        return role;
     }
 }

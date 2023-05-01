@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
-@WebServlet(value = "/products")
+@WebServlet(value = "/api/products")
 public class ProductController extends BaseController {
     @Override
     public void init() throws ServletException {

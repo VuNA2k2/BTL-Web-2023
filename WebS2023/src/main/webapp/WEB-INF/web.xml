@@ -6,4 +6,12 @@
     <listener>
         <listener-class>com.example.webs2023.config.MyAppContextListener</listener-class>
     </listener>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.example.webs2023.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
 </web-app>

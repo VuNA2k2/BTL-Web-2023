@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+input {
+    width: 100%;
+}
+
+#login {
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#username {
+
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#password {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#btnSubmit {
+    padding: 10px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.product-item {
+    background-color: #eee;
+    padding: 20px;
+    text-align: center;
+}

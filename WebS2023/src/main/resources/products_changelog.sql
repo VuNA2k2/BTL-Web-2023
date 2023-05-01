@@ -17,3 +17,5 @@ ALTER TABLE public.products
 
 ALTER TABLE public.products
     ADD CONSTRAINT products_category_id_fkey FOREIGN KEY (category_id) REFERENCES public.categorys(id);
+
+ALTER TABLE public.products ADD COLUMN link_image varchar;

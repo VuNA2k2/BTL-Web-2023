@@ -18,8 +18,8 @@ public class UserService extends BaseService<UserEntity, Long, UserInput, UserOu
         mapper = new UserMapper(UserEntity.class, UserInput.class, UserOutput.class);
     }
 
-    public List<UserOutput> getUserByDateOfBirth(String dateOfBirth) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return ((UserRepository) repository).getUserByDateOfBirth("20-09-2002").stream().map((e) -> (UserOutput) mapper.getOutputFromEntity(e)).toList();
+    public UserOutput exitsWithUsernameAndPassword(String username, String password) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        UserEntity userEntity = ((UserRepository) repository).exitsWithUsernameAndPassword(username, password);
+        return mapper.getOutputFromEntity(userEntity);
     }
-//    TODO: Add more methods here
 }

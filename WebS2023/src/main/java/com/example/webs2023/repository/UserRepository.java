@@ -18,4 +18,8 @@ public class UserRepository extends BaseRepository<UserEntity, Long> {
         return rawQuery("SELECT * FROM users WHERE date_of_birth='" +dateOfBirth+ "'");
 
     }
+
+    public UserEntity exitsWithUsernameAndPassword(String username, String password) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return rawQuery("SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "'").get(0);
+    }
 }

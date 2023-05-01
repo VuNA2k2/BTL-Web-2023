@@ -13,7 +13,7 @@
 </body>
 <script>
     function callApi() {
-        fetch('http://localhost:8080/WebS2023_war/products', {
+        fetch('http://localhost:8080/WebS2023_war/api/products', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
