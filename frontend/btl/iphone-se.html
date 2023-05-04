@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mobile Phone Store - Product Page</title>
+	<script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
+
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<header>
+		<div class="header-container">
+			<div class="logo">
+				<a href="#"><img src="./img/logo.jpg" alt="Logo"></a>
+			</div>
+			<div class="header-menu">
+				<ul>
+					<li><a href="#">Trang chủ</a></li>
+					<li><a href="#">Sản phẩm</a></li>
+					<li><a href="#">iPhone</a></li>
+					<li><a href="#">iPad</a></li>
+					<li><a href="#">Mac</a></li>
+					<li><a href="#">Liên hệ</a></li>
+				</ul>
+			</div>
+			<div class="search-box">
+				<input type="text" placeholder="Tìm kiếm...">
+				<button><i class="fa-solid fa-magnifying-glass"></i></button>
+			</div>
+			<div class="cart">
+				<a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+			</div>
+			<div class="login">
+				<a href="#"><i class="fa-solid fa-user"></i> </a>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="product">
+            <div class="mySlides">
+                <div class="slideshow">
+                    <a href="#">
+                        <img src="./img/anh1.jpg" style="width:100%" class="active">
+                    </a>
+                    <a href="#">
+                        <img src="./img/anh2.jpg" style="width:100%">
+                    </a>
+                    <a href="#">
+                        <img src="./img/anh3.jpg" style="width:100%">
+                    </a>
+                    <a href="#">
+                        <img src="./img/anh4.jpg" style="width:100%">
+                    </a>				
+
+                    <button class="prev" onclick="prevSlide()">&#10094;</button>
+                    <button class="next" onclick="nextSlide()">&#10095;</button>
+                    <script src="./slide-show.js"></script>
+                </div>
+            </div>
+            <div class="product-filter">
+                <div class="filter-cate">
+                    <a href="./index.html" class="active">Tất cả</a>
+                    <a href="./iphone-14.html" class="" >iPhon 14</a>
+                    <a href="./iphone-13.html" class="" >iPhon 13</a>
+                    <a href="./iphone-12.html" class="" >iPhon 12</a>
+                    <a href="./iphone-11.html" class="" >iPhon 11</a>
+                    <a href="./iphone-se.html" class="" >iPhon SE</a>
+                </div>
+
+                <div class="filter-sort">
+                    <a href="javascript:;" >Xếp theo: Mới ra mắt</a>
+                    <ul>
+                        <li>
+                            <a href="javascript:;" class="option">Mới ra mắt</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="option">Bán chạy</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="option">Giá thấp đến cao</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="option">Giá cao đến thấp</a>
+                        </li>
+                    </ul>      
+                </div>
+            </div>
+
+            <div class="product-container">
+                <ul class="product-list">
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#">
+                            <img src="./img/pic1.jpg">
+                            <div class="product-price">
+                                <h3>Iphone SE Pro</h3>
+                                <p>27.200.000đ</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                
+            </div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="footer-content">
+			<div class="footer-section about">
+				<h2 class="logo-text">TOPZONE</h2>
+				<div class="contact">
+					<i class="f fa-phone"></i> <a href="">0123456789</a></span>
+					<i class="f fa-envelope"></i> <a href="">info@company.com</a></span>
+				</div>
+				<div class="socials">
+					<a href="#"><i class="fab fa-facebook"></i></a>
+					<a href="#"><i class="fab fa-twitter"></i></a>
+					<a href="#"><i class="fab fa-instagram"></i></a>
+				</div>
+			</div>
+			<div class="footer-section">
+				<h2>Hệ thống cửa hàng</h2>
+				<ul>
+					<li><a href="#">Xem 100 cửa hàng</a></li>
+					<li><a href="#">Nội quy cửa hàng</a></li>
+					<li><a href="#">Chất lượng phục vụ</a></li>
+					<li><a href="#">Chính sách bảo hành & đổi trả</a></li>
+				</ul>
+			</div>
+
+			<div class="footer-section">
+				<h2>Hỗ trợ khách hàng</h2>
+				<ul>
+					<li><a href="#">Điều kiện giao dịch chung </a></li>
+					<li><a href="#">Hướng dẫn mua hàng online </a></li>
+					<li><a href="#">Chính sách giao hàng </a></li>
+					<li><a href="#">Hướng dẫn thanh toán </a></li>
+				</ul>
+			</div>
+
+			<div class="footer-section">
+				<h2>Về thương hiệu TopZone</h2>
+				<ul>
+					<li><a href="#">Tích điểm Quà tặng VIP</a></li>
+					<li><a href="#">Giới thiệu TopZone</a></li>
+					<li><a href="#">Bán hàng doanh nghiệp</a></li>
+					<li><a href="#">Chính sách bảo mật thông tin</a></li>
+				</ul>
+			</div>
+
+			<div class="footer-section">
+				<h2>Trung tâm bảo hành</h2>
+				<ul>
+					<li><a href="#">Giới thiệu TopCare</a></li>
+
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div>&copy; © 2018. Công ty cổ phần Thế Giới Di Động. GPDKKD: 0303217354 do sở KH & ĐT TP.HCM cấp ngày
+				02/01/2007.</div>
+			<div>Địa chỉ: 128 Trần Quang Khải, P. Tân Định, Q.1, TP. Hồ Chí Minh. Điện thoại: 028 38125960.</div>
+
+		</div>
+
+	</footer>
+
+</body>
+
+</html>
