@@ -14,9 +14,9 @@ public class JwtService {
     private static final String SECRET = "WebS2023";
     private static final String ALGORITHM = "HmacSHA256";
     private static final Long EXPIRED_TIME = 1000L * 60 * 60 * 24 * 7;
-    public static String createToken(String payload) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public static String createToken(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         Long now = Calendar.getInstance().getTimeInMillis();
-        String prePayload = "{\"id\":\"" + payload + "\" + \"exp\":" + now + EXPIRED_TIME +"}";
+        String prePayload = "{\"id\":\"" + userId.toString() + "\"," + "\"exp\":" + now + EXPIRED_TIME +"}";
         String header = Base64.getUrlEncoder().encodeToString("{\"alg\":\"HS256\",\"typ\":\"JWT\"}".getBytes(StandardCharsets.UTF_8));
         String encodedPayload = Base64.getUrlEncoder().encodeToString(prePayload.getBytes(StandardCharsets.UTF_8));
         String signature = sign(header, encodedPayload);

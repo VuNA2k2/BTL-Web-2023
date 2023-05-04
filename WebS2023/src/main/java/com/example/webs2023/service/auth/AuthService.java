@@ -22,7 +22,7 @@ public class AuthService {
         try {
             UserEntity userEntity = userRepository.exitsWithUsernameAndPassword(loginInput.getUsername(), loginInput.getPassword());
             if(userEntity != null) {
-                String token = JwtService.createToken(userEntity.getId().toString());
+                String token = JwtService.createToken(userEntity.getId(), userEntity.getRole());
                 return new LoginOutput(token);
             } else {
                 return null;
