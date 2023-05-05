@@ -13,7 +13,7 @@ import java.util.Calendar;
 public class JwtService {
     private static final String SECRET = "WebS2023";
     private static final String ALGORITHM = "HmacSHA256";
-    private static final Long EXPIRED_TIME = 1000L * 60 * 60 * 24 * 7;
+    private static final Long EXPIRED_TIME = 1000L * 60 * 60 * 3;
     public static String createToken(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         Long now = Calendar.getInstance().getTimeInMillis();
         String prePayload = "{\"id\":\"" + userId.toString() + "\"," + "\"exp\":" + now + EXPIRED_TIME +"}";
