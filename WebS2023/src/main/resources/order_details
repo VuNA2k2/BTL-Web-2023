@@ -1,0 +1,7 @@
+CREATE TABLE order_details (
+    id SERIAL PRIMARY KEY,
+    oid INTEGER REFERENCES orders(id),
+    pid INTEGER REFERENCES products(id),
+    quantity INTEGER,
+    price DECIMAL(10, 2)
+);
