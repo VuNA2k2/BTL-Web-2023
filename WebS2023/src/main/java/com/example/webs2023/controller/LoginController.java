@@ -18,12 +18,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 
 @WebServlet(value = "/api/auth/login")
-public class AuthController extends BaseController {
-    private final String[] publicPaths = {
-            "/api/auth/login",
-            "/api/auth/register"
-    };
+public class LoginController extends BaseController {
     private final AuthService authService = new AuthService(DependencyInjector.getDependency(UserRepository.class));
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -34,11 +31,7 @@ public class AuthController extends BaseController {
         String token = request.getParameter("token");
         try {
             return new Response("success", "Thanh cong", JwtService.validateToken(token));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidKeyException e) {
-            throw new RuntimeException(e);
-        } catch (SignatureException e) {
+        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
             throw new RuntimeException(e);
         }
     }
@@ -46,22 +39,12 @@ public class AuthController extends BaseController {
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String requestURI = request.getRequestURI();
-            String contextPath = request.getContextPath();
-            String path = requestURI.substring(contextPath.length());
-            if(path.equals("/api/auth/login")) {
-                LoginInput loginInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), LoginInput.class);
-                return new Response(
-                        "success",
-                        "Thanh cong",
-                        authService.login(loginInput));
-
-            } else if(path.equals("/api/auth/register")) {
-                return null;
-            } else {
-                return new Response("fail", "That bai", "Khong tim thay duong dan");
-            }
-        } catch(Exception e) {
+            LoginInput loginInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), LoginInput.class);
+            return new Response(
+                    "success",
+                    "Thanh cong",
+                    authService.login(loginInput));
+        } catch (Exception e) {
             return new Response("fail", "That bai", e);
         }
     }

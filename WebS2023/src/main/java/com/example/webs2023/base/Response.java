@@ -20,6 +20,14 @@ public class Response<T> {
         this.data = data;
     }
 
+    public static Response success() {
+        return new Response("success", "Thanh cong", null);
+    }
+
+    public static Response success(Object data) {
+        return new Response("success", "Thanh cong", data);
+    }
+
     public Response() {
     }
 
