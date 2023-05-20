@@ -1,5 +1,4 @@
 CREATE TABLE order_ref_product (
-    id SERIAL PRIMARY KEY,
     oid INTEGER REFERENCES orders(id),
     pid INTEGER REFERENCES products(id),
     quantity INTEGER,
