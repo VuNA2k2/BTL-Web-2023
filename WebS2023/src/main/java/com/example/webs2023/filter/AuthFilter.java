@@ -1,11 +1,17 @@
 package com.example.webs2023.filter;
 
+import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.service.jwt.JwtService;
+import com.example.webs2023.service.jwt.JwtServiceImpl;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthFilter implements Filter {
+
+    private final JwtService jwtService = DependencyInjector.getDependency(JwtService.class);
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -19,7 +25,8 @@ public class AuthFilter implements Filter {
         String contextPath = httpRequest.getContextPath();
         String path = requestURI.substring(contextPath.length());
         System.out.println(path);
-        if(path != null && path.startsWith("/api/auth")) {
+        if(!path.startsWith("/api")) return;
+        if(path.startsWith("/api/auth")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             String authHeader = httpRequest.getHeader("Authorization");
@@ -31,9 +38,8 @@ public class AuthFilter implements Filter {
 
             String token = authHeader.substring(7);
             try {
-//                DecodedJWT jwt = JwtUtil.verifyToken(token);
-//                httpRequest.setAttribute("userId", jwt.getSubject());
-//                filterChain.doFilter(servletRequest, servletResponse);
+                jwtService.validateToken(token);
+                filterChain.doFilter(servletRequest, servletResponse);
             } catch (Exception e) {
                 httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }

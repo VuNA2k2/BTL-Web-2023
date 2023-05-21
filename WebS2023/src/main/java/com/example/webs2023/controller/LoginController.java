@@ -6,20 +6,17 @@ import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.login.LoginInput;
 import com.example.webs2023.repository.UserRepository;
 import com.example.webs2023.service.auth.AuthService;
-import com.example.webs2023.service.jwt.JwtService;
+import com.example.webs2023.service.auth.AuthServiceImpl;
 import com.example.webs2023.utils.JsonFromInputConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SignatureException;
 
 @WebServlet(value = "/api/auth/login")
 public class LoginController extends BaseController {
-    private final AuthService authService = new AuthService(DependencyInjector.getDependency(UserRepository.class));
+    private final AuthService authService = DependencyInjector.getDependency(AuthService.class);
 
     @Override
     public void init() throws ServletException {
@@ -28,12 +25,7 @@ public class LoginController extends BaseController {
 
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
-        String token = request.getParameter("token");
-        try {
-            return new Response("success", "Thanh cong", JwtService.validateToken(token));
-        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
     }
 
     @Override
