@@ -12,7 +12,7 @@
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <url-pattern>/WebS2023_war/api/*</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
     <security-constraint>
         <web-resource-collection>

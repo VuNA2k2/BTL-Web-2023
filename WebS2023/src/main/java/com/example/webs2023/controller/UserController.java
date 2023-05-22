@@ -3,8 +3,10 @@ package com.example.webs2023.controller;
 import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
+import com.example.webs2023.dto.jwt.JwtPayload;
 import com.example.webs2023.dto.user.UserInput;
 import com.example.webs2023.dto.user.UserOutput;
+import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.user.UserService;
 import com.example.webs2023.utils.JsonFromInputConverter;
 
@@ -16,9 +18,9 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
-@WebServlet(value = "/users")
+@WebServlet(value = "/api/users")
 public class UserController extends BaseController {
-
+    JwtService jwtService = DependencyInjector.getDependency(JwtService.class);
     @Override
     public void init() throws ServletException {
         super.init();
@@ -33,6 +35,10 @@ public class UserController extends BaseController {
                 return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
             } else if(request.getParameter("dateOfBirth") != null && !request.getParameter("dateOfBirth").isEmpty()) {
 
+            } else {
+                String token = request.getHeader("Authorization").substring(7);
+                JwtPayload jwtPayload = jwtService.getPayload(token);
+                return Response.success(service.getById(jwtPayload.getUserId()));
             }
             return null;
 //            TODO: Using more methods here and return result

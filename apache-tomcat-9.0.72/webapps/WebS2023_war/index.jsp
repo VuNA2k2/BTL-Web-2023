@@ -3,45 +3,25 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Màu viền */
+            border-top: 16px solid #3498db; /* Màu viền trên */
+            border-radius: 50%; /* Hình tròn */
+            width: 120px; /* Kích thước */
+            height: 120px; /* Kích thước */
+            animation: spin 2s linear infinite; /* Tạo hiệu ứng quay */
+            margin: 150px auto; /* Canh giữa */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<div id="data"></div>
-<a href="hello-servlet">Hello Servlet</a>
+<div class="loader"></div>
+<script src="script.js"></script>
 </body>
-<script>
-
-    function callApi() {
-        fetch('https://localhost:443/WebS2023_war/api/products', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + getTokenFromCookie(),
-            }
-        }).then(response => response.json()).then(data => {
-            console.log(data);
-            let output = '';
-            for (let i = 0; i < data.data.length; i++)
-                output += JSON.stringify(data.data[i], null, 2) + "<br/>";
-            document.getElementById("data").innerHTML = output;
-        });
-    }
-
-    function getTokenFromCookie() {
-        var cookieString = document.cookie;
-        var cookies = cookieString.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            if (cookie.startsWith('token=')) {
-                var token = cookie.substring('token='.length);
-                return token;
-            }
-        }
-        return null;
-    }
-    // callApi();
-</script>
 </html>

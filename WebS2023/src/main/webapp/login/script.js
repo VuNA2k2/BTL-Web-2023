@@ -23,7 +23,7 @@ function login() {
             response.json().then( (data) => {
                 console.log(data)
                 document.cookie = "token=" + data.data.token + ";path=/";
-                window.location.href = "/WebS2023_war/";
+                window.location.href = "/WebS2023_war";
             });
         } else {
             response.json().then(function (data) {
