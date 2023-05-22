@@ -12,6 +12,15 @@
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/WebS2023_war/api/*</url-pattern>
     </filter-mapping>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AuthServer</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
 </web-app>

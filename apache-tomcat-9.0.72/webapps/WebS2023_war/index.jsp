@@ -14,7 +14,7 @@
 <script>
 
     function callApi() {
-        fetch('http://localhost:8080/WebS2023_war/api/products', {
+        fetch('https://localhost:443/WebS2023_war/api/products', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +33,6 @@
     function getTokenFromCookie() {
         var cookieString = document.cookie;
         var cookies = cookieString.split(';');
-
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();
             if (cookie.startsWith('token=')) {
@@ -41,12 +40,8 @@
                 return token;
             }
         }
-
         return null;
     }
-
-    alert(getTokenFromCookie());
-
-    callApi();
+    // callApi();
 </script>
 </html>

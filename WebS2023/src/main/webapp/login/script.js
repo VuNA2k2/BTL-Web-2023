@@ -9,7 +9,7 @@ function login() {
         password: password
     };
     fetch(
-        "http://localhost:8080/WebS2023_war/api/auth/login",
+        "https://localhost:443/WebS2023_war/api/auth/login",
         {
             method: "POST",
             body: JSON.stringify(data),
