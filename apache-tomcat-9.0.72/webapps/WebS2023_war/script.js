@@ -12,10 +12,8 @@ fetch('https://localhost:443/WebS2023_war/api/users', {
             localStorage.setItem('user', JSON.stringify(data.data));
             if(data.data.role === 'ADMIN') {
                 window.location.href = "/WebS2023_war/admin/user";
-            }else  {
-                window.location.href = "/WebS2023_war/home";
             }
         });
     }
-    window.location.href = "/WebS2023_war/login";
+    window.location.href = "/WebS2023_war/home";
 });
