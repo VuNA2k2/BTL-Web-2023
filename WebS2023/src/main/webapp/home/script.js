@@ -13,4 +13,4 @@ function checkLogged(role) {
     main.innerHTML = `Hello ${localStorage.getItem('user')}`;
 }
 
-checkLogged();
+// checkLogged();

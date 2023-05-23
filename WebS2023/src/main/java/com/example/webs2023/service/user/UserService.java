@@ -1,25 +1,21 @@
 package com.example.webs2023.service.user;
 
-import com.example.webs2023.base.BaseService;
 import com.example.webs2023.dto.user.UserInput;
 import com.example.webs2023.dto.user.UserOutput;
-import com.example.webs2023.entity.UserEntity;
-import com.example.webs2023.repository.UserRepository;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserService extends BaseService<UserEntity, Long, UserInput, UserOutput> {
-
-    public UserService(UserRepository repository) {
-        super();
-        this.repository = repository;
-        mapper = new UserMapper(UserEntity.class, UserInput.class, UserOutput.class);
-    }
-
-    public UserOutput exitsWithUsernameAndPassword(String username, String password) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        UserEntity userEntity = ((UserRepository) repository).exitsWithUsernameAndPassword(username, password);
-        return mapper.getOutputFromEntity(userEntity);
-    }
+public interface UserService {
+    UserOutput getUserById(Long id) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    UserOutput getUserByUsername(String username) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    UserOutput exitsWithUsernameAndPassword(String username, String password) throws SQLException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+    UserOutput saveUser(UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    UserOutput updateUser(Long id, UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    void deleteUser(Long id) throws SQLException;
+    UserOutput getUserByEmail(String email);
+    UserOutput getUserByPhone(String phone);
+    List<UserOutput> getUserByAddress(String address);
+    List<UserOutput> getUserByRole(String role);
 }

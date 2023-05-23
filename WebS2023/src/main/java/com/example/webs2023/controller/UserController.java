@@ -8,6 +8,7 @@ import com.example.webs2023.dto.user.UserInput;
 import com.example.webs2023.dto.user.UserOutput;
 import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.user.UserService;
+import com.example.webs2023.service.user.UserServiceImpl;
 import com.example.webs2023.utils.JsonFromInputConverter;
 
 import javax.servlet.ServletException;
@@ -21,27 +22,41 @@ import java.sql.SQLException;
 @WebServlet(value = "/api/users")
 public class UserController extends BaseController {
     JwtService jwtService = DependencyInjector.getDependency(JwtService.class);
+    UserService service = DependencyInjector.getDependency(UserService.class);
     @Override
     public void init() throws ServletException {
         super.init();
-        service = DependencyInjector.getDependency(UserService.class);
+
     }
 
 
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            if(request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
-                return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
-            } else if(request.getParameter("dateOfBirth") != null && !request.getParameter("dateOfBirth").isEmpty()) {
-
-            } else {
-                String token = request.getHeader("Authorization").substring(7);
-                JwtPayload jwtPayload = jwtService.getPayload(token);
-                return Response.success(service.getById(jwtPayload.getUserId()));
+            String token = request.getHeader("Authorization").substring(7);
+            JwtPayload jwtPayload = jwtService.getPayload(token);
+            UserOutput userOutput = service.getUserById(jwtPayload.getUserId());
+            if (userOutput == null) {
+                response.setStatus(401);
+                return new Response("UNAUTHORIZED", "Chưa đăng nhập vui lòng đăng nhập", null);
+            } else if (!userOutput.getRole().equals("ADMIN")) {
+                response.setStatus(403);
+                return new Response("FORBIDDEN", "Không có quyền truy cập", null);
             }
-            return null;
-//            TODO: Using more methods here and return result
+            if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
+                return new Response("success", "Thanh Cong", service.getUserById(Long.parseLong(request.getParameter("id"))));
+            } else if (request.getParameter("role") != null && !request.getParameter("role").isEmpty()) {
+                return new Response("success", "Thanh Cong", service.getUserByRole(request.getParameter("role")));
+            } else if (request.getParameter("username") != null && !request.getParameter("username").isEmpty()) {
+                return new Response("success", "Thanh Cong", service.getUserByUsername(request.getParameter("username")));
+            } else if (request.getParameter("email") != null && !request.getParameter("email").isEmpty()) {
+                return new Response("success", "Thanh Cong", service.getUserByEmail(request.getParameter("email")));
+            } else if (request.getParameter("phone") != null && !request.getParameter("phone").isEmpty()) {
+                return new Response("success", "Thanh Cong", service.getUserByPhone(request.getParameter("phone")));
+            } else {
+                return Response.success(userOutput);
+            }
+            //            TODO: Using more methods here and return result
         } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {
             return new Response("fail", "That bai", null);
@@ -52,7 +67,7 @@ public class UserController extends BaseController {
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
-            UserOutput userOutput = (UserOutput) service.save(userInput);
+            UserOutput userOutput = (UserOutput) service.saveUser(userInput);
             return new Response("success", "Thanh Cong", userOutput);
 //            TODO: Using more methods here and return result
         } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
@@ -65,7 +80,7 @@ public class UserController extends BaseController {
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
-            UserOutput userOutput = (UserOutput) service.updateById(Long.parseLong(request.getParameter("id")), userInput);
+            UserOutput userOutput = (UserOutput) service.updateUser(Long.parseLong(request.getParameter("id")), userInput);
             return new Response("success", "Thanh Cong", userOutput);
 //        TODO: Using more methods here and return result
         } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
@@ -77,7 +92,8 @@ public class UserController extends BaseController {
     @Override
     protected Response deleteMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            return new Response("success", "Thanh Cong", service.deleteById(Long.parseLong(request.getParameter("id"))));
+            service.deleteUser(Long.parseLong(request.getParameter("id")));
+            return Response.success();
 //        TODO: Using more methods here and return result
         } catch (SQLException e) {
             return new Response("fail", "That bai", null);

@@ -12,6 +12,6 @@
 </head>
 <body>
 <h1>Quản lý người dùng</h1>
-<script src="../../script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

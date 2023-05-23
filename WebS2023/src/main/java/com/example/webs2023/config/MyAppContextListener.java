@@ -14,6 +14,7 @@ import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.jwt.JwtServiceImpl;
 import com.example.webs2023.service.product.ProductService;
 import com.example.webs2023.service.user.UserService;
+import com.example.webs2023.service.user.UserServiceImpl;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -26,7 +27,7 @@ public class MyAppContextListener implements ServletContextListener {
         try {
             DatabaseConnection.getInstance();
             DependencyInjector.registerDependency(UserRepository.class, new UserRepository(UserEntity.class));
-            DependencyInjector.registerDependency(UserService.class, new UserService(DependencyInjector.getDependency(UserRepository.class)));
+            DependencyInjector.registerDependency(UserService.class, new UserServiceImpl(DependencyInjector.getDependency(UserRepository.class)));
             DependencyInjector.registerDependency(JwtService.class, new JwtServiceImpl());
             DependencyInjector.registerDependency(AuthService.class, new AuthServiceImpl(DependencyInjector.getDependency(UserRepository.class), DependencyInjector.getDependency(JwtService.class)));
             DependencyInjector.registerDependency(CategoryRepository.class, new CategoryRepository(CategoryEntity.class));
