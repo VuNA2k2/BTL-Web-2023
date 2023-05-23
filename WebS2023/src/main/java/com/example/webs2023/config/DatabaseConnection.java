@@ -14,7 +14,7 @@ public class DatabaseConnection {
 
             String dbName = "phone_selling";
             String dbUsername = "postgres";
-            String dbPassword = "20092002";
+            String dbPassword = "Huykhoi2010!";
 
             Class.forName(dbDriver);
             instance = DriverManager.getConnection(dbURL + dbName,

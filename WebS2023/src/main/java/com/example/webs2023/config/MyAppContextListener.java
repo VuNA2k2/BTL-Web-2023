@@ -1,14 +1,18 @@
 package com.example.webs2023.config;
 
 import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.entity.CartEntity;
 import com.example.webs2023.entity.CategoryEntity;
 import com.example.webs2023.entity.ProductEntity;
 import com.example.webs2023.entity.UserEntity;
+import com.example.webs2023.repository.CartRepository;
 import com.example.webs2023.repository.CategoryRepository;
 import com.example.webs2023.repository.ProductRepository;
 import com.example.webs2023.repository.UserRepository;
 import com.example.webs2023.service.auth.AuthService;
 import com.example.webs2023.service.auth.AuthServiceImpl;
+import com.example.webs2023.service.cart.CartService;
+import com.example.webs2023.service.cart.CartServiceImpl;
 import com.example.webs2023.service.category.CategoryService;
 import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.jwt.JwtServiceImpl;
@@ -34,6 +38,8 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(CategoryService.class, new CategoryService(DependencyInjector.getDependency(CategoryRepository.class)));
             DependencyInjector.registerDependency(ProductRepository.class, new ProductRepository(ProductEntity.class));
             DependencyInjector.registerDependency(ProductService.class, new ProductService(DependencyInjector.getDependency(ProductRepository.class)));
+            DependencyInjector.registerDependency(CartRepository.class, new CartRepository(CartEntity.class));
+            DependencyInjector.registerDependency(CartService.class, new CartServiceImpl(DependencyInjector.getDependency(CartRepository.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
