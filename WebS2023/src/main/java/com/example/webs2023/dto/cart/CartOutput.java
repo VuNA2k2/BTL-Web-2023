@@ -2,14 +2,16 @@ package com.example.webs2023.dto.cart;
 
 public class CartOutput {
     private Long id;
-    private double totalmoneny;
+    private Long userId;
+    private double totalMoney;
 
     public CartOutput() {
     }
 
-    public CartOutput(Long id, double totalmoneny) {
+    public CartOutput(Long id, Long userId, double totalMoney) {
         this.id = id;
-        this.totalmoneny = totalmoneny;
+        this.userId = userId;
+        this.totalMoney = totalMoney;
     }
 
     public Long getId() {
@@ -20,11 +22,19 @@ public class CartOutput {
         this.id = id;
     }
 
-    public double getTotalmoneny() {
-        return totalmoneny;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setTotalmoneny(double totalmoneny) {
-        this.totalmoneny = totalmoneny;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public double getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(double totalMoney) {
+        this.totalMoney = totalMoney;
     }
 }
