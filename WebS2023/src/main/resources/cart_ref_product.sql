@@ -1,7 +1,7 @@
 CREATE TABLE cart_ref_product (
-    cid INTEGER REFERENCES carts (id),
-    pid INTEGER,
-    pname VARCHAR(255),
+    cart_id INTEGER REFERENCES carts (id),
+    product_id INTEGER,
+    product_name VARCHAR(255),
     quantity INTEGER,
     price DOUBLE PRECISION
 );

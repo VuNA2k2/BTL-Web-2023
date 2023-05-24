@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="loader"></div>
-<%--<script src="script.js"></script>--%>
+<%--&lt;%&ndash;<script src="script.js"></script>&ndash;%&gt; --%>
 <script>
     fetch('https://localhost/WebS2023_war/api/carts?id=1', {
         method: 'GET',
