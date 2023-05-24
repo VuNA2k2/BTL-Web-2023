@@ -38,7 +38,12 @@ public class AuthFilter implements Filter {
 
             String token = authHeader.substring(7);
             try {
-                jwtService.validateToken(token);
+                if(jwtService.validateToken(token)) {
+                    httpRequest.setAttribute("payload", jwtService.getPayload(token));
+                } else {
+                    httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
+                };
                 filterChain.doFilter(servletRequest, servletResponse);
             } catch (Exception e) {
                 httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
