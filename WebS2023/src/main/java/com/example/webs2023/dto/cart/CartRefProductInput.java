@@ -4,19 +4,15 @@ package com.example.webs2023.dto.cart;
 public class CartRefProductInput {
     private Long cartId;
     private Long productId;
-    private String productName;
     private Long quantity;
-    private double price;
 
     public CartRefProductInput() {
     }
 
-    public CartRefProductInput(Long cartId, Long productId, String productName, Long quantity, double price) {
+    public CartRefProductInput(Long cartId, Long productId, Long quantity) {
         this.cartId = cartId;
         this.productId = productId;
-        this.productName = productName;
         this.quantity = quantity;
-        this.price = price;
     }
 
     public Long getCartId() {
@@ -35,27 +31,11 @@ public class CartRefProductInput {
         this.productId = productId;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public Long getQuantity() {
         return quantity;
     }
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 }

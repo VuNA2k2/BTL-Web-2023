@@ -1,22 +1,17 @@
-package com.example.webs2023.entity;
+package com.example.webs2023.dto.cart;
 
-public class CartRefProductEntity {
+
+public class CartRefProductOutput {
     private Long id;
     private Long cartId;
     private Long productId;
     private Long quantity;
 
-    public CartRefProductEntity() {
+    public CartRefProductOutput() {
     }
 
-    public CartRefProductEntity(Long id, Long cartId, Long productId, Long quantity) {
+    public CartRefProductOutput(Long id, Long cartId, Long productId, Long quantity) {
         this.id = id;
-        this.cartId = cartId;
-        this.productId = productId;
-        this.quantity = quantity;
-    }
-
-    public CartRefProductEntity(Long cartId, Long productId, Long quantity) {
         this.cartId = cartId;
         this.productId = productId;
         this.quantity = quantity;

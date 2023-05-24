@@ -1,15 +1,35 @@
 package com.example.webs2023.dto.cart;
 
+import com.example.webs2023.dto.product.ProductOutput;
+
+import java.util.List;
+
 public class CartOutput {
     private Long id;
-    private double totalmoneny;
+    private Long userId;
+
+    private List<CartRefProductOutput> products;
+
+    public List<CartRefProductOutput> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<CartRefProductOutput> products) {
+        this.products = products;
+    }
 
     public CartOutput() {
     }
 
-    public CartOutput(Long id, double totalmoneny) {
+    public CartOutput(Long id, Long userId) {
         this.id = id;
-        this.totalmoneny = totalmoneny;
+        this.userId = userId;
+    }
+
+    public CartOutput(Long id, Long userId, List<CartRefProductOutput> products) {
+        this.id = id;
+        this.userId = userId;
+        this.products = products;
     }
 
     public Long getId() {
@@ -20,11 +40,11 @@ public class CartOutput {
         this.id = id;
     }
 
-    public double getTotalmoneny() {
-        return totalmoneny;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setTotalmoneny(double totalmoneny) {
-        this.totalmoneny = totalmoneny;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

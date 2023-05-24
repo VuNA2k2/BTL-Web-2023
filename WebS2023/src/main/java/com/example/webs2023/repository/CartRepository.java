@@ -14,11 +14,7 @@ public class CartRepository extends BaseRepository<CartEntity, Long> {
         super(entityClass);
     }
 
-    public List<CartEntity> getCartByTotalMoney(double totalMoney) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return rawQuery("SELECT FROM " + tableName + " WHERE total_money = " + totalMoney);
-    }
-
     public List<CartEntity> getCartByUserId(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return rawQuery("SELECT * FROM " + tableName + " WHERE user_id ="+userId);
+        return rawQuery("SELECT * FROM " + tableName + " WHERE user_id ="+userId + " ORDER BY id DESC");
     }
 }

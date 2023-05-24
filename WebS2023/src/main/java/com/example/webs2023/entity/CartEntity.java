@@ -2,29 +2,31 @@ package com.example.webs2023.entity;
 
 public class CartEntity {
     private Long id;
-    private double totalmoney;
+    private Long userId;
 
     public CartEntity() {
     }
 
-    public CartEntity(Long id, double totalmoney) {
+    public CartEntity(Long id, Long userId) {
         this.id = id;
-        this.totalmoney = totalmoney;
+        this.userId = userId;
+    }
+    public CartEntity(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public double getTotalmoney() {
-        return totalmoney;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setTotalmoney(double totalmoney) {
-        this.totalmoney = totalmoney;
+    public Long getUserId() {
+        return userId;
     }
 }

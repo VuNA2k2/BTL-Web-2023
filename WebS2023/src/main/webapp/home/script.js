@@ -14,3 +14,4 @@ function checkLogged(role) {
 }
 
 // checkLogged();
+

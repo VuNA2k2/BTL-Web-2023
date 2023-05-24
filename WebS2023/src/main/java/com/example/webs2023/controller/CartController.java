@@ -19,11 +19,15 @@ public class CartController extends BaseController {
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             String id = request.getParameter("id");
+            String userId = request.getParameter("userId");
             if(id != null && !id.isEmpty()) {
                 return  Response.success(cartService.getCartById(Long.parseLong(id)));
+            } else if(userId != null &&  !userId.isEmpty()) {
+                return Response.success(cartService.getCartByUserId(Long.parseLong(userId)));
             }
             return new Response("fail", "Looix", null);
         } catch (Exception e) {
+            e.printStackTrace();
             return new Response("fail", "Looix", null);
         }
     }

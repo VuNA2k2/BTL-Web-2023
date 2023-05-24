@@ -22,20 +22,20 @@
 </head>
 <body>
 <div class="loader"></div>
-<%--&lt;%&ndash;<script src="script.js"></script>&ndash;%&gt; --%>
-<script>
-    fetch('https://localhost/WebS2023_war/api/carts?id=1', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer ' + document.cookie.split('=')[1],
-        }
-    }).then((response) => {
-        response.json().then((data) => {
-            console.log(data)
-        })
-    })
-</script>
+<script src="script.js"></script>
+<%--<script>--%>
+<%--    fetch('https://localhost/WebS2023_war/api/carts?userId=1', {--%>
+<%--        method: 'GET',--%>
+<%--        headers: {--%>
+<%--            'Content-Type': 'application/json',--%>
+<%--            'Accept': 'application/json',--%>
+<%--            'Authorization': 'Bearer ' + document.cookie.split('=')[1],--%>
+<%--        }--%>
+<%--    }).then((response) => {--%>
+<%--        response.json().then((data) => {--%>
+<%--            console.log(data)--%>
+<%--        })--%>
+<%--    })--%>
+<%--</script>--%>
 </body>
 </html>

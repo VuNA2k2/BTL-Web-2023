@@ -1,16 +1,12 @@
 package com.example.webs2023.config;
 
 import com.example.webs2023.base.DependencyInjector;
-import com.example.webs2023.entity.CartEntity;
-import com.example.webs2023.entity.CategoryEntity;
-import com.example.webs2023.entity.ProductEntity;
-import com.example.webs2023.entity.UserEntity;
-import com.example.webs2023.repository.CartRepository;
-import com.example.webs2023.repository.CategoryRepository;
-import com.example.webs2023.repository.ProductRepository;
-import com.example.webs2023.repository.UserRepository;
+import com.example.webs2023.entity.*;
+import com.example.webs2023.repository.*;
 import com.example.webs2023.service.auth.AuthService;
 import com.example.webs2023.service.auth.AuthServiceImpl;
+import com.example.webs2023.service.cart.CartRefProductService;
+import com.example.webs2023.service.cart.CartRefProductServiceImpl;
 import com.example.webs2023.service.cart.CartService;
 import com.example.webs2023.service.cart.CartServiceImpl;
 import com.example.webs2023.service.category.CategoryService;
@@ -41,7 +37,9 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(ProductRepository.class, new ProductRepository(ProductEntity.class));
             DependencyInjector.registerDependency(ProductService.class, new ProductService(DependencyInjector.getDependency(ProductRepository.class)));
             DependencyInjector.registerDependency(CartRepository.class, new CartRepository(CartEntity.class));
-            DependencyInjector.registerDependency(CartService.class, new CartServiceImpl(DependencyInjector.getDependency(CartRepository.class)));
+            DependencyInjector.registerDependency(CartRefProductRepository.class, new CartRefProductRepository(CartRefProductEntity.class));
+            DependencyInjector.registerDependency(CartRefProductService.class, new CartRefProductServiceImpl(DependencyInjector.getDependency(CartRefProductRepository.class)));
+            DependencyInjector.registerDependency(CartService.class, new CartServiceImpl(DependencyInjector.getDependency(CartRepository.class), DependencyInjector.getDependency(CartRefProductService.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
