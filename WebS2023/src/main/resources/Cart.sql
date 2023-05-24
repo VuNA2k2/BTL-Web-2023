@@ -1,5 +1,5 @@
 CREATE TABLE carts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES user (id),
-    total_money DECIMAL(10, 2)
+    total_money DOUBLE PRECISION
 );
