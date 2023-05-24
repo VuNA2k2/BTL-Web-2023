@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -32,6 +33,9 @@ public class UserController extends BaseController {
 
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String json = (String) session.getAttribute("user");
+        System.out.println(json);
         try {
             String token = request.getHeader("Authorization").substring(7);
             JwtPayload jwtPayload = jwtService.getPayload(token);
@@ -39,9 +43,6 @@ public class UserController extends BaseController {
             if (userOutput == null) {
                 response.setStatus(401);
                 return new Response("UNAUTHORIZED", "Chưa đăng nhập vui lòng đăng nhập", null);
-            } else if (!userOutput.getRole().equals("ADMIN")) {
-                response.setStatus(403);
-                return new Response("FORBIDDEN", "Không có quyền truy cập", null);
             }
             if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
                 return new Response("success", "Thanh Cong", service.getUserById(Long.parseLong(request.getParameter("id"))));

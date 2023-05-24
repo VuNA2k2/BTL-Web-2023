@@ -2,14 +2,17 @@ package com.example.webs2023.service.jwt;
 
 import com.example.webs2023.dto.jwt.JwtPayload;
 import com.example.webs2023.exception.TokenExpiredException;
+import com.example.webs2023.repository.UserRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.Base64;
 import java.util.Calendar;
 
@@ -19,6 +22,11 @@ public class JwtServiceImpl implements JwtService {
     private static final String SECRET = "WebS2023";
     private static final String ALGORITHM = "HmacSHA256";
     private static final Long EXPIRED_TIME = 1000L * 60 * 60 * 3;
+    private final UserRepository userRepository;
+
+    public JwtServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
     public String createToken(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeyException {
         Long now = Calendar.getInstance().getTimeInMillis();
         JwtPayload jwtPayload = new JwtPayload(userId, role, now + EXPIRED_TIME);
@@ -29,7 +37,7 @@ public class JwtServiceImpl implements JwtService {
         return header + "." + encodedPayload + "." + signature;
     }
 
-    public boolean validateToken(String token) throws NoSuchAlgorithmException, InvalidKeyException {
+    public boolean validateToken(String token) throws NoSuchAlgorithmException, InvalidKeyException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String[] parts = token.split("\\.");
         if (parts.length != 3) {
             return false;
@@ -41,6 +49,12 @@ public class JwtServiceImpl implements JwtService {
         JwtPayload jwtPayload = getPayload(token);
         if (jwtPayload.getExp() < Calendar.getInstance().getTimeInMillis()) {
             throw new TokenExpiredException();
+        }
+        if(!jwtPayload.getRole().equals("ADMIN") && !jwtPayload.getRole().equals("USER")) {
+            return false;
+        }
+        if(userRepository.getById(jwtPayload.getUserId()) == null) {
+            return false;
         }
         return signature.equals(calculatedSignature);
     }

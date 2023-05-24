@@ -3,6 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+../apache-tomcat-9.0.72/
+
 ### IntelliJ IDEA ###
 .idea/
 ../.idea/
