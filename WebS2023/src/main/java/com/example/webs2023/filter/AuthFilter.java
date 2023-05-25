@@ -26,7 +26,7 @@ public class AuthFilter implements Filter {
         String path = requestURI.substring(contextPath.length());
         System.out.println(path);
         if(!path.startsWith("/api")) return;
-        if(path.startsWith("/api/auth")) {
+        if(isAuthNotRequired(path, httpRequest.getMethod())) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             String authHeader = httpRequest.getHeader("Authorization");
@@ -51,6 +51,11 @@ public class AuthFilter implements Filter {
         }
     }
 
+    private boolean isAuthNotRequired(String path, String method) {
+       if(path.startsWith("/api/login")) return true;
+       else if(method.equals("GET") && path.startsWith("/api/products")) return true;
+       else return false;
+    }
     @Override
     public void destroy() {
 

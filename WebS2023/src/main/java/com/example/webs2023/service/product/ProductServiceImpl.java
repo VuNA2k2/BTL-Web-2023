@@ -35,4 +35,27 @@ public class ProductServiceImpl extends BaseService<ProductEntity, Long, Product
         productOutput.setCategory(categoryOutput);
         return productOutput;
     }
+
+    @Override
+    public List<ProductOutput> getAllProduct() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<ProductEntity> productEntities = repository.getAll();
+        List<ProductOutput> productOutputs = productEntities.stream().map((product) -> {
+            CategoryOutput categoryOutput;
+            try {
+                categoryOutput = categoryService.getById(product.getCategoryId());
+                List<ImageOutput> imageOutputs = imageService.getImageByProductId(product.getId());
+                ProductOutput productOutput = mapper.getOutputFromEntity(product);
+                productOutput.setCategory(categoryOutput);
+                productOutput.setImages(imageOutputs);
+                return productOutput;
+            } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                     IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+
+        }).toList();
+        return productOutputs;
+    }
+
+
 }

@@ -24,13 +24,13 @@ public class ProductController extends BaseController {
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            if(request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
-                return new Response("success", "Thanh Cong", service.getById(Long.parseLong(request.getParameter("id"))));
+            if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
+                return new Response("success", "Thanh Cong", ((ProductService) service).getProductById(Long.parseLong(request.getParameter("id"))));
             } else {
-                return new Response("success", "Thanh Cong", service.getAll());
+                return new Response("success", "Thanh Cong", ((ProductService) service).getAllProduct());
             }
         } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
-                IllegalAccessException e) {
+                 IllegalAccessException e) {
             return new Response("fail", "That bai", e);
         }
     }
