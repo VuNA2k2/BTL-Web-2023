@@ -25,8 +25,9 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
 
     @Override
     public UserOutput getUserByUsername(String username) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return mapper.getOutputFromEntity(((UserRepository)repository).getByUsername(username));
+        return mapper.getOutputFromEntity(((UserRepository) repository).getByUsername(username));
     }
+
     @Override
     public UserOutput exitsWithUsernameAndPassword(String username, String password) throws SQLException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         UserEntity userEntity = ((UserRepository) repository).exitsWithUsernameAndPassword(username, password);

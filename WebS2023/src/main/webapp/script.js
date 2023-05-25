@@ -7,7 +7,7 @@ function getTokenFromCookie() {
     return token;
 }
 
-fetch('https://localhost:443/WebS2023_war/api/users', {
+fetch('https://localhost:443/WebS2023_war/api/carts', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
@@ -17,15 +17,12 @@ fetch('https://localhost:443/WebS2023_war/api/users', {
 }).then(function (response) {
     if(response.status === 200) {
         response.json().then(function (data) {
-            // console.log(data)
-            localStorage.setItem('user', JSON.stringify(data.data));
-            sessionStorage.setItem('user', JSON.stringify(data.data));
-            const user = sessionStorage.getItem('user');
-            console.log(user);
-            if(data.data.role === 'ADMIN') {
-                window.location.href = "/WebS2023_war/admin/user";
-            }
+            console.log(data)
+            // localStorage.setItem('user', JSON.stringify(data.data));
+            // if(data.data.role === 'ADMIN') {
+            //     window.location.href = "/WebS2023_war/admin/user";
+            // }
         });
     }
-    window.location.href = "/WebS2023_war/home";
+    // window.location.href = "/WebS2023_war/home";
 });

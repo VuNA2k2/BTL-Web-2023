@@ -1,18 +1,21 @@
 package com.example.webs2023.config;
 
 import com.example.webs2023.base.DependencyInjector;
-import com.example.webs2023.entity.CategoryEntity;
-import com.example.webs2023.entity.ProductEntity;
-import com.example.webs2023.entity.UserEntity;
-import com.example.webs2023.repository.CategoryRepository;
-import com.example.webs2023.repository.ProductRepository;
-import com.example.webs2023.repository.UserRepository;
+import com.example.webs2023.entity.*;
+import com.example.webs2023.repository.*;
 import com.example.webs2023.service.auth.AuthService;
 import com.example.webs2023.service.auth.AuthServiceImpl;
+import com.example.webs2023.service.cart.CartService;
+import com.example.webs2023.service.cart.CartServiceImpl;
+import com.example.webs2023.service.cart_ref_product.CartRefProductService;
+import com.example.webs2023.service.cart_ref_product.CartRefProductServiceImpl;
 import com.example.webs2023.service.category.CategoryService;
+import com.example.webs2023.service.image.ImageService;
+import com.example.webs2023.service.image.ImageServiceImpl;
 import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.jwt.JwtServiceImpl;
 import com.example.webs2023.service.product.ProductService;
+import com.example.webs2023.service.product.ProductServiceImpl;
 import com.example.webs2023.service.user.UserService;
 import com.example.webs2023.service.user.UserServiceImpl;
 
@@ -28,6 +31,8 @@ public class MyAppContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
             DatabaseConnection.getInstance();
+            DependencyInjector.registerDependency(ImageRepository.class, new ImageRepository(ImageEntity.class));
+            DependencyInjector.registerDependency(ImageService.class, new ImageServiceImpl(DependencyInjector.getDependency(ImageRepository.class)));
             DependencyInjector.registerDependency(UserRepository.class, new UserRepository(UserEntity.class));
             DependencyInjector.registerDependency(UserService.class, new UserServiceImpl(DependencyInjector.getDependency(UserRepository.class)));
             DependencyInjector.registerDependency(JwtService.class, new JwtServiceImpl(DependencyInjector.getDependency(UserRepository.class)));
@@ -35,7 +40,11 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(CategoryRepository.class, new CategoryRepository(CategoryEntity.class));
             DependencyInjector.registerDependency(CategoryService.class, new CategoryService(DependencyInjector.getDependency(CategoryRepository.class)));
             DependencyInjector.registerDependency(ProductRepository.class, new ProductRepository(ProductEntity.class));
-            DependencyInjector.registerDependency(ProductService.class, new ProductService(DependencyInjector.getDependency(ProductRepository.class)));
+            DependencyInjector.registerDependency(ProductService.class, new ProductServiceImpl(DependencyInjector.getDependency(ProductRepository.class), DependencyInjector.getDependency(CategoryService.class), DependencyInjector.getDependency(ImageService.class)));
+            DependencyInjector.registerDependency(CartRepository.class, new CartRepository(CartEntity.class));
+            DependencyInjector.registerDependency(CartRefProductRepository.class, new CartRefProductRepository(CartsRefProductEntity.class));
+            DependencyInjector.registerDependency(CartRefProductService.class, new CartRefProductServiceImpl(DependencyInjector.getDependency(CartRefProductRepository.class), DependencyInjector.getDependency(ProductService.class)));
+            DependencyInjector.registerDependency(CartService.class, new CartServiceImpl(DependencyInjector.getDependency(CartRepository.class), DependencyInjector.getDependency(CartRefProductService.class), DependencyInjector.getDependency(ProductService.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

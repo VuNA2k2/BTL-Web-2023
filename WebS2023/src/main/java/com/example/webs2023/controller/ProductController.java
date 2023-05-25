@@ -4,6 +4,7 @@ import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.service.product.ProductService;
+import com.example.webs2023.service.product.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ public class ProductController extends BaseController {
     @Override
     public void init() throws ServletException {
         super.init();
-        service = DependencyInjector.getDependency(ProductService.class);
+        service = (ProductServiceImpl) DependencyInjector.getDependency(ProductService.class);
     }
 
     @Override
