@@ -51,37 +51,6 @@
             font-weight: bold;
         }
 
-        .btn {
-            padding: 2px 6px;
-            background-color: #f2f2f2;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-
-
-        .checkout-btn {
-            background-color: #66cc66;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .logout-btn {
-            background-color: #cccccc;
-            border: none;
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
         .center {
             text-align: center;
         }
@@ -97,40 +66,74 @@
             font-weight: bold;
         }
 
-        .continue-shopping-btn {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            padding: 10px;
-            background-color: #f2f2f2;
-            border: none;
-            cursor: pointer;
-        }
-
         .user-history-link {
             margin-left: auto;
             margin-right: 10px;
         }
 
+        .quantity-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quantity-btn {
+            padding: 2px 6px;
+            background-color: #f2f2f2;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .delete-btn {
+            padding: 2px 6px;
+            background-color: #f2f2f2;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1;
+            color: red;
+        }
+        .user-history
+        {
+            float: right;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
 <!-- Header -->
+<h1>
+    Giỏ hàng
+    <span class="user-history">
+        <a href="user-history.html" class="user-history-link">Lịch sử</a>
+    </span>
+</h1>
 
-<h1>Shopping Cart Online</h1>
+<!-- Cart Table -->
 <table id="cartTable">
     <tr>
-        <th>No</th>
-        <th>Name</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total Money</th>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th>Tổng tiền</th>
+        <th></th>
     </tr>
 </table>
+
+<!-- Total Money -->
 <div id="totalMoney" class="total"></div>
 
-<!-- Footer -->
+<!-- Buy Button -->
+<div class="center">
+    <button id="buyBtn" class="buy-btn">Mua</button>
+</div>
 
+<!-- Footer -->
 <script src="script.js"></script>
 </body>
 </html>
