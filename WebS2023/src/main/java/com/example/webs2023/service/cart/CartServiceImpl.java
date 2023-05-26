@@ -1,10 +1,10 @@
 package com.example.webs2023.service.cart;
 
 import com.example.webs2023.base.BaseService;
-import com.example.webs2023.dto.cart.AddProductToCartRequest;
 import com.example.webs2023.dto.cart.CartDetailOutput;
 import com.example.webs2023.dto.cart.CartInput;
 import com.example.webs2023.dto.cart.CartOutput;
+import com.example.webs2023.dto.cart.ProductInCartRequest;
 import com.example.webs2023.dto.cart_ref_product.CartRefProductInput;
 import com.example.webs2023.dto.cart_ref_product.CartRefProductOutput;
 import com.example.webs2023.entity.CartEntity;
@@ -43,15 +43,34 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
     }
 
     @Override
-    public CartDetailOutput addProductToCart(AddProductToCartRequest addProductToCartRequest, Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public CartDetailOutput addProductToCart(ProductInCartRequest productInCartRequest, Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
-        Long id = cartRefProductService.existsByCartIdAndProductId(cartEntity.getId(), addProductToCartRequest.getProductId());
+        Long id = cartRefProductService.existsByCartIdAndProductId(cartEntity.getId(), productInCartRequest.getProductId());
         if (id != null) {
-            CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), addProductToCartRequest.getProductId(), addProductToCartRequest.getQuantity() + 1);
+            CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), productInCartRequest.getProductId(), productInCartRequest.getQuantity() + 1);
             cartRefProductService.update(id, cartRefProductInput);
             return getDetailCartFromCartEntity(cartEntity);
         }
-        CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), addProductToCartRequest.getProductId(), addProductToCartRequest.getQuantity());
+        CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), productInCartRequest.getProductId(), productInCartRequest.getQuantity());
+        cartRefProductService.create(cartRefProductInput);
+        return getDetailCartFromCartEntity(cartEntity);
+    }
+
+    @Override
+    public CartDetailOutput update(ProductInCartRequest productInCartRequest, Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
+        Long id = cartRefProductService.existsByCartIdAndProductId(cartEntity.getId(), productInCartRequest.getProductId());
+        if (id != null) {
+            if(productInCartRequest.getQuantity() == 0){
+                cartRefProductService.delete(id);
+                return getDetailCartFromCartEntity(cartEntity);
+            } else {
+                CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), productInCartRequest.getProductId(), productInCartRequest.getQuantity());
+                cartRefProductService.update(id, cartRefProductInput);
+            }
+            return getDetailCartFromCartEntity(cartEntity);
+        }
+        CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), productInCartRequest.getProductId(), productInCartRequest.getQuantity());
         cartRefProductService.create(cartRefProductInput);
         return getDetailCartFromCartEntity(cartEntity);
     }

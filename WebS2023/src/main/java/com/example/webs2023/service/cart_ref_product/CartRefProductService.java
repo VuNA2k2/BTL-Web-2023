@@ -18,4 +18,6 @@ public interface CartRefProductService {
     Long existsByCartIdAndProductId(Long cartId, Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     CartRefProductOutput update(Long id, CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    void delete(Long id) throws SQLException;
 }

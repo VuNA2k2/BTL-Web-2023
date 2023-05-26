@@ -3,7 +3,7 @@ package com.example.webs2023.controller;
 import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
-import com.example.webs2023.dto.cart.AddProductToCartRequest;
+import com.example.webs2023.dto.cart.ProductInCartRequest;
 import com.example.webs2023.dto.cart.CartDetailOutput;
 import com.example.webs2023.dto.jwt.JwtPayload;
 import com.example.webs2023.dto.user.UserOutput;
@@ -47,8 +47,8 @@ public class CartController extends BaseController {
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
-            AddProductToCartRequest addProductToCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), AddProductToCartRequest.class);
-            return Response.success(((CartService) service).addProductToCart(addProductToCartRequest, jwtPayload.getUserId()));
+            ProductInCartRequest productInCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductInCartRequest.class);
+            return Response.success(((CartService) service).addProductToCart(productInCartRequest, jwtPayload.getUserId()));
         } catch (Exception e) {
             e.printStackTrace();
             return new Response("error", e.getMessage(), e);
@@ -57,7 +57,14 @@ public class CartController extends BaseController {
 
     @Override
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
+            ProductInCartRequest productInCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductInCartRequest.class);
+            return Response.success(((CartService) service).update(productInCartRequest, jwtPayload.getUserId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response("error", e.getMessage(), e);
+        }
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.example.webs2023.dto.cart;
 
-public class AddProductToCartRequest {
+public class ProductInCartRequest {
     private Long productId;
     private Long quantity = 1L;
 
-    public AddProductToCartRequest() {
+    public ProductInCartRequest() {
     }
 
-    public AddProductToCartRequest(Long productId, Long quantity) {
+    public ProductInCartRequest(Long productId, Long quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }

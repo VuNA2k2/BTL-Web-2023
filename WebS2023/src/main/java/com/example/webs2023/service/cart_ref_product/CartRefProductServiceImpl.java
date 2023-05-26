@@ -15,6 +15,7 @@ import java.util.List;
 public class CartRefProductServiceImpl extends BaseService<CartsRefProductEntity, Long, CartRefProductInput, CartRefProductOutput> implements CartRefProductService {
 
     private final ProductService productService;
+
     public CartRefProductServiceImpl(CartRefProductRepository cartRefProductRepository, ProductService productService) {
         this.productService = productService;
         this.repository = cartRefProductRepository;
@@ -61,9 +62,13 @@ public class CartRefProductServiceImpl extends BaseService<CartsRefProductEntity
     @Override
     public CartRefProductOutput update(Long id, CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         CartsRefProductEntity cartsRefProductEntity = mapper.getEntityFromInput(cartRefProductInput);
-        cartsRefProductEntity.setId(id);
         cartsRefProductEntity = repository.updateById(id, cartsRefProductEntity);
         return getCartRefProductOutputByCartRefProductEntity(cartsRefProductEntity);
+    }
+
+    @Override
+    public void delete(Long id) throws SQLException {
+        repository.deleteById(id);
     }
 
 
