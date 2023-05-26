@@ -18,15 +18,16 @@ import java.util.Calendar;
 
 public class JwtServiceImpl implements JwtService {
 
-    private final Gson gson = new GsonBuilder().create();
     private static final String SECRET = "WebS2023";
     private static final String ALGORITHM = "HmacSHA256";
     private static final Long EXPIRED_TIME = 1000L * 60 * 60 * 3;
+    private final Gson gson = new GsonBuilder().create();
     private final UserRepository userRepository;
 
     public JwtServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public String createToken(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeyException {
         Long now = Calendar.getInstance().getTimeInMillis();
         JwtPayload jwtPayload = new JwtPayload(userId, role, now + EXPIRED_TIME);
@@ -37,7 +38,7 @@ public class JwtServiceImpl implements JwtService {
         return header + "." + encodedPayload + "." + signature;
     }
 
-    public boolean validateToken(String token) throws NoSuchAlgorithmException, InvalidKeyException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public boolean validateToken(String token, String requireRole) throws NoSuchAlgorithmException, InvalidKeyException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String[] parts = token.split("\\.");
         if (parts.length != 3) {
             return false;
@@ -50,10 +51,10 @@ public class JwtServiceImpl implements JwtService {
         if (jwtPayload.getExp() < Calendar.getInstance().getTimeInMillis()) {
             throw new TokenExpiredException();
         }
-        if(!jwtPayload.getRole().equals("ADMIN") && !jwtPayload.getRole().equals("USER")) {
+        if (!jwtPayload.getRole().trim().toUpperCase().equals(requireRole)) {
             return false;
         }
-        if(userRepository.getById(jwtPayload.getUserId()) == null) {
+        if (userRepository.getById(jwtPayload.getUserId()) == null) {
             return false;
         }
         return signature.equals(calculatedSignature);

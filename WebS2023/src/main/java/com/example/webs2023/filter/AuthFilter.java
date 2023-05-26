@@ -26,7 +26,8 @@ public class AuthFilter implements Filter {
         String path = requestURI.substring(contextPath.length());
         System.out.println(path);
         if(!path.startsWith("/api")) return;
-        if(isAuthNotRequired(path, httpRequest.getMethod())) {
+        String requireRole = getRequireRole(path, httpRequest.getMethod());
+        if(requireRole.equals("NONE")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             String authHeader = httpRequest.getHeader("Authorization");
@@ -38,7 +39,7 @@ public class AuthFilter implements Filter {
 
             String token = authHeader.substring(7);
             try {
-                if(jwtService.validateToken(token)) {
+                if(jwtService.validateToken(token, requireRole)) {
                     httpRequest.setAttribute("payload", jwtService.getPayload(token));
                 } else {
                     httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -51,10 +52,13 @@ public class AuthFilter implements Filter {
         }
     }
 
-    private boolean isAuthNotRequired(String path, String method) {
-       if(path.startsWith("/api/auth")) return true;
-       else if(method.equals("GET") && path.startsWith("/api/products")) return true;
-       else return false;
+    private String getRequireRole(String path, String method) {
+       if(path.startsWith("/api/auth")) return "NONE";
+       else if(path.startsWith("/api/products")) {
+           if(method.equals("POST") || method.equals("PUT") || method.equals("DELETE")) return "ADMIN";
+           else return "NONE";
+       } else if(path.startsWith("/api/carts")) return "USER";
+       else return "USER";
     }
     @Override
     public void destroy() {

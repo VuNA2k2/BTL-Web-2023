@@ -5,6 +5,7 @@ import com.example.webs2023.dto.category.CategoryOutput;
 import com.example.webs2023.dto.image.ImageOutput;
 import com.example.webs2023.dto.product.ProductInput;
 import com.example.webs2023.dto.product.ProductOutput;
+import com.example.webs2023.dto.product.ProductRequest;
 import com.example.webs2023.entity.ProductEntity;
 import com.example.webs2023.repository.ProductRepository;
 import com.example.webs2023.service.category.CategoryService;
@@ -67,6 +68,11 @@ public class ProductServiceImpl extends BaseService<ProductEntity, Long, Product
         }
 
 
+    }
+
+    @Override
+    public ProductOutput createProduct(ProductRequest productRequest) {
+        return null;
     }
 
 

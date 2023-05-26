@@ -33,9 +33,6 @@ public class UserController extends BaseController {
 
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        String json = (String) session.getAttribute("user");
-        System.out.println(json);
         try {
             String token = request.getHeader("Authorization").substring(7);
             JwtPayload jwtPayload = jwtService.getPayload(token);

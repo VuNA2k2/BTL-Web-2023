@@ -9,6 +9,6 @@ import java.sql.SQLException;
 
 public interface JwtService {
     String createToken(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeyException;
-    boolean validateToken(String token) throws NoSuchAlgorithmException, InvalidKeyException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    boolean validateToken(String token, String requireRole) throws NoSuchAlgorithmException, InvalidKeyException, SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
     JwtPayload getPayload(String token);
 }

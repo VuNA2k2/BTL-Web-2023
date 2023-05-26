@@ -3,8 +3,10 @@ package com.example.webs2023.controller;
 import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
+import com.example.webs2023.dto.product.ProductRequest;
 import com.example.webs2023.service.product.ProductService;
 import com.example.webs2023.service.product.ProductServiceImpl;
+import com.example.webs2023.utils.JsonFromInputConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +43,12 @@ public class ProductController extends BaseController {
 
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductRequest.class);
+            return Response.success(((ProductService) service).createProduct(productRequest));
+        } catch (Exception e) {
+            return new Response("fail", "That bai", e);
+        }
     }
 
     @Override
