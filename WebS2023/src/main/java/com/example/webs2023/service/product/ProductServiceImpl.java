@@ -39,22 +39,34 @@ public class ProductServiceImpl extends BaseService<ProductEntity, Long, Product
     @Override
     public List<ProductOutput> getAllProduct() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<ProductEntity> productEntities = repository.getAll();
-        List<ProductOutput> productOutputs = productEntities.stream().map((product) -> {
-            CategoryOutput categoryOutput;
-            try {
-                categoryOutput = categoryService.getById(product.getCategoryId());
-                List<ImageOutput> imageOutputs = imageService.getImageByProductId(product.getId());
-                ProductOutput productOutput = mapper.getOutputFromEntity(product);
-                productOutput.setCategory(categoryOutput);
-                productOutput.setImages(imageOutputs);
-                return productOutput;
-            } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
-                     IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
-
-        }).toList();
+        List<ProductOutput> productOutputs = productEntities.stream().map(this::getProductDetailByProductEntity).toList();
         return productOutputs;
+    }
+
+    @Override
+    public List<ProductOutput> getProductByCategoryId(long categoryId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<ProductEntity> productEntities = repository.getAll("WHERE category_id = " + categoryId + " ORDER BY id DESC");
+        List<ProductOutput> productOutputs = productEntities.stream().map(this::getProductDetailByProductEntity).toList();
+        return productOutputs;
+    }
+
+    @Override
+    public ProductOutput getProductDetailByProductEntity(ProductEntity product) {
+
+        CategoryOutput categoryOutput;
+        try {
+            categoryOutput = categoryService.getById(product.getCategoryId());
+            List<ImageOutput> imageOutputs = imageService.getImageByProductId(product.getId());
+            ProductOutput productOutput = mapper.getOutputFromEntity(product);
+            productOutput.setCategory(categoryOutput);
+            productOutput.setImages(imageOutputs);
+            return productOutput;
+        } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                 IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
 

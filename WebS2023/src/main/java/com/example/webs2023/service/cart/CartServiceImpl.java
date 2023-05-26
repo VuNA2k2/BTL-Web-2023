@@ -16,19 +16,17 @@ import java.util.List;
 
 public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, CartOutput> implements CartService {
     private final CartRefProductService cartRefProductService;
-    private final ProductService productService;
 
     public CartServiceImpl(CartRepository cartRepository, CartRefProductService cartRefProductService, ProductService productService) {
         this.repository = cartRepository;
         this.cartRefProductService = cartRefProductService;
-        this.productService = productService;
         this.mapper = new CartMapper(CartEntity.class, CartInput.class, CartOutput.class);
     }
 
 
     @Override
     public CartDetailOutput getLeastCart(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return getDetailCartFromCartEntity(repository.getAll("WHERE user_id = "+ userId +" ORDER BY id DESC LIMIT 1").get(0));
+        return getDetailCartFromCartEntity(repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0));
     }
 
     @Override
