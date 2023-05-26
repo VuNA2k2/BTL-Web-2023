@@ -24,7 +24,7 @@ public class BaseRepository<E, T> {
     protected BaseRepository(Class<E> entityClass) throws SQLException, ClassNotFoundException {
         connection = DatabaseConnection.getInstance();
         this.entityClass = entityClass;
-        tableName = StringUtils.camelToSnake(entityClass.getName().toLowerCase().substring(entityClass.getName().lastIndexOf(".") + 1, entityClass.getName().indexOf("Entity"))) + "s";
+        tableName = StringUtils.camelToSnake(entityClass.getName().substring(entityClass.getName().lastIndexOf(".") + 1, entityClass.getName().indexOf("Entity"))) + "s";
     }
 
     public E save(E e) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, SQLException {
