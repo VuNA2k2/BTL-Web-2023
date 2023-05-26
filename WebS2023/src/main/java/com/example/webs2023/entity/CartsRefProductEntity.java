@@ -16,6 +16,12 @@ public class CartsRefProductEntity {
         this.quantity = quantity;
     }
 
+    public CartsRefProductEntity(Long cartId, Long productId, Long quantity) {
+        this.cartId = cartId;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
     public Long getId() {
         return id;
     }

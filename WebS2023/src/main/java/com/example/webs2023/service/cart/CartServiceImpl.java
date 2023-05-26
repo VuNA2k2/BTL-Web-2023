@@ -1,9 +1,11 @@
 package com.example.webs2023.service.cart;
 
 import com.example.webs2023.base.BaseService;
+import com.example.webs2023.dto.cart.AddProductToCartRequest;
 import com.example.webs2023.dto.cart.CartDetailOutput;
 import com.example.webs2023.dto.cart.CartInput;
 import com.example.webs2023.dto.cart.CartOutput;
+import com.example.webs2023.dto.cart_ref_product.CartRefProductInput;
 import com.example.webs2023.dto.cart_ref_product.CartRefProductOutput;
 import com.example.webs2023.entity.CartEntity;
 import com.example.webs2023.repository.CartRepository;
@@ -38,5 +40,19 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
         cartDetailOutput.setTotalMoney(totalMoney);
         cartDetailOutput.setProducts(cartRefProductOutputList);
         return cartDetailOutput;
+    }
+
+    @Override
+    public CartDetailOutput addProductToCart(AddProductToCartRequest addProductToCartRequest, Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
+        Long id = cartRefProductService.existsByCartIdAndProductId(cartEntity.getId(), addProductToCartRequest.getProductId());
+        if (id != null) {
+            CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), addProductToCartRequest.getProductId(), addProductToCartRequest.getQuantity() + 1);
+            cartRefProductService.update(id, cartRefProductInput);
+            return getDetailCartFromCartEntity(cartEntity);
+        }
+        CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), addProductToCartRequest.getProductId(), addProductToCartRequest.getQuantity());
+        cartRefProductService.create(cartRefProductInput);
+        return getDetailCartFromCartEntity(cartEntity);
     }
 }

@@ -42,5 +42,29 @@ public class CartRefProductServiceImpl extends BaseService<CartsRefProductEntity
         }
     }
 
+    @Override
+    public CartRefProductOutput create(CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartsRefProductEntity cartsRefProductEntity = mapper.getEntityFromInput(cartRefProductInput);
+        cartsRefProductEntity = repository.save(cartsRefProductEntity);
+        return getCartRefProductOutputByCartRefProductEntity(cartsRefProductEntity);
+    }
+
+    @Override
+    public Long existsByCartIdAndProductId(Long cartId, Long productId) {
+        try {
+            return ((CartRefProductRepository) repository).existsByCartIdAndProductId(cartId, productId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public CartRefProductOutput update(Long id, CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartsRefProductEntity cartsRefProductEntity = mapper.getEntityFromInput(cartRefProductInput);
+        cartsRefProductEntity.setId(id);
+        cartsRefProductEntity = repository.updateById(id, cartsRefProductEntity);
+        return getCartRefProductOutputByCartRefProductEntity(cartsRefProductEntity);
+    }
+
 
 }

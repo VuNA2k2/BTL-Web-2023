@@ -1,5 +1,6 @@
 package com.example.webs2023.service.cart_ref_product;
 
+import com.example.webs2023.dto.cart_ref_product.CartRefProductInput;
 import com.example.webs2023.dto.cart_ref_product.CartRefProductOutput;
 import com.example.webs2023.entity.CartsRefProductEntity;
 
@@ -11,4 +12,10 @@ public interface CartRefProductService {
     List<CartRefProductOutput> getCartsRefProductByCartId(Long cartId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     CartRefProductOutput getCartRefProductOutputByCartRefProductEntity(CartsRefProductEntity cartsRefProductEntity);
+
+    CartRefProductOutput create(CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    Long existsByCartIdAndProductId(Long cartId, Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    CartRefProductOutput update(Long id, CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

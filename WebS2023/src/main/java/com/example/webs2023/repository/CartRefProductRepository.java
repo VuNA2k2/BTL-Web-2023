@@ -15,4 +15,8 @@ public class CartRefProductRepository extends BaseRepository<CartsRefProductEnti
     public List<CartsRefProductEntity> getCartsRefProductByCartId(Long cartId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return rawQuery("SELECT * FROM carts_ref_products WHERE cart_id = " + cartId);
     }
+
+    public Long existsByCartIdAndProductId(Long cartId, Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return rawQuery("SELECT * FROM carts_ref_products WHERE cart_id = " + cartId + " AND product_id = " + productId).get(0).getId();
+    }
 }
