@@ -2,6 +2,7 @@ package com.example.webs2023.service.product;
 
 import com.example.webs2023.base.BaseService;
 import com.example.webs2023.dto.category.CategoryOutput;
+import com.example.webs2023.dto.image.ImageInput;
 import com.example.webs2023.dto.image.ImageOutput;
 import com.example.webs2023.dto.product.ProductInput;
 import com.example.webs2023.dto.product.ProductOutput;
@@ -71,9 +72,28 @@ public class ProductServiceImpl extends BaseService<ProductEntity, Long, Product
     }
 
     @Override
-    public ProductOutput createProduct(ProductRequest productRequest) {
-        return null;
+    public ProductOutput createProduct(ProductRequest productRequest) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        ProductEntity productEntity = mapper.getEntityFromInput(productRequest);
+        ProductEntity createdProduct = repository.save(productEntity);
+        ProductOutput productOutput = mapper.getOutputFromEntity(createdProduct);
+        CategoryOutput categoryOutput = categoryService.getById(createdProduct.getCategoryId());
+        productOutput.setCategory(categoryOutput);
+        productOutput.setImages(List.of());
+        if (productRequest.getImages() != null) {
+            List<ImageOutput> images = productRequest.getImages().stream().map((url) -> {
+                ImageInput imageInput = new ImageInput();
+                imageInput.setRefId(createdProduct.getId());
+                imageInput.setLink(url);
+                imageInput.setRefType("PRODUCT");
+                try {
+                    return imageService.createImage(imageInput);
+                } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                         IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }).toList();
+            productOutput.setImages(images);
+        }
+        return productOutput;
     }
-
-
 }

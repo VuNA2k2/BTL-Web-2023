@@ -18,5 +18,5 @@ public interface ProductService {
 
     ProductOutput getProductDetailByProductEntity(ProductEntity product);
 
-    ProductOutput createProduct(ProductRequest productRequest);
+    ProductOutput createProduct(ProductRequest productRequest) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

@@ -22,4 +22,11 @@ public class ImageServiceImpl extends BaseService<ImageEntity, Long, ImageInput,
         List<ImageOutput> imageOutputs = imageEntities.stream().map(imageEntity -> (ImageOutput) mapper.getOutputFromEntity(imageEntity)).toList();
         return imageOutputs;
     }
+
+    @Override
+    public ImageOutput createImage(ImageInput imageInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        ImageEntity imageEntity = mapper.getEntityFromInput(imageInput);
+        ImageEntity createdImageEntity = repository.save(imageEntity);
+        return mapper.getOutputFromEntity(createdImageEntity);
+    }
 }

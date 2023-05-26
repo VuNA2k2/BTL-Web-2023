@@ -47,6 +47,7 @@ public class ProductController extends BaseController {
             ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductRequest.class);
             return Response.success(((ProductService) service).createProduct(productRequest));
         } catch (Exception e) {
+            e.printStackTrace();
             return new Response("fail", "That bai", e);
         }
     }
