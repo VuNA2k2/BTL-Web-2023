@@ -28,7 +28,7 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
 
     @Override
     public CartDetailOutput getLeastCart(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return getDetailCartFromCartEntity(repository.getAll("ORDER BY id DESC LIMIT 1").get(0));
+        return getDetailCartFromCartEntity(repository.getAll("WHERE user_id = "+ userId +" ORDER BY id DESC LIMIT 1").get(0));
     }
 
     @Override

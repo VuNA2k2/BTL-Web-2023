@@ -52,7 +52,7 @@ public class AuthFilter implements Filter {
     }
 
     private boolean isAuthNotRequired(String path, String method) {
-       if(path.startsWith("/api/login")) return true;
+       if(path.startsWith("/api/auth")) return true;
        else if(method.equals("GET") && path.startsWith("/api/products")) return true;
        else return false;
     }
