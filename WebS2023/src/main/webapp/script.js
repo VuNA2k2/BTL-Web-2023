@@ -38,12 +38,12 @@ function getTokenFromCookie() {
     return token;
 }
 
-fetch('https://localhost:443/WebS2023_war/api/products', {
+fetch('https://localhost:443/WebS2023_war/api/carts', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        // 'Authorization': 'Bearer ' + getTokenFromCookie(),
+        'Authorization': 'Bearer ' + getTokenFromCookie(),
     }
 }).then(function (response) {
     if (response.status === 200) {
