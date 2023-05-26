@@ -48,7 +48,7 @@ fetch('https://localhost:443/WebS2023_war/api/carts', {
 }).then(function (response) {
     if (response.status === 200) {
         response.json().then(function (data) {
-            console.log(data);
+            // console.log(data);
             displayCartData(data);
         });
     } else {
