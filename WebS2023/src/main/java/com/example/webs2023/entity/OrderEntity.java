@@ -1,18 +1,18 @@
 package com.example.webs2023.entity;
 
-import java.sql.Time;
+import java.sql.Timestamp;
 
 public class OrderEntity {
     private Long id;
     private Long userId;
-    private Time orderDate;
+    private Timestamp orderDate;
 
     private String status;
 
     public OrderEntity() {
     }
 
-    public OrderEntity(Long id, Long userId, Time orderDate, String status) {
+    public OrderEntity(Long id, Long userId, Timestamp orderDate, String status) {
         this.id = id;
         this.userId = userId;
         this.orderDate = orderDate;
@@ -35,11 +35,11 @@ public class OrderEntity {
         this.userId = userId;
     }
 
-    public Time getOrderDate() {
+    public Timestamp getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Time orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 

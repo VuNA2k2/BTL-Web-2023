@@ -14,8 +14,12 @@ import com.example.webs2023.service.image.ImageService;
 import com.example.webs2023.service.image.ImageServiceImpl;
 import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.jwt.JwtServiceImpl;
+import com.example.webs2023.service.order.OrderService;
+import com.example.webs2023.service.order.OrderServiceImpl;
 import com.example.webs2023.service.product.ProductService;
 import com.example.webs2023.service.product.ProductServiceImpl;
+import com.example.webs2023.service.product_in_order.ProductInOrderService;
+import com.example.webs2023.service.product_in_order.ProductInOrderServiceImpl;
 import com.example.webs2023.service.user.UserService;
 import com.example.webs2023.service.user.UserServiceImpl;
 
@@ -46,6 +50,9 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(CartRefProductService.class, new CartRefProductServiceImpl(DependencyInjector.getDependency(CartRefProductRepository.class), DependencyInjector.getDependency(ProductService.class)));
             DependencyInjector.registerDependency(CartService.class, new CartServiceImpl(DependencyInjector.getDependency(CartRepository.class), DependencyInjector.getDependency(CartRefProductService.class), DependencyInjector.getDependency(ProductService.class)));
             DependencyInjector.registerDependency(OrderRepository.class, new OrderRepository(OrderEntity.class));
+            DependencyInjector.registerDependency(ProductInOrderRepository.class, new ProductInOrderRepository(ProductsInOrderEntity.class));
+            DependencyInjector.registerDependency(ProductInOrderService.class, new ProductInOrderServiceImpl(DependencyInjector.getDependency(ProductInOrderRepository.class)));
+            DependencyInjector.registerDependency(OrderService.class, new OrderServiceImpl(DependencyInjector.getDependency(OrderRepository.class), DependencyInjector.getDependency(CartService.class), DependencyInjector.getDependency(ProductInOrderService.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

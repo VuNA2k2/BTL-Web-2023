@@ -71,5 +71,16 @@ public class CartRefProductServiceImpl extends BaseService<CartsRefProductEntity
         repository.deleteById(id);
     }
 
+    @Override
+    public void deleteByCartId(Long cartId) throws SQLException {
+        ((CartRefProductRepository) repository).deleteByCartId(cartId);
+    }
+
+    @Override
+    public CartRefProductOutput getCartRefProductById(Long id) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartsRefProductEntity cartsRefProductEntity = repository.getById(id);
+        return getCartRefProductOutputByCartRefProductEntity(cartsRefProductEntity);
+    }
+
 
 }
