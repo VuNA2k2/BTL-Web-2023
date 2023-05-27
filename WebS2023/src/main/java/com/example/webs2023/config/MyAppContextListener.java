@@ -45,6 +45,7 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(CartRefProductRepository.class, new CartRefProductRepository(CartsRefProductEntity.class));
             DependencyInjector.registerDependency(CartRefProductService.class, new CartRefProductServiceImpl(DependencyInjector.getDependency(CartRefProductRepository.class), DependencyInjector.getDependency(ProductService.class)));
             DependencyInjector.registerDependency(CartService.class, new CartServiceImpl(DependencyInjector.getDependency(CartRepository.class), DependencyInjector.getDependency(CartRefProductService.class), DependencyInjector.getDependency(ProductService.class)));
+            DependencyInjector.registerDependency(OrderRepository.class, new OrderRepository(OrderEntity.class));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
