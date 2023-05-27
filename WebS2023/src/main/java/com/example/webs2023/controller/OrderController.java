@@ -4,6 +4,7 @@ import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.jwt.JwtPayload;
+import com.example.webs2023.dto.order.OrderOutput;
 import com.example.webs2023.service.order.OrderService;
 import com.example.webs2023.service.order.OrderServiceImpl;
 
@@ -38,7 +39,12 @@ public class OrderController extends BaseController {
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
-            return Response.success(((OrderService) this.service).createNewOrder(jwtPayload.getUserId()));
+            OrderOutput orderOutput = ((OrderService) this.service).createNewOrder(jwtPayload.getUserId());
+            if (orderOutput != null) {
+                return Response.success(orderOutput);
+            } else {
+                return new Response("error", "Chua co san pham nao trong gio hang", null);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new Response("error", e.getMessage(), e);

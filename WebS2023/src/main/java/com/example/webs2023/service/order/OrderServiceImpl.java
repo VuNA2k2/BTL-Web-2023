@@ -29,6 +29,9 @@ public class OrderServiceImpl extends BaseService<OrderEntity, Long, OrderInput,
     @Override
     public OrderOutput createNewOrder(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         CartDetailOutput cartOutput = cartService.getLeastCart(userId);
+        if(cartOutput == null) {
+            return null;
+        }
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setUserId(userId);
         orderEntity.setOrderDate(Timestamp.from(Calendar.getInstance().toInstant()));
