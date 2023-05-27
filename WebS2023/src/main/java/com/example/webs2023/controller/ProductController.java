@@ -54,11 +54,25 @@ public class ProductController extends BaseController {
 
     @Override
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            String id = request.getParameter("id");
+            ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductRequest.class);
+            return Response.success(((ProductService) service).updateProduct(Long.parseLong(id), productRequest));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response("fail", "That bai", e);
+        }
     }
 
     @Override
     protected Response deleteMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            String id = request.getParameter("id");
+            ((ProductService) service).deleteProduct(Long.parseLong(id));
+            return Response.success("Xoa thanh cong");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response("fail", "That bai", e);
+        }
     }
 }

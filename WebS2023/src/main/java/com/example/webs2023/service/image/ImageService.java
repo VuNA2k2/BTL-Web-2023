@@ -11,4 +11,6 @@ public interface ImageService {
     List<ImageOutput> getImageByProductId(Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     ImageOutput createImage(ImageInput imageInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    void deleteImage(Long id) throws SQLException;
 }
