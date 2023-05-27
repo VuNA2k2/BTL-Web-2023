@@ -79,6 +79,5 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
     public void deleteCart(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
         cartRefProductService.deleteByCartId(cartEntity.getId());
-        repository.deleteById(cartEntity.getId());
     }
 }

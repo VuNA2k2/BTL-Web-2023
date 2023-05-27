@@ -26,9 +26,16 @@ public class OrderController extends BaseController {
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String id = request.getParameter("id");
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
-            return Response.success(((OrderService) this.service).getOrderByUserId(jwtPayload.getUserId()));
+            if (jwtPayload.getRole().equals("USER")) {
+                return Response.success(((OrderService) this.service).getOrderByUserId(jwtPayload.getUserId()));
+            } else {
+                String userId = request.getParameter("userId");
+                if (userId != null && !userId.isBlank()) {
+                    return Response.success(((OrderService) this.service).getOrderByUserId(Long.parseLong(userId)));
+                }
+                return Response.success(((OrderService) this.service).getAllListOrder());
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new Response("error", e.getMessage(), e);
@@ -53,7 +60,17 @@ public class OrderController extends BaseController {
 
     @Override
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        try {
+            JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
+            if(jwtPayload.getRole().equals("USER")) {
+                return new Response("error", "Ban khong co quyen", null);
+            } else {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response("error", e.getMessage(), e);
+        }
     }
 
     @Override

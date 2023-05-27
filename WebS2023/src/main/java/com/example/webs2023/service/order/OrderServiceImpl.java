@@ -70,4 +70,17 @@ public class OrderServiceImpl extends BaseService<OrderEntity, Long, OrderInput,
         }).toList();
         return orderOutputs;
     }
+
+    @Override
+    public List<OrderOutput> getAllListOrder() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<OrderEntity> orderEntities = repository.getAll("ORDER BY id DESC");
+        List<OrderOutput> orderOutputs = orderEntities.stream().map(orderEntity -> {
+            try {
+                return getOrderOutputFromOrderEntity(orderEntity);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
+        return orderOutputs;
+    }
 }

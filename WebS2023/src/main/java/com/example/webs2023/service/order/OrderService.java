@@ -14,4 +14,7 @@ public interface OrderService {
     OrderOutput getOrderOutputFromOrderEntity(OrderEntity orderEntity) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     List<OrderOutput> getOrderByUserId(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    List<OrderOutput> getAllListOrder() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
 }
