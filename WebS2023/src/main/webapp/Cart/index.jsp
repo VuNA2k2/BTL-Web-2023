@@ -140,6 +140,6 @@
 </div>
 
 <!-- Footer -->
-<script src="cartscript.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
