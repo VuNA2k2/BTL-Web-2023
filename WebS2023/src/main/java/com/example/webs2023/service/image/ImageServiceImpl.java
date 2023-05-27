@@ -29,4 +29,9 @@ public class ImageServiceImpl extends BaseService<ImageEntity, Long, ImageInput,
         ImageEntity createdImageEntity = repository.save(imageEntity);
         return mapper.getOutputFromEntity(createdImageEntity);
     }
+
+    @Override
+    public void deleteImage(Long id) throws SQLException {
+        repository.deleteById(id);
+    }
 }

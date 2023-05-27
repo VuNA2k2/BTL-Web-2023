@@ -30,6 +30,7 @@ public class ProductServiceImpl extends BaseService<ProductEntity, Long, Product
     @Override
     public ProductOutput getProductById(Long id) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         ProductEntity productEntity = repository.getById(id);
+        if(productEntity == null) return null;
         ProductOutput productOutput = mapper.getOutputFromEntity(productEntity);
         CategoryOutput categoryOutput = categoryService.getById(productEntity.getCategoryId());
         List<ImageOutput> imageOutputs = imageService.getImageByProductId(productEntity.getId());
@@ -95,5 +96,53 @@ public class ProductServiceImpl extends BaseService<ProductEntity, Long, Product
             productOutput.setImages(images);
         }
         return productOutput;
+    }
+
+    @Override
+    public ProductOutput updateProduct(long id, ProductRequest productRequest) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        ProductEntity productEntity = mapper.getEntityFromInput(productRequest);
+        ProductEntity updatedProduct = repository.updateById(id, productEntity);
+        imageService.getImageByProductId(id).forEach((image) -> {
+            try {
+                if(!productRequest.getImages().contains(image.getLink())){
+                    imageService.deleteImage(image.getId());
+                } else {
+                    productRequest.getImages().remove(image.getLink());
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        if (productRequest.getImages() != null) {
+            productRequest.getImages().forEach((url) -> {
+                ImageInput imageInput = new ImageInput();
+                imageInput.setRefId(updatedProduct.getId());
+                imageInput.setLink(url);
+                imageInput.setRefType("PRODUCT");
+                try {
+                    imageService.createImage(imageInput);
+                } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                         IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+        return getProductDetailByProductEntity(updatedProduct);
+    }
+
+    @Override
+    public void deleteProduct(long id) {
+        try {
+            imageService.getImageByProductId(id).forEach((image) -> {
+                try {
+                    imageService.deleteImage(image.getId());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            repository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

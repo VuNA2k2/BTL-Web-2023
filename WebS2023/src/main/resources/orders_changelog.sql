@@ -5,3 +5,6 @@ CREATE TABLE orders
     order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id)
 )
+
+alter table orders
+    add status VARCHAR default 'PENDING' not null;
