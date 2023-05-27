@@ -1,5 +1,6 @@
 package com.example.webs2023.service.order;
 
+import com.example.webs2023.dto.order.OrderInput;
 import com.example.webs2023.dto.order.OrderOutput;
 import com.example.webs2023.entity.OrderEntity;
 
@@ -17,4 +18,7 @@ public interface OrderService {
 
     List<OrderOutput> getAllListOrder() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
+    OrderOutput cancelOrder(Long userId, Long orderId, OrderInput orderInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    OrderOutput updateOrderStatus(Long id, String status) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

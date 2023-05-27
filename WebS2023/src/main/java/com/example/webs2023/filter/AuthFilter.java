@@ -60,7 +60,7 @@ public class AuthFilter implements Filter {
             else return "NONE";
         } else if (path.startsWith("/api/carts")) return "USER";
         else if (path.startsWith("/api/orders")) {
-            if (method.equals("GET")) return "BOTH";
+            if (method.equals("GET") || method.equals("PUT")) return "BOTH";
             else if(method.equals("POST")) return "USER";
             else return "ADMIN";
         } else return "USER";

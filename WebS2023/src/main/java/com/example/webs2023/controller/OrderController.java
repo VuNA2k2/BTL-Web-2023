@@ -4,9 +4,11 @@ import com.example.webs2023.base.BaseController;
 import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.jwt.JwtPayload;
+import com.example.webs2023.dto.order.OrderInput;
 import com.example.webs2023.dto.order.OrderOutput;
 import com.example.webs2023.service.order.OrderService;
 import com.example.webs2023.service.order.OrderServiceImpl;
+import com.example.webs2023.utils.JsonFromInputConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,10 +64,19 @@ public class OrderController extends BaseController {
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
-            if(jwtPayload.getRole().equals("USER")) {
-                return new Response("error", "Ban khong co quyen", null);
+            String orderId = request.getParameter("orderId");
+            OrderInput orderInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), OrderInput.class);
+            if (orderId != null && !orderId.isBlank()) {
+                if (jwtPayload.getRole().equals("USER")) {
+                    if (orderInput.getStatus().equals("CANCEL")) {
+                        return Response.success(((OrderService) this.service).cancelOrder(jwtPayload.getUserId(), Long.parseLong(orderId), orderInput));
+                    }
+                    return new Response("error", "Khong co quyen thay doi trang thai", null);
+                } else {
+                    return Response.success(((OrderService) this.service).updateOrderStatus(Long.parseLong(orderId), orderInput.getStatus()));
+                }
             } else {
-
+                return new Response("error", "Khong tim thay orderId", null);
             }
         } catch (Exception e) {
             e.printStackTrace();

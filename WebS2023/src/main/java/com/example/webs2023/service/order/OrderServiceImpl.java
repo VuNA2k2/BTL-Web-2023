@@ -29,7 +29,7 @@ public class OrderServiceImpl extends BaseService<OrderEntity, Long, OrderInput,
     @Override
     public OrderOutput createNewOrder(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         CartDetailOutput cartOutput = cartService.getLeastCart(userId);
-        if(cartOutput == null) {
+        if (cartOutput == null) {
             return null;
         }
         OrderEntity orderEntity = new OrderEntity();
@@ -82,5 +82,25 @@ public class OrderServiceImpl extends BaseService<OrderEntity, Long, OrderInput,
             }
         }).toList();
         return orderOutputs;
+    }
+
+    @Override
+    public OrderOutput cancelOrder(Long userId, Long orderId, OrderInput orderInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        OrderEntity orderEntity = repository.getById(orderId);
+        if (!orderEntity.getUserId().equals(userId) || !orderEntity.getStatus().equals("PENDING")) {
+            return getOrderOutputFromOrderEntity(orderEntity);
+        }
+        orderEntity.setStatus("CANCEL");
+        orderEntity.setId(null);
+        OrderEntity savedOrder = repository.updateById(orderId, orderEntity);
+        return getOrderOutputFromOrderEntity(savedOrder);
+    }
+
+    @Override
+    public OrderOutput updateOrderStatus(Long id, String status) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setStatus(status);
+        OrderEntity savedOrder = repository.updateById(id, orderEntity);
+        return getOrderOutputFromOrderEntity(savedOrder);
     }
 }
