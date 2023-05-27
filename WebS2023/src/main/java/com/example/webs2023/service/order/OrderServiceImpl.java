@@ -37,6 +37,7 @@ public class OrderServiceImpl extends BaseService<OrderEntity, Long, OrderInput,
         orderEntity.setOrderDate(Timestamp.from(Calendar.getInstance().toInstant()));
         orderEntity.setStatus("PENDING");
         OrderEntity savedOrder = repository.save(orderEntity);
+        cartService.deleteCart(userId);
         cartOutput.getProducts().forEach(cartRefProductOutput -> {
             try {
                 productInOrderService.createProductInOrderCartRefProduct(savedOrder.getId(), cartRefProductOutput);
