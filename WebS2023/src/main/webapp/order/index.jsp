@@ -64,21 +64,55 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    /* CSS cho nút Order Details */
+    .order-details-button {
+      padding: 5px 10px;
+      background-color: transparent;
+      border: none;
+      color: black;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      margin: 2px;
+      cursor: pointer;
+    }
+
+
+    select
+    {
+      margin-right: 5px;
+      padding: 3px 0;
+    }
+
+    /* CSS cho nút Update Order */
+    .update-order {
+
+      padding: 3px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
   </style>
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
 
-<h1>Orders</h1>
+<h1>Danh sách đơn hàng</h1>
 <table id="orderTable">
   <tr>
     <th>ID</th>
-    <th>User ID</th>
-    <th>Order Date</th>
-    <th>Total Money</th>
-    <th>Status</th>
-    <th>Update Status</th>
-    <th>Order Details</th>
+    <th>ID người dùng</th>
+    <th>Ngày đặt</th>
+    <th>Tổng tiền</th>
+    <th>Tình trạng đơn hàng</th>
+    <th></th>
+    <th></th>
   </tr>
 </table>
 
@@ -86,11 +120,18 @@
 <div id="modal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <div id="productDetails"></div>
+    <table id="productTable">
+      <h1>Danh sách sản phẩm</h1>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </table>
   </div>
 </div>
-
-
+>
 
 <%@ include file="../layout/footer.jsp" %>
 

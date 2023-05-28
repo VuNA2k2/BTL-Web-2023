@@ -79,6 +79,7 @@ function displayOrderData(data) {
 
         // Create update status button and assign click event
         const updateStatusBtn = document.createElement('button');
+        updateStatusBtn.classList.add('update-order');
         updateStatusBtn.textContent = 'Cập nhật';
         updateStatusBtn.addEventListener('click', function () {
             const selectedStatus = statusSelect.value;
@@ -111,11 +112,13 @@ function displayOrderData(data) {
 
         // Create order details button and assign click event
         const orderDetailsBtn = document.createElement('button');
+        orderDetailsBtn.classList.add('order-details-button');
         orderDetailsBtn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
 
         orderDetailsBtn.addEventListener('click', function () {
             openOrderDetailsModal(orderData.id, data);
         });
+
 
         // Append select and buttons to respective cells
         updateStatusCell.appendChild(statusSelect);
@@ -140,26 +143,36 @@ function openOrderDetailsModal(orderId, data) {
     }
 
     const products = order.products;
-    const productDetails = document.getElementById('productDetails');
-    productDetails.innerHTML = ''; // Clear previous content
+    const productTable = document.getElementById('productTable');
+    productTable.innerHTML = ''; // Clear previous content
 
+    // Create table header row
+    const headerRow = productTable.insertRow();
+    const productIdHeader = headerRow.insertCell();
+    productIdHeader.textContent = 'Product ID';
+    const productNameHeader = headerRow.insertCell();
+    productNameHeader.textContent = 'Product Name';
+    const priceHeader = headerRow.insertCell();
+    priceHeader.textContent = 'Price';
+    const quantityHeader = headerRow.insertCell();
+    quantityHeader.textContent = 'Quantity';
+
+    // Create table rows for each product
     products.forEach(function (product) {
-        const productName = document.createElement('p');
-        productName.textContent = 'Product Name: ' + product.productName;
-
-        const productPrice = document.createElement('p');
-        productPrice.textContent = 'Price: ' + product.productPrice;
-
-        const productQuantity = document.createElement('p');
-        productQuantity.textContent = 'Quantity: ' + product.productQuantity;
-
-        productDetails.appendChild(productName);
-        productDetails.appendChild(productPrice);
-        productDetails.appendChild(productQuantity);
+        const newRow = productTable.insertRow();
+        const productIdCell = newRow.insertCell();
+        productIdCell.textContent = product.productId;
+        const productNameCell = newRow.insertCell();
+        productNameCell.textContent = product.productName;
+        const priceCell = newRow.insertCell();
+        priceCell.textContent = product.productPrice;
+        const quantityCell = newRow.insertCell();
+        quantityCell.textContent = product.productQuantity;
     });
 
     modal.style.display = 'block';
 }
+
 
 closeBtn.onclick = function () {
     closeModal();
