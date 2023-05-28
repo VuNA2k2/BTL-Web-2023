@@ -7,7 +7,7 @@ function checkLogged(role) {
     });
     if (token === undefined || token === null || token === '' || localStorage.getItem('user') === null || localStorage.getItem('user') === undefined || JSON.parse(localStorage.getItem('user')).role !== role) {
         window.location.href = "/WebS2023_war/login";
-        // return;
+        return;
     }
     // const main = document.getElementById('main');
     // main.innerHTML = `Hello ${localStorage.getItem('user')}`;
