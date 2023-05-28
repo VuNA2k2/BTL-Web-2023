@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,13 +55,29 @@
         #popup-content button {
             margin-top: 10px;
         }
+
+        .add-user-button {
+            width: 7%;
+            padding: 5px 10px;
+            margin-left: auto ;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 <%@include file="../../layout/header.jsp" %>
 <h1>User Management</h1>
-<div id="users-container"></div>
 
+<table id="users-container">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Detail</th>
+    </tr>
+
+</table>
+<button class="add-user-button" onclick="showAddUserForm()">Add User</button>
 <div id="popup">
     <div id="popup-content">
         <h2>User Details</h2>
@@ -86,7 +103,6 @@
     </div>
 </div>
 
-<button onclick="showAddUserForm()">Add User</button>
 <%@include file="../../layout/footer.jsp" %>
 <script src="script.js"></script>
 </body>

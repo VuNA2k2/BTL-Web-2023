@@ -14,144 +14,205 @@ function checkLogged(role) {
 }
 
 checkLogged('ADMIN');
-
-const users = [
-    {
-        "id": 1,
-        "username": "john_doe",
-        "password": "123456",
-        "full_name": "John Doe",
-        "email": "john.doe@example.com",
-        "phone": "123456789",
-        "address": "123 Main St",
-        "role": "USER"
-    },
-    {
-        "id": 2,
-        "username": "jane_smith",
-        "password": "abcdef",
-        "full_name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "phone": "987654321",
-        "address": "456 Elm St",
-        "role": "ADMIN"
-    }
-];
-
-document.addEventListener('DOMContentLoaded', getUsers);
-
+// Make the API request and handle the response
 function getUsers() {
-    const usersContainer = document.getElementById('users-container');
-    usersContainer.innerHTML = '';
+    fetch('https://localhost:443/WebS2023_war/api/users', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error fetching user data');
+            }
+        })
+        .then(function (data) {
+            displayUsers(data);
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Handle fetch error or display error message
+            alert('Error fetching user data. Please try again.');
+        });
+}
 
-    users.forEach(user => {
-        const userCard = document.createElement('div');
-        userCard.classList.add('user-card');
-        userCard.setAttribute('data-userid', user.id);
-        userCard.innerHTML = `
-            <p><strong>ID:</strong> ${user.id}  <strong>Username:</strong> ${user.username}  <strong>Role:</strong> ${user.role}</p>
-        `;
-        userCard.addEventListener('click', () => showUserDetails(user.id));
-        usersContainer.appendChild(userCard);
+function displayUsers(data) {
+    const usersContainer = document.getElementById('users-container');
+
+    // Remove existing rows
+    const rows = usersContainer.getElementsByTagName('tr');
+    while (rows.length > 1) {
+        usersContainer.deleteRow(1); // Start from index 1 to keep the table header
+    }
+
+    // Display user data
+    data.forEach(function (userData) {
+        const newRow = usersContainer.insertRow();
+
+        // Create data cells
+        const idCell = newRow.insertCell();
+        const usernameCell = newRow.insertCell();
+        const roleCell = newRow.insertCell();
+        const detailCell = newRow.insertCell();
+
+        // Set values for data cells
+        idCell.textContent = userData.id;
+        usernameCell.textContent = userData.username;
+        roleCell.textContent = userData.role;
+
+        // Create detail button and assign click event
+        const detailButton = document.createElement('button');
+        detailButton.textContent = 'Detail';
+        detailButton.addEventListener('click', function () {
+            openUserDetailsModal(userData);
+        });
+
+        detailCell.appendChild(detailButton);
     });
 }
 
-function showUserDetails(userId) {
-    const user = users.find(user => user.id === userId);
+// Modal pop-up functions
+const popup = document.getElementById('popup');
+const popupContent = document.getElementById('popup-content');
+const userForm = document.getElementById('user-form');
+const deleteButton = document.getElementById('delete-button');
 
-    const popup = document.getElementById('popup');
-    const form = document.getElementById('user-form');
-    const idInput = document.getElementById('id');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const addressInput = document.getElementById('address');
-    const roleInput = document.getElementById('role');
+function openUserDetailsModal(userData) {
+    // Populate form fields with user data
+    document.getElementById('id').value = userData.id;
+    document.getElementById('username').value = userData.username;
+    document.getElementById('password').value = userData.password;
+    document.getElementById('fullName').value = userData.fullName;
+    document.getElementById('email').value = userData.email;
+    document.getElementById('phone').value = userData.phone;
+    document.getElementById('address').value = userData.address;
+    document.getElementById('role').value = userData.role;
 
-    idInput.value = user.id;
-    usernameInput.value = user.username;
-    passwordInput.value = user.password;
-    fullNameInput.value = user.full_name;
-    emailInput.value = user.email;
-    phoneInput.value = user.phone;
-    addressInput.value = user.address;
-    roleInput.value = user.role;
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const updateUser = {
-            id: idInput.value,
-            username: usernameInput.value,
-            password: passwordInput.value,
-            full_name: fullNameInput.value,
-            email: emailInput.value,
-            phone: phoneInput.value,
-            address: addressInput.value,
-            role: roleInput.value
-        };
-
-        const index = users.findIndex(user => user.id === userId);
-        users[index] = updateUser;
-
-        popup.style.display = 'none';
-        getUsers();
-    });
-
-    const deleteButton = document.getElementById('delete-button');
-    deleteButton.addEventListener('click', () => {
-        const index = users.findIndex(user => user.id === userId);
-        users.splice(index, 1);
-
-        popup.style.display = 'none';
-        getUsers();
-    });
-
+    // Show the modal
     popup.style.display = 'block';
 }
+
+function closeUserDetailsModal() {
+    // Clear form fields
+    userForm.reset();
+
+    // Hide the modal
+    popup.style.display = 'none';
+}
+
+userForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const id = document.getElementById('id').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const role = document.getElementById('role').value;
+
+    const user = {
+        id: id,
+        username: username,
+        password: password,
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        address: address,
+        role: role,
+    };
+
+    // Perform save user request
+    saveUser(user);
+});
+
+deleteButton.addEventListener('click', function () {
+    const id = document.getElementById('id').value;
+
+    // Perform delete user request
+    deleteUser(id);
+});
+
+function saveUser(user) {
+    fetch('https://localhost/WebS2023_war/api/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(user),
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                closeUserDetailsModal();
+                getUsers();
+            } else {
+                throw new Error('Error saving user');
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Handle fetch error or display error message
+            alert('Error saving user. Please try again.');
+        });
+}
+
+function deleteUser(id) {
+    fetch('https://localhost/WebS2023_war/api/users/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                closeUserDetailsModal();
+                getUsers();
+            } else {
+                throw new Error('Error deleting user');
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Handle fetch error or display error message
+            alert('Error deleting user. Please try again.');
+        });
+}
+
+// Call getUsers to get initial user data
+getUsers();
 
 function showAddUserForm() {
-    const popup = document.getElementById('popup');
-    const form = document.getElementById('user-form');
-    const idInput = document.getElementById('id');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const addressInput = document.getElementById('address');
-    const roleInput = document.getElementById('role');
-
-    idInput.value = '';
-    usernameInput.value = '';
-    passwordInput.value = '';
-    fullNameInput.value = '';
-    emailInput.value = '';
-    phoneInput.value = '';
-    addressInput.value = '';
-    roleInput.value = '';
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const newUser = {
-            id: users.length + 1,
-            username: usernameInput.value,
-            password: passwordInput.value,
-            full_name: fullNameInput.value,
-            email: emailInput.value,
-            phone: phoneInput.value,
-            address: addressInput.value,
-            role: roleInput.value
-        };
-
-        users.push(newUser);
-
-        popup.style.display = 'none';
-        getUsers();
+    openUserDetailsModal({
+        id: '',
+        username: '',
+        password: '',
+        fullName: '',
+        email: '',
+        phone: '',
+        address: '',
+        role: '',
     });
-
-    popup.style.display = 'block';
 }
+
+
+const popupOverlay = document.getElementById('popup');
+
+// Function to close pop-up when clicked outside
+function closePopUpOnClickOutside(event) {
+    if (event.target === popupOverlay) {
+        closeUserDetailsModal();
+    }
+}
+
+// Event listener for click outside the pop-up
+popupOverlay.addEventListener('click', closePopUpOnClickOutside);
+
+
+
