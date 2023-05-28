@@ -35,10 +35,15 @@ function fetchCartData() {
 }
 
 function displayCartData(data) {
+
     const cartTable = document.getElementById("cartTable");
     const totalMoneyElement = document.getElementById("totalMoney");
     const buyBtn = document.getElementById("buyBtn");
-
+    // Remove existing rows
+    const rows = cartTable.getElementsByTagName('tr');
+    while (rows.length > 1) {
+       cartTable.deleteRow(1); // Start from index 1 to keep the table header
+    }
 
     // Display cart items
     let totalMoney = 0;
