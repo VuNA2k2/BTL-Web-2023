@@ -20,4 +20,8 @@ public interface CartRefProductService {
     CartRefProductOutput update(Long id, CartRefProductInput cartRefProductInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     void delete(Long id) throws SQLException;
+
+    void deleteByCartId(Long cartId) throws SQLException;
+
+    CartRefProductOutput getCartRefProductById(Long id) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

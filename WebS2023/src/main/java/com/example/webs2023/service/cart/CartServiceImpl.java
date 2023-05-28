@@ -61,7 +61,7 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
         CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
         Long id = cartRefProductService.existsByCartIdAndProductId(cartEntity.getId(), productInCartRequest.getProductId());
         if (id != null) {
-            if(productInCartRequest.getQuantity() == 0){
+            if (productInCartRequest.getQuantity() == 0) {
                 cartRefProductService.delete(id);
                 return getDetailCartFromCartEntity(cartEntity);
             } else {
@@ -73,5 +73,11 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
         CartRefProductInput cartRefProductInput = new CartRefProductInput(cartEntity.getId(), productInCartRequest.getProductId(), productInCartRequest.getQuantity());
         cartRefProductService.create(cartRefProductInput);
         return getDetailCartFromCartEntity(cartEntity);
+    }
+
+    @Override
+    public void deleteCart(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
+        cartRefProductService.deleteByCartId(cartEntity.getId());
     }
 }

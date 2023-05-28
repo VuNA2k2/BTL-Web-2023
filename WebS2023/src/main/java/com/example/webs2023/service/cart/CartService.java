@@ -15,4 +15,6 @@ public interface CartService {
     CartDetailOutput addProductToCart(ProductInCartRequest productInCartRequest, Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     CartDetailOutput update(ProductInCartRequest productInCartRequest, Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    void deleteCart(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

@@ -8,3 +8,6 @@ CREATE TABLE products_in_orders
     product_quantity INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (order_id) REFERENCES orders (id)
 );
+
+alter table products_in_orders
+alter column product_price type integer using product_price::integer;

@@ -51,7 +51,7 @@ public class JwtServiceImpl implements JwtService {
         if (jwtPayload.getExp() < Calendar.getInstance().getTimeInMillis()) {
             throw new TokenExpiredException();
         }
-        if (!jwtPayload.getRole().trim().toUpperCase().equals(requireRole)) {
+        if (!jwtPayload.getRole().trim().toUpperCase().equals(requireRole) && !requireRole.equals("BOTH")) {
             return false;
         }
         if (userRepository.getById(jwtPayload.getUserId()) == null) {
