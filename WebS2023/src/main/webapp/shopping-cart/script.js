@@ -118,5 +118,33 @@ function updateQuantity(productId, quantity) {
         });
 }
 
+function buyCart() {
+    const token = getTokenFromCookie();
+
+    fetch('https://localhost:443/WebS2023_war/api/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error fetching cart data');
+            }
+        })
+        .then(function (data) {
+            console.log(data);
+            location.reload();
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Handle fetch error or display error message
+
+        });
+}
 // Fetch cart data when the page loads
 fetchCartData();

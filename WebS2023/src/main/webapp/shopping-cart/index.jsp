@@ -137,8 +137,9 @@
 
 <!-- Buy Button -->
 <div class="center">
-  <button id="buyBtn" class="buy-btn">Mua</button>
+  <button id="buyBtn" class="buy-btn" onclick="buyCart()">Mua</button>
 </div>
+
 
 <!-- Footer -->
 <%@include file="../layout/footer.jsp" %>
