@@ -1,139 +1,91 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Shopping Cart</title>
+    <meta charset="UTF-8">
+    <title>User Management</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        .user-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
         }
 
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        table {
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            text-align: center;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .tr {
-            text-align: right;
-        }
-
-        a {
-            text-decoration: none;
-            color: chocolate;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .total {
-            text-align: right;
-            margin: 20px 10px 0 0;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .buy-btn {
-            width: 40%;
-            border: none;
-            padding: 8px 16px;
-            background-color: #66cc66;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .user-history-link {
-            margin-left: auto;
-            margin-right: 10px;
-        }
-
-        .quantity-wrapper {
-            display: flex;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
         }
 
-        .quantity-btn {
-            padding: 2px 6px;
-            background-color: #f2f2f2;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            line-height: 1;
+        #popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 400px;
         }
 
-        .delete-btn {
-            padding: 2px 6px;
-            background-color: #f2f2f2;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            line-height: 1;
-            color: red;
+        #popup-content h2 {
+            margin-top: 0;
         }
-        .user-history
-        {
-            float: right;
-            margin-right: 10px;
+
+        #popup-content label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #popup-content input[type="text"],
+        #popup-content input[type="email"],
+        #popup-content input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #popup-content button {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-<!-- Header -->
-<h1>
-    Giỏ hàng
-    <span class="user-history">
-        <a href="user-history.html" class="user-history-link">Lịch sử</a>
-    </span>
-</h1>
+<h1>User Management</h1>
+<div id="users-container"></div>
 
-<!-- Cart Table -->
-<table id="cartTable">
-    <tr>
-        <th>STT</th>
-        <th>Tên</th>
-        <th>Số lượng</th>
-        <th>Giá</th>
-        <th>Tổng tiền</th>
-        <th></th>
-    </tr>
-</table>
-
-<!-- Total Money -->
-<div id="totalMoney" class="total"></div>
-
-<!-- Buy Button -->
-<div class="center">
-    <button id="buyBtn" class="buy-btn">Mua</button>
+<div id="popup">
+    <div id="popup-content">
+        <h2>User Details</h2>
+        <form id="user-form">
+            <input type="hidden" id="id">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" required>
+            <label for="role">Role:</label>
+            <input type="text" id="role" required>
+            <button type="submit">Save</button>
+            <button type="button" id="delete-button">Delete</button>
+        </form>
+    </div>
 </div>
 
-<!-- Footer -->
+<button onclick="showAddUserForm()">Add User</button>
 <script src="script.js"></script>
 </body>
 </html>
