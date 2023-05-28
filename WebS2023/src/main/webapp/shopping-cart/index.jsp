@@ -111,7 +111,7 @@
 </head>
 <body>
 <!-- Header -->
-<%@include file="header.jsp" %>
+<%@include file="../layout/header.jsp" %>
 <h1>
   Giỏ hàng
   <span class="user-history">
@@ -141,7 +141,7 @@
 </div>
 
 <!-- Footer -->
-<%@include file="footer.jsp" %>
+<%@include file="../layout/footer.jsp" %>
 <script src="script.js"></script>
 </body>
 </html>
