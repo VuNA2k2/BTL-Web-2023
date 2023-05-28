@@ -69,28 +69,30 @@
 <body>
 <%@ include file="../layout/header.jsp" %>
 
-<h1>Danh sách đơn hàng</h1>
+<h1>Orders</h1>
 <table id="orderTable">
   <tr>
     <th>ID</th>
     <th>User ID</th>
-    <th>Ngày đặt hàng</th>
-    <th>Tổng số tiền</th>
-    <th>Trạng thái</th>
-    <th>Cập nhật trạng thái</th>
+    <th>Order Date</th>
+    <th>Total Money</th>
+    <th>Status</th>
+    <th>Update Status</th>
+    <th>Order Details</th>
   </tr>
 </table>
 
-<%@ include file="../layout/footer.jsp" %>
-
-<!-- Modal pop-up -->
+<!-- Modal -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2>Thông tin chi tiết sản phẩm</h2>
     <div id="productDetails"></div>
   </div>
 </div>
+
+
+
+<%@ include file="../layout/footer.jsp" %>
 
 </body>
 <script src="script.js"></script>
