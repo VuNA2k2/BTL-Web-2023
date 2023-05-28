@@ -5,33 +5,40 @@ function getTokenFromCookie() {
     return token;
 }
 
-fetch('https://localhost:443/WebS2023_war/api/carts', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + getTokenFromCookie(),
-    }
-}).then(function (response) {
-    if (response.status === 200) {
-        response.json().then(function (data) {
+function fetchCartData() {
+    const token = getTokenFromCookie();
+
+    fetch('https://localhost:443/WebS2023_war/api/carts', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        }
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error fetching cart data');
+            }
+        })
+        .then(function (data) {
             console.log(data);
-            displayCartData(data.data); // Truyền data.data vào hàm displayCartData
+            displayCartData(data.data);
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Handle fetch error or display error message
+            alert('Error fetching cart data. Please try again.');
         });
-    } else {
-        // Handle error response
-    }
-});
+}
 
 function displayCartData(data) {
     const cartTable = document.getElementById("cartTable");
     const totalMoneyElement = document.getElementById("totalMoney");
     const buyBtn = document.getElementById("buyBtn");
 
-    // Clear existing table rows
-    while (cartTable.rows.length > 1) {
-        cartTable.deleteRow(1);
-    }
 
     // Display cart items
     let totalMoney = 0;
@@ -47,27 +54,24 @@ function displayCartData(data) {
         noCell.textContent = index + 1;
         nameCell.textContent = item.product.name;
         quantityCell.innerHTML = `
-    <div class="quantity-wrapper">
-        <button class="quantity-btn" onclick="decreaseQuantity(${item.product.id}, ${item.quantity})">-</button>
-        <span>${item.quantity}</span>
-        <button class="quantity-btn" onclick="increaseQuantity(${item.product.id}, ${item.quantity})">+</button>
-    </div>
-`;
-
+            <div class="quantity-wrapper">
+                <button class="quantity-btn" onclick="updateQuantity(${item.product.id}, ${item.quantity - 1})">-</button>
+                <span>${item.quantity}</span>
+                <button class="quantity-btn" onclick="updateQuantity(${item.product.id}, ${item.quantity + 1})">+</button>
+            </div>
+        `;
         priceCell.textContent = item.product.price;
         totalMoneyCell.textContent = item.quantity * item.product.price;
-
         totalMoney += item.quantity * item.product.price;
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-btn');
         deleteBtn.textContent = 'Delete';
-        deleteBtn.addEventListener('click', () => deleteProduct(item.product.id, item.quantity));
-
+        deleteBtn.addEventListener('click', () => updateQuantity(item.product.id, 0));
 
         actionCell.appendChild(deleteBtn);
-        productIdCell.style.display = "none"; // Ẩn cột "ProductId"
-        productIdCell.textContent=item.product.id;
+        productIdCell.style.display = "none";
+        productIdCell.textContent = item.product.id;
     });
 
     // Display total money
@@ -75,24 +79,7 @@ function displayCartData(data) {
     // Show/hide Buy button
 }
 
-function decreaseQuantity(productId, quantity) {
-
-        quantity -= 1;
-        updateCartData(productId, quantity);
-
-}
-
-function increaseQuantity(productId, quantity) {
-    quantity += 1;
-    updateCartData(productId, quantity);
-}
-
-function deleteProduct(productId, quantity) {
-    updateCartData(productId, 0);
-}
-
-
-function updateCartData(productId, quantity) {
+function updateQuantity(productId, quantity) {
     const token = getTokenFromCookie();
     const updateData = {
         productId: productId,
@@ -117,13 +104,14 @@ function updateCartData(productId, quantity) {
         })
         .then(function (data) {
             console.log(data);
-            displayCartData(data.data);
+            fetchCartData();
         })
         .catch(function (error) {
+            console.error(error);
             // Handle fetch error or display error message
-            console.log(error);
-            // Display error message to the user
             alert('Error updating cart data. Please try again.');
         });
 }
 
+// Fetch cart data when the page loads
+fetchCartData();

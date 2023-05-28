@@ -115,7 +115,7 @@
 <h1>
   Giỏ hàng
   <span class="user-history">
-        <a href="https://localhost/WebS2023_war/cart-history" class="user-history-link">Lịch sử</a>
+        <a href="https://localhost/WebS2023_war/order/" class="user-history-link">Lịch sử</a>
     </span>
 </h1>
 
