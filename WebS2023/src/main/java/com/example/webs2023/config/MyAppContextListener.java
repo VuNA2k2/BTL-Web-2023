@@ -20,6 +20,8 @@ import com.example.webs2023.service.product.ProductService;
 import com.example.webs2023.service.product.ProductServiceImpl;
 import com.example.webs2023.service.product_in_order.ProductInOrderService;
 import com.example.webs2023.service.product_in_order.ProductInOrderServiceImpl;
+import com.example.webs2023.service.rate.RateService;
+import com.example.webs2023.service.rate.RateServiceImpl;
 import com.example.webs2023.service.user.UserService;
 import com.example.webs2023.service.user.UserServiceImpl;
 
@@ -53,6 +55,8 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(ProductInOrderRepository.class, new ProductInOrderRepository(ProductsInOrderEntity.class));
             DependencyInjector.registerDependency(ProductInOrderService.class, new ProductInOrderServiceImpl(DependencyInjector.getDependency(ProductInOrderRepository.class)));
             DependencyInjector.registerDependency(OrderService.class, new OrderServiceImpl(DependencyInjector.getDependency(OrderRepository.class), DependencyInjector.getDependency(CartService.class), DependencyInjector.getDependency(ProductInOrderService.class)));
+            DependencyInjector.registerDependency(RateRepository.class, new RateRepository(RateEntity.class));
+            DependencyInjector.registerDependency(RateService.class, new RateServiceImpl(DependencyInjector.getDependency(RateRepository.class), DependencyInjector.getDependency(ProductInOrderRepository.class), DependencyInjector.getDependency(ImageService.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

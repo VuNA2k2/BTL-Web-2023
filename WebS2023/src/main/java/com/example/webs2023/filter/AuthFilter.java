@@ -45,7 +45,6 @@ public class AuthFilter implements Filter {
                     httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     return;
                 }
-                ;
                 filterChain.doFilter(servletRequest, servletResponse);
             } catch (Exception e) {
                 httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -68,6 +67,9 @@ public class AuthFilter implements Filter {
             else if(method.equals("POST")) return "NONE";
             else if(method.equals("PUT")) return "BOTH";
             else if(method.equals("DELETE")) return "ADMIN";
+            else return "NONE";
+        } else if(path.startsWith("/api/rates")) {
+            if(method.equals("POST")) return "USER";
             else return "NONE";
         }
         else return "NONE";
