@@ -28,15 +28,16 @@ public class OrderController extends BaseController {
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
+            String status = request.getParameter("status");
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
             if (jwtPayload.getRole().equals("USER")) {
-                return Response.success(((OrderService) this.service).getOrderByUserId(jwtPayload.getUserId()));
+                return Response.success(((OrderService) this.service).getOrderByUserId(jwtPayload.getUserId(), status));
             } else {
                 String userId = request.getParameter("userId");
                 if (userId != null && !userId.isBlank()) {
-                    return Response.success(((OrderService) this.service).getOrderByUserId(Long.parseLong(userId)));
+                    return Response.success(((OrderService) this.service).getOrderByUserId(Long.parseLong(userId), status));
                 }
-                return Response.success(((OrderService) this.service).getAllListOrder());
+                return Response.success(((OrderService) this.service).getAllListOrder(status));
             }
         } catch (Exception e) {
             e.printStackTrace();

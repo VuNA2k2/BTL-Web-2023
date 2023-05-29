@@ -59,21 +59,32 @@ public class OrderServiceImpl extends BaseService<OrderEntity, Long, OrderInput,
     }
 
     @Override
-    public List<OrderOutput> getOrderByUserId(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<OrderEntity> orderEntities = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC");
-        List<OrderOutput> orderOutputs = orderEntities.stream().map(orderEntity -> {
+    public List<OrderOutput> getOrderByUserId(Long userId, String status) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String sql;
+        if (status != null) {
+            sql = "WHERE user_id = " + userId + " AND status = '" + status + "' ORDER BY id DESC";
+        } else {
+            sql = "WHERE user_id = " + userId + " ORDER BY id DESC";
+        }
+        List<OrderEntity> orderEntities = repository.getAll(sql);
+        return orderEntities.stream().map(orderEntity -> {
             try {
                 return getOrderOutputFromOrderEntity(orderEntity);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }).toList();
-        return orderOutputs;
     }
 
     @Override
-    public List<OrderOutput> getAllListOrder() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<OrderEntity> orderEntities = repository.getAll("ORDER BY id DESC");
+    public List<OrderOutput> getAllListOrder(String status) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String sql;
+        if (status != null) {
+            sql = "WHERE status = '" + status + "' ORDER BY id DESC";
+        } else {
+            sql = "ORDER BY id DESC";
+        }
+        List<OrderEntity> orderEntities = repository.getAll(sql);
         List<OrderOutput> orderOutputs = orderEntities.stream().map(orderEntity -> {
             try {
                 return getOrderOutputFromOrderEntity(orderEntity);
