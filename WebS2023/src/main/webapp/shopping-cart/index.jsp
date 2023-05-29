@@ -100,10 +100,8 @@
 
 <div id="cartItems" class="center"></div>
 
-<!-- Total Money -->
 <div id="cartTotal" class="total"></div>
 
-<!-- Buy Button -->
 <div class="center">
   <button id="buyBtn" class="buy-btn" onclick="buyCart()">Mua</button>
 </div>

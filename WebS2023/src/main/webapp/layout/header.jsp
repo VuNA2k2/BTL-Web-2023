@@ -1,15 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kuros
-  Date: 5/27/2023
-  Time: 6:22 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%--
-    Document   : header
-    Created on : May 20, 2023, 9:32:34 AM
-    Author     : kuros
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,14 +61,6 @@
       font-weight: 600;
     }
 
-    .logo {
-      display: flex;
-      height: 70px;
-    }
-
-    .logo img {
-      height: 100%;
-    }
 
     .search-box {
       position: absolute;

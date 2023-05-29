@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Danh sách đơn hàng</title>
+  <script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
   <style>
     /* CSS cho bảng */
     table {
@@ -23,13 +24,11 @@
       background-color: #f2f2f2;
     }
 
-    /* CSS cho tiêu đề */
     h1 {
       margin-bottom: 20px;
       text-align: center;
     }
 
-    /* CSS cho modal pop-up */
     .modal {
       display: none;
       position: fixed;
@@ -65,7 +64,6 @@
       cursor: pointer;
     }
 
-    /* CSS cho nút Order Details */
     .order-details-button {
       padding: 5px 10px;
       background-color: transparent;
@@ -79,16 +77,12 @@
       cursor: pointer;
     }
 
-
-    select
-    {
+    select {
       margin-right: 5px;
       padding: 3px 0;
     }
 
-    /* CSS cho nút Update Order */
     .update-order {
-
       padding: 3px 16px;
       background-color: #4CAF50;
       color: white;
@@ -96,7 +90,28 @@
       border-radius: 4px;
       cursor: pointer;
       transition: background-color 0.3s;
+      display: inline-block;
+      align-items: center;
     }
+
+    .filter-icon {
+      margin-right: 5px;
+      color: darkgray;
+
+    }
+
+    .filter-container {
+      display: flex;
+      justify-content: right;
+      margin-right: 10px;
+    }
+
+    #filterButton
+    {
+      border: none;
+      background-color: transparent;
+    }
+
 
   </style>
 </head>
@@ -104,6 +119,23 @@
 <%@ include file="../layout/header.jsp" %>
 
 <h1>Danh sách đơn hàng</h1>
+
+<div class="filter-container">
+  <div>
+    <select id="statusFilterSelect">
+      <option value="">Tất cả</option>
+      <option value="PENDING">PENDING</option>
+      <option value="IN SHIPPING">IN SHIPPING</option>
+      <option value="DONE">DONE</option>
+      <option value="CANCEL">CANCEL</option>
+    </select>
+    <button id="filterButton" class="filter">
+      <i class="fa-solid fa-filter filter-icon"></i>
+    </button>
+  </div>
+</div>
+
+
 <table id="orderTable">
   <tr>
     <th>ID</th>
@@ -116,10 +148,9 @@
   </tr>
 </table>
 
-<!-- Modal -->
 <div id="modal" class="modal">
   <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="close"><i class="fa-solid fa-x"></i></span>
     <table id="productTable">
       <h1>Danh sách sản phẩm</h1>
       <tr>
@@ -131,7 +162,6 @@
     </table>
   </div>
 </div>
->
 
 <%@ include file="../layout/footer.jsp" %>
 

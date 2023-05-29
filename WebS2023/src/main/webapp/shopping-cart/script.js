@@ -28,7 +28,6 @@ function fetchCartData() {
         })
         .catch(function (error) {
             console.error(error);
-            // Handle fetch error or display error message
             alert('Error fetching cart data. Please try again.');
         });
 }
@@ -38,10 +37,8 @@ function displayCartData(data) {
     const cartTotal = document.getElementById('cartTotal');
     const buyBtn = document.getElementById('buyBtn');
 
-    // Clear existing cart items
     cartItems.innerHTML = '';
 
-    // Display cart items
     let totalMoney = 0;
     data.products.forEach((item, index) => {
         const cartItem = document.createElement('div');
@@ -60,13 +57,10 @@ function displayCartData(data) {
         cartItemName.textContent = item.product.name;
         cartItemInfo.appendChild(cartItemName);
 
-
-
         const cartItemPrice = document.createElement('div');
         cartItemPrice.classList.add('cart-item-price');
         cartItemPrice.textContent = 'Price: ' + item.product.price + ' đ';
         cartItemInfo.appendChild(cartItemPrice);
-
 
         const cartItemQuantity = document.createElement('div');
         cartItemQuantity.classList.add('cart-item-quantity');
@@ -101,11 +95,8 @@ function displayCartData(data) {
         totalMoney += item.quantity * item.product.price;
     });
 
-    // Display total money
     cartTotal.textContent = 'Total Money: ' + totalMoney + ' đ';
 }
-
-
 
 function updateQuantity(productId, quantity) {
     const token = getTokenFromCookie();
@@ -113,7 +104,6 @@ function updateQuantity(productId, quantity) {
         productId: productId,
         quantity: quantity
     };
-
     fetch('https://localhost:443/WebS2023_war/api/carts', {
         method: 'PUT',
         headers: {
@@ -136,7 +126,6 @@ function updateQuantity(productId, quantity) {
         })
         .catch(function (error) {
             console.error(error);
-            // Handle fetch error or display error message
             alert('Error updating cart data. Please try again.');
         });
 }
@@ -165,10 +154,8 @@ function buyCart() {
         })
         .catch(function (error) {
             console.error(error);
-            // Handle fetch error or display error message
             alert('Error buying cart. Please try again.');
         });
 }
 
-// Fetch cart data when the page loads
 fetchCartData();
