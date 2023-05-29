@@ -1,148 +1,115 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
   <title>Shopping Cart</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
+    .cart-item {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid #f2f2f2;
+      padding: 20px;
+      width: 40%;
+      margin: 0 auto;
+    }
+
+    .cart-item-image {
+      width: 200px;
+      margin-right: 20px;
+
+    }
+    .delete-btn {
+      border: none;
+      background-color: transparent;
+      color: red;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+
+    .cart-item-info {
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      justify-content: space-between;
     }
 
-    h1 {
-      text-align: center;
-      margin-top: 20px;
+    .cart-item-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      text-align: center;
-      padding: 8px;
-    }
-
-    th {
-      background-color: #f2f2f2;
-    }
-
-    .tr {
-      text-align: right;
-    }
-
-    a {
-      text-decoration: none;
-      color: chocolate;
+    .cart-item-price {
       font-size: 16px;
-      font-weight: bold;
     }
 
-    .total {
-      text-align: right;
-      margin: 20px 10px 0 0;
-      font-size: 20px;
-      font-weight: bold;
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
     }
 
-    .center {
+    .cart-item-quantity input {
+      width: 30px;
       text-align: center;
+      margin-left: 10px;
+    }
+
+    .cart-item-total {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
     }
 
     .buy-btn {
-      width: 40%;
       border: none;
+      width: 40%;
+      margin: 20px auto;
       padding: 8px 16px;
-      background-color: #66cc66;
+      background-color: springgreen;
       color: white;
       cursor: pointer;
       font-size: 14px;
       font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      display: block;
     }
 
-    .user-history-link {
-      margin-left: auto;
-      margin-right: 10px;
+    .user-history, .total {
+      text-align: right;
+      margin: 20px 10px 0 0;
     }
-
-    .quantity-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .quantity-btn {
-      padding: 2px 6px;
-      background-color: #f2f2f2;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 1;
-    }
-
-    .delete-btn {
-      padding: 2px 6px;
-      background-color: #f2f2f2;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 1;
-      color: red;
-    }
-    .user-history
+    h1
     {
-      float: right;
-      margin-right: 10px;
-    }
-
-    .hidden
-    {
-      display: none;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-<!-- Header -->
-<%@include file="../layout/header.jsp" %>
-<h1>
-  Giỏ hàng
-  <span class="user-history">
-        <a href="https://localhost/WebS2023_war/order/" class="user-history-link">Lịch sử</a>
-    </span>
-</h1>
+<%@ include file="../layout/header.jsp" %>
 
-<!-- Cart Table -->
-<table id="cartTable">
-  <tr>
-    <th>STT</th>
-    <th>Tên</th>
-    <th>Số lượng</th>
-    <th>Giá</th>
-    <th>Tổng tiền</th>
-    <th></th>
-    <th class="hidden" >ProductId</th>
-  </tr>
-</table>
+<h1>Giỏ hàng</h1>
+
+<div class="user-history">
+  <a href="https://localhost/WebS2023_war/order/" class="user-history-link">Lịch sử</a>
+</div>
+
+<div id="cartItems" class="center"></div>
 
 <!-- Total Money -->
-<div id="totalMoney" class="total"></div>
+<div id="cartTotal" class="total"></div>
 
 <!-- Buy Button -->
 <div class="center">
   <button id="buyBtn" class="buy-btn" onclick="buyCart()">Mua</button>
 </div>
 
+<%@ include file="../layout/footer.jsp" %>
 
-<!-- Footer -->
-<%@include file="../layout/footer.jsp" %>
-<script src="script.js"></script>
 </body>
+<script src="script.js"></script>
 </html>
