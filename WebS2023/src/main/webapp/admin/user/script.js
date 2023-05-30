@@ -15,7 +15,38 @@ function checkLogged(role) {
 
 checkLogged('ADMIN');
 
+function getTokenFromCookie() {
+    const cookie = document.cookie.split(';');
+    const token = cookie[0].substring("token=".length, cookie[0].length);
+    return token;
+}
 
+// function fetchDataUser(status) {
+//     fetch('api', {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json',
+//             'Authorization': 'Bearer ' + getTokenFromCookie(),
+//         },
+//     })
+//         .then(function (response) {
+//             if (response.status === 200) {
+//                 return response.json();
+//             } else {
+//                 throw new Error('Error fetching order data');
+//             }
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//             displayUsers(data.data);
+//         })
+//         .catch(function (error) {
+//             console.error(error);
+//             alert('Error fetching order data. Please try again.');
+//         });
+// }
+// fetchDataUser();
 getUsers();
 function getUsers() {
     const users = {
@@ -56,7 +87,7 @@ function getUsers() {
     displayUsers(users);
 }
 
-function displayUsers(users) {
+function displayUsers(data) {
     const usersContainer = document.getElementById('users-container');
 
     // Remove existing rows
@@ -65,7 +96,7 @@ function displayUsers(users) {
         usersContainer.deleteRow(1);
     }
 
-    users.users.forEach(function (user) {
+    data.users.forEach(function (user) {
         const row = document.createElement('tr');
 
         const idCell = document.createElement('td');
@@ -165,14 +196,37 @@ function saveUser() {
     console.log("Address:", address);
     console.log("Role:", role);
 
+    // Viết api vào đây và chỉnh sửa
+
     // Refresh user list
     getUsers();
 }
 
 function deleteUser(id) {
     // Perform delete logic here
-    console.log("Deleting user with ID:", id);
-
+    //     fetch('api', {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json',
+//             'Authorization': 'Bearer ' + getTokenFromCookie(),
+//         },
+//     })
+//         .then(function (response) {
+//             if (response.status === 200) {
+//                 return response.json();
+//             } else {
+//                 throw new Error('Error fetching order data');
+//             }
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//             fetchDataUser();
+//         })
+//         .catch(function (error) {
+//             console.error(error);
+//             alert('Error fetching order data. Please try again.');
+//         })
     // Refresh user list
     getUsers();
 }
