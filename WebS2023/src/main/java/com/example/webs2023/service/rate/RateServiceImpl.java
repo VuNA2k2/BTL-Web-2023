@@ -31,7 +31,7 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
 
     @Override
     public RateOutput createRate(Long userId, RateInput rateInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        if (!productInOrderRepository.existsByUserOrderAndId(userId, rateInput.getProductInOrderId())) {
+        if (productInOrderRepository.existsByUserOrderAndId(userId, rateInput.getProductInOrderId())) {
             return null;
         }
         RateEntity rateEntity = mapper.getEntityFromInput(rateInput);
