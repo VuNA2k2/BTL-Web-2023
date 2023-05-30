@@ -9,3 +9,10 @@ CREATE TABLE rates
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (product_in_order_id) REFERENCES products_in_orders (id)
 )
+
+alter table rates
+drop constraint rates_product_in_order_id_fkey;
+
+alter table rates
+    add constraint rates_product_id_fkey
+        foreign key (product_in_order_id) references products;
