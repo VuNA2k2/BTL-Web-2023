@@ -150,7 +150,7 @@ function buyCart() {
         })
         .then(function (data) {
             console.log(data);
-
+            fetchCartData();
         })
         .catch(function (error) {
             console.error(error);
