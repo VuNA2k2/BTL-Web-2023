@@ -58,7 +58,7 @@ function displayOrderData(data) {
         idCell.textContent = orderData.id;
         userIdCell.textContent = orderData.userId;
         orderDateCell.textContent = orderData.orderDate;
-        totalMoneyCell.textContent = orderData.totalMoney;
+        totalMoneyCell.textContent = orderData.totalMoney+'đ ';
         statusCell.textContent = orderData.status;
 
         const statusSelect = document.createElement('select');
@@ -140,13 +140,13 @@ function openOrderDetailsModal(orderId, data) {
 
     const headerRow = productTable.insertRow();
     const productIdHeader = headerRow.insertCell();
-    productIdHeader.textContent = 'Product ID';
+    productIdHeader.textContent = 'ID Sản phẩm';
     const productNameHeader = headerRow.insertCell();
-    productNameHeader.textContent = 'Product Name';
+    productNameHeader.textContent = 'Tên sản phẩm';
     const priceHeader = headerRow.insertCell();
-    priceHeader.textContent = 'Price';
+    priceHeader.textContent = 'Giá';
     const quantityHeader = headerRow.insertCell();
-    quantityHeader.textContent = 'Quantity';
+    quantityHeader.textContent = 'Số lượng';
 
     products.forEach(function (product) {
         const newRow = productTable.insertRow();
@@ -155,7 +155,7 @@ function openOrderDetailsModal(orderId, data) {
         const productNameCell = newRow.insertCell();
         productNameCell.textContent = product.productName;
         const priceCell = newRow.insertCell();
-        priceCell.textContent = product.productPrice;
+        priceCell.textContent = product.productPrice+'đ';
         const quantityCell = newRow.insertCell();
         quantityCell.textContent = product.productQuantity;
     });
