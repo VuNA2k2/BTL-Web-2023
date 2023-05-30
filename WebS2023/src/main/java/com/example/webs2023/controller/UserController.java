@@ -45,7 +45,7 @@ public class UserController extends BaseController {
                 } else if (request.getParameter("phone") != null && !request.getParameter("phone").isEmpty()) {
                     return Response.success(service.getUserByPhone(request.getParameter("phone")));
                 } else {
-                    return Response.success(service.getAllUsers());
+                    return Response.success(userOutput);
                 }
             } else {
                 return Response.success(userOutput);
