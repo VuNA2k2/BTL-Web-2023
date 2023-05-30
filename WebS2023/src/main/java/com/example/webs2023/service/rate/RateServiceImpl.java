@@ -31,16 +31,17 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
 
     @Override
     public RateOutput createRate(Long userId, RateInput rateInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        if (!productInOrderRepository.existsByUserOrderAndId(userId, rateInput.getProductInOrderId())) {
+        if (productInOrderRepository.existsByUserOrderAndId(userId, rateInput.getProductInOrderId())) {
             return null;
         }
         RateEntity rateEntity = mapper.getEntityFromInput(rateInput);
+        rateEntity.setProductInOrderId(productInOrderRepository.getById(rateInput.getProductInOrderId()).getProductId());
         rateEntity.setUserId(userId);
         rateEntity.setCreatedAt(Timestamp.from(Instant.now()));
         rateEntity = repository.save(rateEntity);
         List<ImageOutput> images = new ArrayList<>();
         RateEntity finalRateEntity = rateEntity;
-        rateInput.getImages().stream().forEach(image -> {
+        rateInput.getImages().forEach(image -> {
             try {
                 ImageInput imageInput = new ImageInput();
                 imageInput.setLink(image);
@@ -61,7 +62,7 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
     public List<RateOutput> getListRateByProductId(Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<RateEntity> rateEntities = repository.getAll("WHERE product_in_order_id = " + productId);
         List<RateOutput> rateOutputs = new ArrayList<>();
-        rateEntities.stream().forEach(rateEntity -> {
+        rateEntities.forEach(rateEntity -> {
             try {
                 RateOutput rateOutput = mapper.getOutputFromEntity(rateEntity);
                 rateOutput.setImages(imageService.getImageByRateId(rateEntity.getId()));
