@@ -50,13 +50,13 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
     }
 
     @Override
-    public UserOutput getUserByEmail(String email) {
-        return null;
+    public UserOutput getUserByEmail(String email) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return mapper.getOutputFromEntity(((UserRepository) repository).getByEmail(email));
     }
 
     @Override
-    public UserOutput getUserByPhone(String phone) {
-        return null;
+    public UserOutput getUserByPhone(String phone) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return mapper.getOutputFromEntity(((UserRepository) repository).getByPhone(phone));
     }
 
     @Override
@@ -65,7 +65,13 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
     }
 
     @Override
-    public List<UserOutput> getUserByRole(String role) {
-        return null;
+    public List<UserOutput> getUserByRole(String role) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<UserEntity> userEntities = repository.getAll("WHERE role = '" + role + "'");
+        return userEntities.stream().map(userEntity -> (UserOutput) mapper.getOutputFromEntity(userEntity)).toList();
+    }
+
+    @Override
+    public List<UserOutput> getAllUsers() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return getAll();
     }
 }
