@@ -14,8 +14,10 @@ public interface UserService {
     UserOutput saveUser(UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
     UserOutput updateUser(Long id, UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
     void deleteUser(Long id) throws SQLException;
-    UserOutput getUserByEmail(String email);
-    UserOutput getUserByPhone(String phone);
+    UserOutput getUserByEmail(String email) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    UserOutput getUserByPhone(String phone) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
     List<UserOutput> getUserByAddress(String address);
-    List<UserOutput> getUserByRole(String role);
+    List<UserOutput> getUserByRole(String role) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    List<UserOutput> getAllUsers() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

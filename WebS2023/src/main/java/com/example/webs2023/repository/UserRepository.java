@@ -26,4 +26,12 @@ public class UserRepository extends BaseRepository<UserEntity, Long> {
     public UserEntity getByUsername(String username) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return rawQuery("SELECT * FROM users WHERE username='" + username + "'").get(0);
     }
+
+    public UserEntity getByEmail(String email) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return rawQuery("SELECT * FROM users WHERE email='" + email + "'").get(0);
+    }
+
+    public UserEntity getByPhone(String phone) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return rawQuery("SELECT * FROM users WHERE phone='" + phone + "'").get(0);
+    }
 }
