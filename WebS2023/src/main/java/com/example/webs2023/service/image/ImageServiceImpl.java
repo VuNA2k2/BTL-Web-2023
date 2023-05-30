@@ -34,4 +34,11 @@ public class ImageServiceImpl extends BaseService<ImageEntity, Long, ImageInput,
     public void deleteImage(Long id) throws SQLException {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<ImageOutput> getImageByRateId(Long id) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<ImageEntity> imageEntities = ((ImageRepository) repository).getImagesByRefIdAndRefType(id, "RATE");
+        List<ImageOutput> imageOutputs = imageEntities.stream().map(imageEntity -> (ImageOutput) mapper.getOutputFromEntity(imageEntity)).toList();
+        return imageOutputs;
+    }
 }

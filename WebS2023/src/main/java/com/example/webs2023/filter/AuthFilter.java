@@ -60,19 +60,24 @@ public class AuthFilter implements Filter {
         } else if (path.startsWith("/api/carts")) return "USER";
         else if (path.startsWith("/api/orders")) {
             if (method.equals("GET") || method.equals("PUT")) return "BOTH";
-            else if(method.equals("POST")) return "USER";
+            else if (method.equals("POST")) return "USER";
             else return "ADMIN";
-        } else if(path.startsWith("/api/users")) {
-            if(method.equals("GET")) return "BOTH";
-            else if(method.equals("POST")) return "NONE";
-            else if(method.equals("PUT")) return "BOTH";
-            else if(method.equals("DELETE")) return "ADMIN";
+        } else if (path.startsWith("/api/users")) {
+            if (method.equals("GET")) return "BOTH";
+            else if (method.equals("POST")) return "NONE";
+            else if (method.equals("PUT")) return "BOTH";
+            else if (method.equals("DELETE")) return "ADMIN";
             else return "NONE";
-        } else if(path.startsWith("/api/rates")) {
-            if(method.equals("POST")) return "USER";
+        } else if (path.startsWith("/api/rates")) {
+            if (method.equals("POST")) return "USER";
             else return "NONE";
-        }
-        else return "NONE";
+        } else if (path.startsWith("/api/users")) {
+            if (method.equals("GET")) return "BOTH";
+            else if (method.equals("POST")) return "ADMIN";
+            else if (method.equals("PUT")) return "BOTH";
+            else if (method.equals("DELETE")) return "ADMIN";
+            else return "NONE";
+        } else return "NONE";
     }
 
     @Override

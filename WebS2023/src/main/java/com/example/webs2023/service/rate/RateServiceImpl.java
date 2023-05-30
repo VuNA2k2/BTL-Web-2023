@@ -3,6 +3,7 @@ package com.example.webs2023.service.rate;
 import com.example.webs2023.base.BaseService;
 import com.example.webs2023.dto.image.ImageInput;
 import com.example.webs2023.dto.image.ImageOutput;
+import com.example.webs2023.dto.rate.AvgRateOutput;
 import com.example.webs2023.dto.rate.RateInput;
 import com.example.webs2023.dto.rate.RateOutput;
 import com.example.webs2023.entity.RateEntity;
@@ -46,12 +47,46 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
                 imageInput.setRefId(finalRateEntity.getId());
                 imageInput.setRefType("RATE");
                 images.add(imageService.createImage(imageInput));
-            } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException throwables) {
+            } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                     IllegalAccessException throwables) {
                 throwables.printStackTrace();
             }
         });
         RateOutput rateOutput = mapper.getOutputFromEntity(rateEntity);
         rateOutput.setImages(images);
         return rateOutput;
+    }
+
+    @Override
+    public List<RateOutput> getListRateByProductId(Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<RateEntity> rateEntities = repository.getAll("WHERE product_in_order_id = " + productId);
+        List<RateOutput> rateOutputs = new ArrayList<>();
+        rateEntities.stream().forEach(rateEntity -> {
+            try {
+                RateOutput rateOutput = mapper.getOutputFromEntity(rateEntity);
+                rateOutput.setImages(imageService.getImageByRateId(rateEntity.getId()));
+                rateOutputs.add(rateOutput);
+            } catch (SQLException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                     IllegalAccessException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+        return rateOutputs;
+    }
+
+    @Override
+    public AvgRateOutput avgRateByProductId(Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        List<RateEntity> rateEntities = repository.getAll("WHERE product_in_order_id = " + productId);
+        AvgRateOutput avgRateOutput = new AvgRateOutput();
+        if (rateEntities.size() == 0) {
+            avgRateOutput.setAvgRate(0.0);
+            avgRateOutput.setCountRate(0L);
+            return avgRateOutput;
+        }
+        double totalRate;
+        totalRate = rateEntities.stream().mapToDouble(RateEntity::getStar).sum();
+        avgRateOutput.setAvgRate(totalRate / rateEntities.size());
+        avgRateOutput.setCountRate((long) rateEntities.size());
+        return avgRateOutput;
     }
 }
