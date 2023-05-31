@@ -22,8 +22,8 @@ function getTokenFromCookie() {
 }
 
 function fetchDataUser(role) {
-    let api='https://localhost:443/WebS2023_war/api/users';
-    fetch('api', {
+    let api='https://localhost:443/WebS2023_war/api/users?role='+role;
+    fetch(api, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -56,14 +56,14 @@ function displayUsers(data) {
         usersContainer.deleteRow(1);
     }
 
-    data.users.forEach(function (user) {
+    data.forEach(function (user) {
         const row = document.createElement('tr');
 
         const idCell = document.createElement('td');
         idCell.textContent = user.id;
 
         const usernameCell = document.createElement('td');
-        usernameCell.textContent = user.username;
+        usernameCell.textContent = user.fullName;
 
         const roleCell = document.createElement('td');
         roleCell.textContent = user.role;
@@ -91,9 +91,9 @@ function openUserDetailsModal(user) {
     const userForm = document.getElementById('user-form');
 
     document.getElementById('id').value = user.id;
-    document.getElementById('username').value = user.username;
-    document.getElementById('password').value = user.password;
-    document.getElementById('fullName').value = user.full_name;
+    document.getElementById('username').value = "########";
+    document.getElementById('password').value = "########";
+    document.getElementById('fullName').value = user.fullName;
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
     document.getElementById('address').value = user.address;

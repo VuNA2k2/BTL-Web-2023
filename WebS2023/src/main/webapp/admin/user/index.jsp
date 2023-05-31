@@ -28,7 +28,7 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Username</th>
+            <th>Name</th>
             <th>Role</th>
             <th>Detail</th>
         </tr>
