@@ -13,4 +13,6 @@ public interface ImageService {
     ImageOutput createImage(ImageInput imageInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     void deleteImage(Long id) throws SQLException;
+
+    List<ImageOutput> getImageByRateId(Long id) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }
