@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 @WebServlet(value = "/api/users")
 public class UserController extends BaseController {
@@ -37,6 +38,9 @@ public class UserController extends BaseController {
                 if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
                     return Response.success(service.getUserById(Long.parseLong(request.getParameter("id"))));
                 } else if (request.getParameter("role") != null && !request.getParameter("role").isEmpty()) {
+                    if(Objects.equals(request.getParameter("role"), "ALL")) {
+                        return Response.success(service.getAllUsers());
+                    }
                     return Response.success(service.getUserByRole(request.getParameter("role")));
                 } else if (request.getParameter("username") != null && !request.getParameter("username").isEmpty()) {
                     return Response.success(service.getUserByUsername(request.getParameter("username")));
