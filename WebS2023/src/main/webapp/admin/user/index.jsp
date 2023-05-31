@@ -15,7 +15,7 @@
     <div class="filter-container">
         <div>
             <select id="userFilterSelect">
-                <option value="">Tất cả</option>
+                <option value="ALL">Tất cả</option>
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
             </select>
