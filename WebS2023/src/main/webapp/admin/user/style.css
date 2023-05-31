@@ -137,3 +137,21 @@ td {
 #users-container {
     margin-top: 20px;
 }
+
+.filter-icon {
+    margin-right: 5px;
+    color: darkgray;
+
+}
+
+.filter-container {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+}
+
+#filterButton
+{
+    border: none;
+    background-color: transparent;
+}
