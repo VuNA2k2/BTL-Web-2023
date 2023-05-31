@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kuros
-  Date: 5/27/2023
-  Time: 6:22 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -26,8 +19,6 @@
       padding: 10px 50px;
       margin-top: auto;
     }
-
-
 
     .footer-content {
       display: flex;

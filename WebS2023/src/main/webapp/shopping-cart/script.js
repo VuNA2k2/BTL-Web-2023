@@ -1,4 +1,3 @@
-// Make the API request and handle the response
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
     const token = cookie[0].substring("token=".length, cookie[0].length);
@@ -29,54 +28,74 @@ function fetchCartData() {
         })
         .catch(function (error) {
             console.error(error);
-            // Handle fetch error or display error message
             alert('Error fetching cart data. Please try again.');
         });
 }
 
 function displayCartData(data) {
-    const cartTable = document.getElementById("cartTable");
-    const totalMoneyElement = document.getElementById("totalMoney");
-    const buyBtn = document.getElementById("buyBtn");
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    const buyBtn = document.getElementById('buyBtn');
 
+    cartItems.innerHTML = '';
 
-    // Display cart items
     let totalMoney = 0;
     data.products.forEach((item, index) => {
-        const row = cartTable.insertRow(index + 1);
-        const noCell = row.insertCell(0);
-        const nameCell = row.insertCell(1);
-        const quantityCell = row.insertCell(2);
-        const priceCell = row.insertCell(3);
-        const totalMoneyCell = row.insertCell(4);
-        const actionCell = row.insertCell(5);
-        const productIdCell = row.insertCell(6);
-        noCell.textContent = index + 1;
-        nameCell.textContent = item.product.name;
-        quantityCell.innerHTML = `
-            <div class="quantity-wrapper">
-                <button class="quantity-btn" onclick="updateQuantity(${item.product.id}, ${item.quantity - 1})">-</button>
-                <span>${item.quantity}</span>
-                <button class="quantity-btn" onclick="updateQuantity(${item.product.id}, ${item.quantity + 1})">+</button>
-            </div>
-        `;
-        priceCell.textContent = item.product.price;
-        totalMoneyCell.textContent = item.quantity * item.product.price;
-        totalMoney += item.quantity * item.product.price;
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+
+        const cartItemImage = document.createElement('img');
+        cartItemImage.classList.add('cart-item-image');
+        cartItemImage.src = item.product.images[0].link;
+        cartItem.appendChild(cartItemImage);
+
+        const cartItemInfo = document.createElement('div');
+        cartItemInfo.classList.add('cart-item-info');
+
+        const cartItemName = document.createElement('div');
+        cartItemName.classList.add('cart-item-name');
+        cartItemName.textContent = item.product.name;
+        cartItemInfo.appendChild(cartItemName);
+
+        const cartItemPrice = document.createElement('div');
+        cartItemPrice.classList.add('cart-item-price');
+        cartItemPrice.textContent = 'Price: ' + item.product.price + ' đ';
+        cartItemInfo.appendChild(cartItemPrice);
+
+        const cartItemQuantity = document.createElement('div');
+        cartItemQuantity.classList.add('cart-item-quantity');
+
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.min = 0;
+        quantityInput.value = item.quantity;
+        quantityInput.addEventListener('change', (event) => {
+            updateQuantity(item.product.id, parseInt(event.target.value));
+        });
+
+        cartItemQuantity.appendChild(quantityInput);
+        cartItemInfo.appendChild(cartItemQuantity);
+
+        const cartItemTotal = document.createElement('div');
+        cartItemTotal.classList.add('cart-item-total');
+        cartItemTotal.textContent = 'Total: ' + item.quantity * item.product.price + ' đ';
+        cartItemInfo.appendChild(cartItemTotal);
+
+        cartItem.appendChild(cartItemInfo);
+        cartItems.appendChild(cartItem);
 
         const deleteBtn = document.createElement('button');
         deleteBtn.classList.add('delete-btn');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.addEventListener('click', () => updateQuantity(item.product.id, 0));
+        deleteBtn.textContent = 'Xóa';
+        deleteBtn.addEventListener('click', () => {
+            updateQuantity(item.product.id, 0);
+        });
+        cartItemInfo .appendChild(deleteBtn);
 
-        actionCell.appendChild(deleteBtn);
-        productIdCell.style.display = "none";
-        productIdCell.textContent = item.product.id;
+        totalMoney += item.quantity * item.product.price;
     });
 
-    // Display total money
-    totalMoneyElement.textContent = "Total Money: " + totalMoney + " đ";
-    // Show/hide Buy button
+    cartTotal.textContent = 'Total Money: ' + totalMoney + ' đ';
 }
 
 function updateQuantity(productId, quantity) {
@@ -85,8 +104,7 @@ function updateQuantity(productId, quantity) {
         productId: productId,
         quantity: quantity
     };
-
-    fetch(`https://localhost:443/WebS2023_war/api/carts`, {
+    fetch('https://localhost:443/WebS2023_war/api/carts', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -108,10 +126,36 @@ function updateQuantity(productId, quantity) {
         })
         .catch(function (error) {
             console.error(error);
-            // Handle fetch error or display error message
             alert('Error updating cart data. Please try again.');
         });
 }
 
-// Fetch cart data when the page loads
+function buyCart() {
+    const token = getTokenFromCookie();
+
+    fetch('https://localhost:443/WebS2023_war/api/orders', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + token,
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error buying cart');
+            }
+        })
+        .then(function (data) {
+            console.log(data);
+            fetchCartData();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error buying cart. Please try again.');
+        });
+}
+
 fetchCartData();

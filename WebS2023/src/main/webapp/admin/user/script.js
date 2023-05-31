@@ -15,143 +15,227 @@ function checkLogged(role) {
 
 checkLogged('ADMIN');
 
-const users = [
-    {
-        "id": 1,
-        "username": "john_doe",
-        "password": "123456",
-        "full_name": "John Doe",
-        "email": "john.doe@example.com",
-        "phone": "123456789",
-        "address": "123 Main St",
-        "role": "USER"
-    },
-    {
-        "id": 2,
-        "username": "jane_smith",
-        "password": "abcdef",
-        "full_name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "phone": "987654321",
-        "address": "456 Elm St",
-        "role": "ADMIN"
-    }
-];
+function getTokenFromCookie() {
+    const cookie = document.cookie.split(';');
+    const token = cookie[0].substring("token=".length, cookie[0].length);
+    return token;
+}
 
-document.addEventListener('DOMContentLoaded', getUsers);
-
+// function fetchDataUser(status) {
+//     fetch('api', {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json',
+//             'Authorization': 'Bearer ' + getTokenFromCookie(),
+//         },
+//     })
+//         .then(function (response) {
+//             if (response.status === 200) {
+//                 return response.json();
+//             } else {
+//                 throw new Error('Error fetching order data');
+//             }
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//             displayUsers(data.data);
+//         })
+//         .catch(function (error) {
+//             console.error(error);
+//             alert('Error fetching order data. Please try again.');
+//         });
+// }
+// fetchDataUser();
+getUsers();
 function getUsers() {
-    const usersContainer = document.getElementById('users-container');
-    usersContainer.innerHTML = '';
+    const users = {
+        "users": [
+            {
+                "id": 1,
+                "username": "user1",
+                "password": "password1",
+                "full_name": "John Doe",
+                "email": "john.doe@example.com",
+                "phone": "1234567890",
+                "address": "123 Main St, City",
+                "role": "USER"
+            },
+            {
+                "id": 2,
+                "username": "user2",
+                "password": "password2",
+                "full_name": "Jane Smith",
+                "email": "jane.smith@example.com",
+                "phone": "9876543210",
+                "address": "456 Elm St, Town",
+                "role": "USER"
+            },
+            {
+                "id": 3,
+                "username": "admin",
+                "password": "admin123",
+                "full_name": "Admin User",
+                "email": "admin@example.com",
+                "phone": "5555555555",
+                "address": "789 Oak St, City",
+                "role": "ADMIN"
+            }
+        ]
+    };
 
-    users.forEach(user => {
-        const userCard = document.createElement('div');
-        userCard.classList.add('user-card');
-        userCard.setAttribute('data-userid', user.id);
-        userCard.innerHTML = `
-            <p><strong>ID:</strong> ${user.id}  <strong>Username:</strong> ${user.username}  <strong>Role:</strong> ${user.role}</p>
-        `;
-        userCard.addEventListener('click', () => showUserDetails(user.id));
-        usersContainer.appendChild(userCard);
+    displayUsers(users);
+}
+
+function displayUsers(data) {
+    const usersContainer = document.getElementById('users-container');
+
+    // Remove existing rows
+    const rows = usersContainer.getElementsByTagName('tr');
+    while (rows.length > 1) {
+        usersContainer.deleteRow(1);
+    }
+
+    data.users.forEach(function (user) {
+        const row = document.createElement('tr');
+
+        const idCell = document.createElement('td');
+        idCell.textContent = user.id;
+
+        const usernameCell = document.createElement('td');
+        usernameCell.textContent = user.username;
+
+        const roleCell = document.createElement('td');
+        roleCell.textContent = user.role;
+
+        const detailCell = document.createElement('button');
+        detailCell.classList.add('user-card');
+        detailCell.textContent = 'View Details';
+
+        detailCell.addEventListener('click', function () {
+            openUserDetailsModal(user);
+        });
+
+        row.appendChild(idCell);
+        row.appendChild(usernameCell);
+        row.appendChild(roleCell);
+        row.appendChild(detailCell);
+
+        usersContainer.appendChild(row);
     });
 }
 
-function showUserDetails(userId) {
-    const user = users.find(user => user.id === userId);
-
+function openUserDetailsModal(user) {
     const popup = document.getElementById('popup');
-    const form = document.getElementById('user-form');
-    const idInput = document.getElementById('id');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const addressInput = document.getElementById('address');
-    const roleInput = document.getElementById('role');
+    const popupContent = document.getElementById('popup-content');
+    const userForm = document.getElementById('user-form');
 
-    idInput.value = user.id;
-    usernameInput.value = user.username;
-    passwordInput.value = user.password;
-    fullNameInput.value = user.full_name;
-    emailInput.value = user.email;
-    phoneInput.value = user.phone;
-    addressInput.value = user.address;
-    roleInput.value = user.role;
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const updateUser = {
-            id: idInput.value,
-            username: usernameInput.value,
-            password: passwordInput.value,
-            full_name: fullNameInput.value,
-            email: emailInput.value,
-            phone: phoneInput.value,
-            address: addressInput.value,
-            role: roleInput.value
-        };
-
-        const index = users.findIndex(user => user.id === userId);
-        users[index] = updateUser;
-
-        popup.style.display = 'none';
-        getUsers();
-    });
+    document.getElementById('id').value = user.id;
+    document.getElementById('username').value = user.username;
+    document.getElementById('password').value = user.password;
+    document.getElementById('fullName').value = user.full_name;
+    document.getElementById('email').value = user.email;
+    document.getElementById('phone').value = user.phone;
+    document.getElementById('address').value = user.address;
+    document.getElementById('role').value = user.role;
 
     const deleteButton = document.getElementById('delete-button');
-    deleteButton.addEventListener('click', () => {
-        const index = users.findIndex(user => user.id === userId);
-        users.splice(index, 1);
 
+    deleteButton.addEventListener('click', function () {
+        deleteUser(user.id);
         popup.style.display = 'none';
-        getUsers();
     });
 
-    popup.style.display = 'block';
+    userForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        saveUser();
+        popup.style.display = 'none';
+    });
+
+    popup.style.display = 'flex';
 }
 
 function showAddUserForm() {
+    const userForm = document.getElementById('user-form');
+    userForm.reset();
+
     const popup = document.getElementById('popup');
-    const form = document.getElementById('user-form');
-    const idInput = document.getElementById('id');
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const addressInput = document.getElementById('address');
-    const roleInput = document.getElementById('role');
+    const popupContent = document.getElementById('popup-content');
 
-    idInput.value = '';
-    usernameInput.value = '';
-    passwordInput.value = '';
-    fullNameInput.value = '';
-    emailInput.value = '';
-    phoneInput.value = '';
-    addressInput.value = '';
-    roleInput.value = '';
+    const deleteButton = document.getElementById('delete-button');
+    deleteButton.style.display = 'none';
 
-    form.addEventListener('submit', e => {
+    userForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
-        const newUser = {
-            id: users.length + 1,
-            username: usernameInput.value,
-            password: passwordInput.value,
-            full_name: fullNameInput.value,
-            email: emailInput.value,
-            phone: phoneInput.value,
-            address: addressInput.value,
-            role: roleInput.value
-        };
-
-        users.push(newUser);
-
+        saveUser();
         popup.style.display = 'none';
-        getUsers();
     });
 
-    popup.style.display = 'block';
+    popup.style.display = 'flex';
 }
+
+function saveUser() {
+    const userForm = document.getElementById('user-form');
+    const id = userForm.elements['id'].value;
+    const username = userForm.elements['username'].value;
+    const password = userForm.elements['password'].value;
+    const fullName = userForm.elements['fullName'].value;
+    const email = userForm.elements['email'].value;
+    const phone = userForm.elements['phone'].value;
+    const address = userForm.elements['address'].value;
+    const role = userForm.elements['role'].value;
+
+    // Perform save logic here
+    console.log("Saving user...");
+    console.log("ID:", id);
+    console.log("Username:", username);
+    console.log("Password:", password);
+    console.log("Full Name:", fullName);
+    console.log("Email:", email);
+    console.log("Phone:", phone);
+    console.log("Address:", address);
+    console.log("Role:", role);
+
+    // Viết api vào đây và chỉnh sửa
+
+    // Refresh user list
+    getUsers();
+}
+
+function deleteUser(id) {
+    // Perform delete logic here
+    //     fetch('api', {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json',
+//             'Authorization': 'Bearer ' + getTokenFromCookie(),
+//         },
+//     })
+//         .then(function (response) {
+//             if (response.status === 200) {
+//                 return response.json();
+//             } else {
+//                 throw new Error('Error fetching order data');
+//             }
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//             fetchDataUser();
+//         })
+//         .catch(function (error) {
+//             console.error(error);
+//             alert('Error fetching order data. Please try again.');
+//         })
+    // Refresh user list
+    getUsers();
+}
+
+window.addEventListener('click', function (event) {
+    const popup = document.getElementById('popup');
+    const popupContent = document.getElementById('popup-content');
+
+    if (event.target == popup) {
+        popup.style.display = 'none';
+    }
+});

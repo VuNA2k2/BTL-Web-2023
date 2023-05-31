@@ -1,15 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kuros
-  Date: 5/27/2023
-  Time: 6:22 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%--
-    Document   : header
-    Created on : May 20, 2023, 9:32:34 AM
-    Author     : kuros
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,14 +61,6 @@
       font-weight: 600;
     }
 
-    .logo {
-      display: flex;
-      height: 70px;
-    }
-
-    .logo img {
-      height: 100%;
-    }
 
     .search-box {
       position: absolute;
@@ -168,7 +148,7 @@
         <li><a href="#">iPad</a></li>
         <li><a href="#">Mac</a></li>
         <li><a href="#">Liên hệ</a></li>
-        <li><a href="orderlist.jsp">Đơn hàng</a></li>
+        <li><a href="https://localhost/WebS2023_war/order">Đơn hàng</a></li>
 
       </ul>
 
@@ -178,7 +158,7 @@
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div class="cart">
-      <a href="shoppingcart.jsp"><i class="fa-solid fa-cart-shopping"></i></a>
+      <a href="https://localhost/WebS2023_war/shopping-cart"><i class="fa-solid fa-cart-shopping"></i></a>
     </div>
     <div class="login">
       <a href="#"><i class="fa-solid fa-user"></i> </a>
