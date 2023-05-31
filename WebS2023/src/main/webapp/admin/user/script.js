@@ -22,8 +22,8 @@ function getTokenFromCookie() {
 }
 
 function fetchDataUser(role) {
-    let api='https://localhost:443/WebS2023_war/api/users';
-    fetch('api', {
+    let api='https://localhost:443/WebS2023_war/api/users?role='+role;
+    fetch(api, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
