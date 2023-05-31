@@ -5,12 +5,25 @@
     <meta charset="UTF-8">
     <title>User Management</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <%@include file="../../layout/header.jsp" %>
 <div id="container">
     <h1>User Management</h1>
-
+    <div class="filter-container">
+        <div>
+            <select id="userFilterSelect">
+                <option value="">Tất cả</option>
+                <option value="USER">User</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+            <button id="filterButton" class="filter">
+                <i class="fa-solid fa-filter filter-icon"></i>
+            </button>
+        </div>
+    </div>
     <table id="users-container">
         <thead>
         <tr>

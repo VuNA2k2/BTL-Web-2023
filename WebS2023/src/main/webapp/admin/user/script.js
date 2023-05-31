@@ -22,6 +22,10 @@ function getTokenFromCookie() {
 }
 
 // function fetchDataUser(status) {
+//     let url='api';
+//     if (status) {
+//          url += '?status=' + status;
+//         }
 //     fetch('api', {
 //         method: 'GET',
 //         headers: {
@@ -239,3 +243,11 @@ window.addEventListener('click', function (event) {
         popup.style.display = 'none';
     }
 });
+const filterButton = document.getElementById('filterButton');
+filterButton.addEventListener('click', applyFilter);
+
+function applyFilter() {
+    const selectedStatus = document.getElementById('userFilterSelect').value;
+    fetchDataUser(selectedStatus);
+}
+applyFilter();
