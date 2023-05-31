@@ -10,14 +10,18 @@
 <%@ include file="../layout/header.jsp" %>
 <h1>Danh sách sản phẩm</h1>
 
-<label for="categoryFilterSelect">Loại:</label>
-<select id="categoryFilterSelect">
-    <option value="">Tất cả</option>
-    <option value="11">Iphone 11</option>
-    <option value="12">Iphone 12</option>
-    <option value="13">Iphone 13</option>
-    <option value="14">Iphone 14</option>
-</select>
+<div>
+    <label for="categoryFilterSelect">Filter by Category:</label>
+    <select id="categoryFilterSelect">
+        <option value="">All</option>
+        <option value="1">Category 1</option>
+        <option value="2">Category 2</option>
+        <option value="3">Category 3</option>
+    </select>
+    <button onclick="applyFilter()">Apply Filter</button>
+</div>
+
+<div id="productContainer"></div>
 
 
 <%@ include file="../layout/footer.jsp" %>

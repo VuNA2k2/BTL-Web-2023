@@ -59,9 +59,9 @@ function displayProductData() {
                     : data;
 
                 filteredData.forEach(function(productData) {
-                    // Create product card element
-                    const productCard = document.createElement('div');
-                    productCard.classList.add('product-card');
+                    // // Create product card element
+                    // const productCard = document.createElement('div');
+                    // productCard.classList.add('product-card');
 
                     // Create elements for product information
                     const idElement = document.createElement('p');
@@ -85,16 +85,16 @@ function displayProductData() {
                         window.location.href = `product-details.html?id=${productData.id}`;
                     });
 
-                    // Append elements to product card
-                    productCard.appendChild(idElement);
-                    productCard.appendChild(nameElement);
-                    productCard.appendChild(priceElement);
-                    productCard.appendChild(categoryElement);
-                    productCard.appendChild(descriptionElement);
-                    productCard.appendChild(viewDetailsBtn);
-
-                    // Append product card to product container
-                    productContainer.appendChild(productCard);
+                    // // Append elements to product card
+                    // productCard.appendChild(idElement);
+                    // productCard.appendChild(nameElement);
+                    // productCard.appendChild(priceElement);
+                    // productCard.appendChild(categoryElement);
+                    // productCard.appendChild(descriptionElement);
+                    // productCard.appendChild(viewDetailsBtn);
+                    //
+                    // // Append product card to product container
+                    // productContainer.appendChild(productCard);
                 });
             })
             .catch(function(error) {
