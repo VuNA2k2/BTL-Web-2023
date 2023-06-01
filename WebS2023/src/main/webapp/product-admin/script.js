@@ -47,86 +47,26 @@ function displayProductData(data) {
         const priceCell = newRow.insertCell();
         const categoryCell = newRow.insertCell();
         const discriptionCell = newRow.insertCell();
-        const statusCell = newRow.insertCell();
-        const updateStatusCell = newRow.insertCell();
-        const deleteCell = newRow.insertCell();
 
         idCell.textContent = productData.id;
         nameCell.textContent = productData.name;
-        priceCell.textContent = productData.price+'đ';
-        categoryCell.textContent = productData.category;
+        priceCell.textContent = productData.price + 'đ';
+        categoryCell.textContent = productData.category.description;
         discriptionCell.textContent = productData.description;
-        statusCell.textContent = productData.status;
-
-        const statusSelect = document.createElement('select');
-        statusSelect.id = 'statusSelect_' + productData.id;
-
-        const statuses = ['1', '2', '3'];
-        statuses.forEach(function (status) {
-            const option = document.createElement('option');
-            option.value = status;
-            option.textContent = status;
-            statusSelect.appendChild(option);
-        });
-
-        statusSelect.value = productData.status;
-
-        const updateStatusBtn = document.createElement('button');
-        updateStatusBtn.classList.add('update-order');
-        updateStatusBtn.textContent = 'Cập nhật';
-        updateStatusBtn.addEventListener('click', function () {
-            const selectedStatus = statusSelect.value;
-            fetch('https://localhost/WebS2023_war/api/products?id=' + productData.id, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + getTokenFromCookie(),
-                },
-                body: JSON.stringify({ status: selectedStatus }),
-            })
-                .then(function (response) {
-                    if (response.status === 200) {
-                        return response.json();
-                    } else {
-                        throw new Error('Error updating order status');
-                    }
-                })
-                .then(function () {
-
-                    applyFilter();
-                })
-                .catch(function (error) {
-                    console.error(error);
-                    alert('Error updating order status. Please try again.');
-                });
-        });
-
-        updateStatusCell.appendChild(statusSelect);
-        updateStatusCell.appendChild(updateStatusBtn);
-
-        // Tạo nút sửa sản phẩm
-        const editBtn = document.createElement('button');
-        editBtn.classList.add('edit-product');
-        editBtn.textContent = 'Edit';
-        editBtn.addEventListener('click', () => {
-            // Gọi hàm để sửa sản phẩm
-            editProduct(productData.id);
-        });
-
-        // Tạo nút xóa sản phẩm
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-product');
-        deleteBtn.textContent = 'Delete';
-        deleteBtn.addEventListener('click', () => {
-            // Gọi hàm để xóa sản phẩm
-            deleteProduct(productData.id);
-        });
-
-
     });
 }
 
+// Mở modal thêm sản phẩm
+function openAddProductModal() {
+    var modal = document.getElementById("addProductModal");
+    modal.style.display = "block";
+}
+
+// Đóng modal thêm sản phẩm
+function closeAddProductModal() {
+    var modal = document.getElementById("addProductModal");
+    modal.style.display = "none";
+}
 
 // Hàm thêm sản phẩm
 function addProduct() {
@@ -159,9 +99,26 @@ function addProduct() {
             fetchData();
         })
         .catch(function (error) {
-            console.error(error);
+           console.error(error);
             alert('Error adding product. Please try again.');
         });
+}
+
+
+// Hàm cập nhật bảng sản phẩm (thêm sản phẩm mới vào bảng)
+function updateProductTable(name, price, category, description, image) {
+    var table = document.getElementById("productTable");
+    var newRow = table.insertRow(-1);
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+    var cell4 = newRow.insertCell(3);
+    var cell5 = newRow.insertCell(4);
+    cell1.innerHTML = ""; // Thay bằng ID sản phẩm
+    cell2.innerHTML = name;
+    cell3.innerHTML = price;
+    cell4.innerHTML = category;
+    cell5.innerHTML = description;
 }
 
 // Hàm sửa sản phẩm
