@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product List</title>
+    <script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

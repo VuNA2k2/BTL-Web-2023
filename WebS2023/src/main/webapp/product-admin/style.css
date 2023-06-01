@@ -1,11 +1,10 @@
 /* style.css */
-
 body {
     font-family: Arial, sans-serif;
 }
 
-h1 {
-    text-align: center;
+h1, h2 {
+    margin-bottom: 10px;
 }
 
 form {
@@ -13,45 +12,61 @@ form {
 }
 
 label {
-    display: inline-block;
-    width: 100px;
+    display: block;
+    margin-bottom: 5px;
 }
 
 input[type="text"],
-input[type="number"],
-textarea {
+input[type="number"] {
     width: 200px;
+    padding: 5px;
     margin-bottom: 10px;
 }
 
-button {
+button[type="button"] {
     padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.filter-container {
+    margin-bottom: 10px;
+}
+
+.filter-container div {
+    display: flex;
+    align-items: center;
+}
+
+.filter-container select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.filter {
+    padding: 5px;
+    background-color: #4caf50;
+    color: white;
     border: none;
     cursor: pointer;
 }
 
 table {
-    width: 100%;
     border-collapse: collapse;
+    width: 100%;
 }
 
-th,
-td {
-    border: 1px solid #ccc;
+table th, table td {
+    border: 1px solid #ddd;
     padding: 8px;
 }
 
-th {
+table th {
     background-color: #f2f2f2;
-    text-align: left;
 }
 
-#categoryFilterSelect {
-    margin-left: 10px;
-}
-
-#filterButton {
-    margin-left: 10px;
+.table-row:hover {
+    background-color: #f5f5f5;
 }
