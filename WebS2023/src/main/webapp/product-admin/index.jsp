@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
 <%@ include file="../layout/header.jsp" %>
 <h1>Product Management</h1>
 
-<div id="productContainer"></div>
 
 
 <h2>Add Product</h2>
@@ -24,9 +24,24 @@
     <input type="text" id="productDescription" required>
     <label for="productImage">Image URL:</label>
     <input type="text" id="productImage" required>
-    <button type="button" onclick="addProduct()">Add Product</button>
+    <button type="button" onclick="addProduct()">Thêm sản phẩm</button>
 </form>
 
+
+<div class="filter-container">
+    <div>
+        <select id="statusFilterSelect">
+            <option value="">Tất cả</option>
+            <option value="1">category 1</option>
+            <option value="2">category 2</option>
+            <option value="3">category 3</option>
+            <option value="4">category 4</option>
+        </select>
+        <button id="filterButton" class="filter">
+            <i class="fa-solid fa-filter filter-icon"></i>
+        </button>
+    </div>
+</div>
 
 <table id="productTable">
     <thead>
@@ -36,19 +51,9 @@
         <th>Price</th>
         <th>Category</th>
         <th>Description</th>
-        <th>Actions</th>
     </tr>
     </thead>
 </table>
-
-<h2>Filter Products</h2>
-<select id="categoryFilterSelect">
-    <option value="">All Categories</option>
-    <option value="1">Category 1</option>
-    <option value="2">Category 2</option>
-    <option value="3">Category 3</option>
-</select>
-<button type="button" onclick="applyFilter()">Apply Filter</button>
 
 <%@ include file="../layout/footer.jsp" %>
 <script src="script.js"></script>

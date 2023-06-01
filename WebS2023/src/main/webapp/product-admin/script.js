@@ -31,10 +31,108 @@ function fetchData() {
 }
 
 function displayProductData(data) {
-    const productContainer = document.getElementById('productContainer');
+    const productTable = document.getElementById('productTable');
+
+    // Remove existing rows
+    const rows = productTable.getElementsByTagName('tr');
+    while (rows.length > 1) {
+        productTable.deleteRow(1);
+    }
+
+    data.forEach(function (productData) {
+        const newRow = productTable.insertRow();
+
+        const idCell = newRow.insertCell();
+        const nameCell = newRow.insertCell();
+        const priceCell = newRow.insertCell();
+        const categoryCell = newRow.insertCell();
+        const discriptionCell = newRow.insertCell();
+        const statusCell = newRow.insertCell();
+        const updateStatusCell = newRow.insertCell();
+        const deleteCell = newRow.insertCell();
+
+        idCell.textContent = productData.id;
+        nameCell.textContent = productData.name;
+        priceCell.textContent = productData.price+'đ';
+        categoryCell.textContent = productData.category;
+        discriptionCell.textContent = productData.description;
+        statusCell.textContent = productData.status;
+
+        const statusSelect = document.createElement('select');
+        statusSelect.id = 'statusSelect_' + productData.id;
+
+        const statuses = ['1', '2', '3'];
+        statuses.forEach(function (status) {
+            const option = document.createElement('option');
+            option.value = status;
+            option.textContent = status;
+            statusSelect.appendChild(option);
+        });
+
+        statusSelect.value = productData.status;
+
+        const updateStatusBtn = document.createElement('button');
+        updateStatusBtn.classList.add('update-order');
+        updateStatusBtn.textContent = 'Cập nhật';
+        updateStatusBtn.addEventListener('click', function () {
+            const selectedStatus = statusSelect.value;
+            fetch('https://localhost/WebS2023_war/api/products?id=' + productData.id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + getTokenFromCookie(),
+                },
+                body: JSON.stringify({ status: selectedStatus }),
+            })
+                .then(function (response) {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error updating order status');
+                    }
+                })
+                .then(function () {
+
+                    applyFilter();
+                })
+                .catch(function (error) {
+                    console.error(error);
+                    alert('Error updating order status. Please try again.');
+                });
+        });
+
+        // Tạo nút sửa sản phẩm
+        const editBtn = document.createElement('button');
+        editBtn.classList.add('edit-product');
+        editBtn.textContent = 'Edit';
+        editBtn.addEventListener('click', () => {
+            // Gọi hàm để sửa sản phẩm
+            editProduct(productData.id);
+        });
+
+        // Tạo nút xóa sản phẩm
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-product');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', () => {
+            // Gọi hàm để xóa sản phẩm
+            deleteProduct(productData.id);
+        });
+
+
+        updateStatusCell.appendChild(statusSelect);
+        updateStatusCell.appendChild(updateStatusBtn);
+
+    });
+}
+
+
+function displayProductData(data) {
+    const productTable = document.getElementById('productTable');
 
     // Xóa danh sách sản phẩm hiện có
-    productContainer.innerHTML = '';
+    productTable.innerHTML = '';
 
     data.forEach((productData) => {
         // Tạo phần tử div cho từng sản phẩm
@@ -45,12 +143,13 @@ function displayProductData(data) {
         idElement.textContent = `ID: ${productData.id}`;
         const nameElement = document.createElement('h3');
         nameElement.textContent = productData.name;
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = `Description: ${productData.description}`;
         const priceElement = document.createElement('p');
         priceElement.textContent = `Price: ${productData.price}đ`;
         const categoryElement = document.createElement('p');
         categoryElement.textContent = `Category: ${productData.category}`;
-        const descriptionElement = document.createElement('p');
-        descriptionElement.textContent = `Description: ${productData.description}`;
+
 
         const imageElement = document.createElement('img');
         imageElement.src = productData.image;
