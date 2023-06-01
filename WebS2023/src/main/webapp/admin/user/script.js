@@ -21,72 +21,32 @@ function getTokenFromCookie() {
     return token;
 }
 
-// function fetchDataUser(status) {
-//     fetch('api', {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json',
-//             'Authorization': 'Bearer ' + getTokenFromCookie(),
-//         },
-//     })
-//         .then(function (response) {
-//             if (response.status === 200) {
-//                 return response.json();
-//             } else {
-//                 throw new Error('Error fetching order data');
-//             }
-//         })
-//         .then(function (data) {
-//             console.log(data);
-//             displayUsers(data.data);
-//         })
-//         .catch(function (error) {
-//             console.error(error);
-//             alert('Error fetching order data. Please try again.');
-//         });
-// }
-// fetchDataUser();
-getUsers();
-function getUsers() {
-    const users = {
-        "users": [
-            {
-                "id": 1,
-                "username": "user1",
-                "password": "password1",
-                "full_name": "John Doe",
-                "email": "john.doe@example.com",
-                "phone": "1234567890",
-                "address": "123 Main St, City",
-                "role": "USER"
-            },
-            {
-                "id": 2,
-                "username": "user2",
-                "password": "password2",
-                "full_name": "Jane Smith",
-                "email": "jane.smith@example.com",
-                "phone": "9876543210",
-                "address": "456 Elm St, Town",
-                "role": "USER"
-            },
-            {
-                "id": 3,
-                "username": "admin",
-                "password": "admin123",
-                "full_name": "Admin User",
-                "email": "admin@example.com",
-                "phone": "5555555555",
-                "address": "789 Oak St, City",
-                "role": "ADMIN"
+function fetchDataUser(role) {
+    let api='https://localhost:443/WebS2023_war/api/users?role='+role;
+    fetch(api, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error fetching user data');
             }
-        ]
-    };
-
-    displayUsers(users);
+        })
+        .then(function (data) {
+            console.log(data);
+            displayUsers(data.data);
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error fetching user data. Please try again.');
+        });
 }
-
 function displayUsers(data) {
     const usersContainer = document.getElementById('users-container');
 
@@ -239,3 +199,11 @@ window.addEventListener('click', function (event) {
         popup.style.display = 'none';
     }
 });
+const filterButton = document.getElementById('filterButton');
+filterButton.addEventListener('click', applyFilter);
+
+function applyFilter() {
+    const selectedRole = document.getElementById('userFilterSelect').value;
+    fetchDataUser(selectedRole);
+}
+applyFilter();
