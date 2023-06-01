@@ -93,6 +93,7 @@ function createUserData(user) {
             }
         })
         .then(function () {
+            console.log('ok');
             applyFilter();
         })
         .catch(function (error) {
@@ -146,8 +147,8 @@ function openUserDetailsModal(user) {
     const userForm = document.getElementById('user-form');
 
     document.getElementById('id').value = user.id;
-    document.getElementById('username').value = "########";
-    document.getElementById('password').value = "########";
+    document.getElementById('username').value = user.username;
+    document.getElementById('password').value = userForm.elements['password'].value;
     document.getElementById('fullName').value = user.fullName;
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
@@ -277,3 +278,4 @@ function applyFilter() {
     fetchDataUser(selectedRole);
 }
 applyFilter();
+
