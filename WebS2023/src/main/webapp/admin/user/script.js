@@ -47,6 +47,61 @@ function fetchDataUser(role) {
             alert('Error fetching user data. Please try again.');
         });
 }
+function saveUserData(user, id) {
+    let api = 'https://localhost:443/WebS2023_war/api/users?id=' + id;
+    fetch(api, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+        body: JSON.stringify(user),
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error putting user data');
+            }
+        })
+        .then(function () {
+            applyFilter();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error putting user data. Please try again.');
+        });
+}
+
+function createUserData(user) {
+    let api = 'https://localhost:443/WebS2023_war/api/users';
+    fetch(api, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+        body: JSON.stringify(user),
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error posting user data');
+            }
+        })
+        .then(function () {
+            applyFilter();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error posting user data. Please try again.');
+        });
+}
+
+
 function displayUsers(data) {
     const usersContainer = document.getElementById('users-container');
 
@@ -108,7 +163,7 @@ function openUserDetailsModal(user) {
 
     userForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        saveUser();
+        saveUser('save');
         popup.style.display = 'none';
     });
 
@@ -127,14 +182,14 @@ function showAddUserForm() {
 
     userForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        saveUser();
+        saveUser('create');
         popup.style.display = 'none';
     });
 
     popup.style.display = 'flex';
 }
 
-function saveUser() {
+function saveUser(func) {
     const userForm = document.getElementById('user-form');
     const id = userForm.elements['id'].value;
     const username = userForm.elements['username'].value;
@@ -155,11 +210,26 @@ function saveUser() {
     console.log("Phone:", phone);
     console.log("Address:", address);
     console.log("Role:", role);
+    const user = {
+        username: username,
+        password: password,
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        address: address,
+        role: role
+    };
 
-    // Viết api vào đây và chỉnh sửa
+    if(func==='save'){
+        console.log(func);
+        saveUserData(user,id);
+    }
 
-    // Refresh user list
-    getUsers();
+    if(func==='create'){
+        console.log(func);
+        createUserData(user);
+    }
+
 }
 
 function deleteUser(id) {
