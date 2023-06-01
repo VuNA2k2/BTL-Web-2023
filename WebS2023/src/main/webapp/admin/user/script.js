@@ -220,7 +220,7 @@ function saveUser(func) {
         address: address,
         role: role
     };
-
+    console.log(JSON.stringify(user));
     if(func==='save'){
         console.log(func);
         saveUserData(user,id);
@@ -278,4 +278,6 @@ function applyFilter() {
     fetchDataUser(selectedRole);
 }
 applyFilter();
+
+
 
