@@ -10,6 +10,8 @@ import com.example.webs2023.service.cart.CartServiceImpl;
 import com.example.webs2023.service.cart_ref_product.CartRefProductService;
 import com.example.webs2023.service.cart_ref_product.CartRefProductServiceImpl;
 import com.example.webs2023.service.category.CategoryService;
+import com.example.webs2023.service.dashboard.DashboardService;
+import com.example.webs2023.service.dashboard.DashboardServiceImpl;
 import com.example.webs2023.service.image.ImageService;
 import com.example.webs2023.service.image.ImageServiceImpl;
 import com.example.webs2023.service.jwt.JwtService;
@@ -57,6 +59,7 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(OrderService.class, new OrderServiceImpl(DependencyInjector.getDependency(OrderRepository.class), DependencyInjector.getDependency(CartService.class), DependencyInjector.getDependency(ProductInOrderService.class)));
             DependencyInjector.registerDependency(RateRepository.class, new RateRepository(RateEntity.class));
             DependencyInjector.registerDependency(RateService.class, new RateServiceImpl(DependencyInjector.getDependency(RateRepository.class), DependencyInjector.getDependency(ProductInOrderRepository.class), DependencyInjector.getDependency(ImageService.class)));
+            DependencyInjector.registerDependency(DashboardService.class, new DashboardServiceImpl(DependencyInjector.getDependency(ProductInOrderService.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

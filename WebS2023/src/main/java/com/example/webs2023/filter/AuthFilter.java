@@ -71,7 +71,9 @@ public class AuthFilter implements Filter {
         } else if (path.startsWith("/api/rates")) {
             if (method.equals("POST")) return "USER";
             else return "NONE";
-        } else return "NONE";
+        } else if(path.startsWith("/api/dashboard")) {
+            return "ADMIN";
+        }else return "NONE";
     }
 
     @Override
