@@ -102,7 +102,31 @@ function createUserData(user) {
         });
 }
 
-
+function deleteUserData(id) {
+    let api = 'https://localhost:443/WebS2023_war/api/users?id=' + id;
+    fetch(api, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error putting user data');
+            }
+        })
+        .then(function () {
+            applyFilter();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error putting user data. Please try again.');
+        });
+}
 function displayUsers(data) {
     const usersContainer = document.getElementById('users-container');
 
@@ -148,17 +172,16 @@ function openUserDetailsModal(user) {
 
     document.getElementById('id').value = user.id;
     document.getElementById('username').value = user.username;
-    document.getElementById('password').value = userForm.elements['password'].value;
+    document.getElementById('password').value = '########';
     document.getElementById('fullName').value = user.fullName;
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
     document.getElementById('address').value = user.address;
     document.getElementById('role').value = user.role;
-
     const deleteButton = document.getElementById('delete-button');
 
     deleteButton.addEventListener('click', function () {
-        deleteUser(user.id);
+        deleteUserData(user.id);
         popup.style.display = 'none';
     });
 
@@ -211,56 +234,35 @@ function saveUser(func) {
     console.log("Phone:", phone);
     console.log("Address:", address);
     console.log("Role:", role);
-    const user = {
-        username: username,
-        password: password,
-        fullName: fullName,
-        email: email,
-        phone: phone,
-        address: address,
-        role: role
-    };
-    console.log(JSON.stringify(user));
     if(func==='save'){
+        const user = {
+            username: username,
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            address: address,
+            role: role
+        };
         console.log(func);
         saveUserData(user,id);
     }
 
     if(func==='create'){
+        const user = {
+            username: username,
+            password: password,
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            address: address,
+            role: role
+        };
         console.log(func);
         createUserData(user);
     }
 
 }
 
-function deleteUser(id) {
-    // Perform delete logic here
-    //     fetch('api', {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json',
-//             'Authorization': 'Bearer ' + getTokenFromCookie(),
-//         },
-//     })
-//         .then(function (response) {
-//             if (response.status === 200) {
-//                 return response.json();
-//             } else {
-//                 throw new Error('Error fetching order data');
-//             }
-//         })
-//         .then(function (data) {
-//             console.log(data);
-//             fetchDataUser();
-//         })
-//         .catch(function (error) {
-//             console.error(error);
-//             alert('Error fetching order data. Please try again.');
-//         })
-    // Refresh user list
-    getUsers();
-}
 
 window.addEventListener('click', function (event) {
     const popup = document.getElementById('popup');
