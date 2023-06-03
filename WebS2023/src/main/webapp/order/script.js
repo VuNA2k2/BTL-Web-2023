@@ -162,14 +162,13 @@ function openOrderDetailsModal(orderId, data) {
         const actionCell = newRow.insertCell();
 
         const rate = document.createElement('i');
-       rate.className = 'fa-solid fa-arrow-right';
+        rate.className = 'fa-solid fa-arrow-right';
         rate.addEventListener('click', function () {
             const productId = product.productId;
-            console.log(productId);
-            localStorage.setItem('productIdFromOrder', productId); // lưu productId vào localStore
-            window.location.href = 'your-link-url'; // điền link chuyển hướng vào đây
+            window.location.href = 'https://localhost/WebS2023_war/comment?productId=' + productId;
         });
         actionCell.appendChild(rate);
+
     });
 
     modal.style.display = 'block';
