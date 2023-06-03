@@ -23,7 +23,7 @@ function login() {
             response.json().then( (data) => {
                 console.log(data)
                 document.cookie = "token=" + data.data.token + ";path=/";
-                // checkLogged();
+
                 window.location.href = "/WebS2023_war";
 
             });
@@ -34,28 +34,3 @@ function login() {
         }
     });
 }
-
-// Thêm phần điều hướng đăng nhập
-// function checkLogged() {
-//     let token;
-//     document.cookie.split(';').forEach(function (c) {
-//         if (c.includes('token')) {
-//             token = c.split('=')[1];
-//         }
-//     });
-//     if (token === undefined || token === null || token === '' || localStorage.getItem('user') === null || localStorage.getItem('user') === undefined) {
-//         window.location.href = "/WebS2023_war/login";
-//         return;
-//     }
-//
-//     if(JSON.parse(localStorage.getItem('user')).role ==='ADMIN')
-//     {
-//         window.location.href = "/WebS2023_war/admin/user";
-//         return;
-//     }
-//     if(JSON.parse(localStorage.getItem('user')).role ==='USER')
-//     {
-//         window.location.href = "/WebS2023_war/home";
-//         return;
-//     }
-// }
