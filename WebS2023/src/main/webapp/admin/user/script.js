@@ -167,7 +167,6 @@ function displayUsers(data) {
 
 function openUserDetailsModal(user) {
     const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popup-content');
     const userForm = document.getElementById('user-form');
 
     document.getElementById('id').value = user.id;
