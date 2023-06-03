@@ -136,7 +136,7 @@ function openOrderDetailsModal(orderId, data) {
 
     const products = order.products;
     const productTable = document.getElementById('productTable');
-    productTable.innerHTML = ''; // Clear previous content
+    productTable.innerHTML = '';
 
     const headerRow = productTable.insertRow();
     const productIdHeader = headerRow.insertCell();
@@ -147,6 +147,7 @@ function openOrderDetailsModal(orderId, data) {
     priceHeader.textContent = 'Giá';
     const quantityHeader = headerRow.insertCell();
     quantityHeader.textContent = 'Số lượng';
+    const actionHeader = headerRow.insertCell();
 
     products.forEach(function (product) {
         const newRow = productTable.insertRow();
@@ -158,6 +159,17 @@ function openOrderDetailsModal(orderId, data) {
         priceCell.textContent = product.productPrice+'đ';
         const quantityCell = newRow.insertCell();
         quantityCell.textContent = product.productQuantity;
+        const actionCell = newRow.insertCell();
+
+        const rate = document.createElement('i');
+       rate.className = 'fa-solid fa-arrow-right';
+        rate.addEventListener('click', function () {
+            const productId = product.productId;
+            console.log(productId);
+            localStorage.setItem('productIdFromOrder', productId); // lưu productId vào localStore
+            window.location.href = 'your-link-url'; // điền link chuyển hướng vào đây
+        });
+        actionCell.appendChild(rate);
     });
 
     modal.style.display = 'block';
