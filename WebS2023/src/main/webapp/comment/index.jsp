@@ -1,35 +1,40 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Product Reviews</title>
+    <title>Đánh giá sản phẩm</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1>Product Reviews</h1>
+<h1>Đánh giá sản phẩm</h1>
 <div id="product-info">
-    <p>Average Rating: <span id="avg-rates"></span></p>
-    <p>Total Reviews: <span id="count-rates"></span></p>
+    <p>Trung bình: <span id="avg-rates"></span><span class="star-fill"></span></p>
+    <p>Số lượt đánh giá: <span id="count-rates"></span></p>
 </div>
 <ul id="review-list"></ul>
 <form id="review-form">
     <input type="hidden" id="product-id-hidden" value="12">
     <div>
-        <label for="comment">Comment:</label>
-<%--        <textarea id="comment" rows="4" cols="50"></textarea>--%>
-        <input type="text" id="comment"></div>
+        <label for="comment">Bình luận:</label>
+        <input type="text" id="comment">
     </div>
     <div>
-        <label for="star">Rating:</label>
-        <select id="star">
-            <option value="1">1 Star</option>
-            <option value="2">2 Stars</option>
-            <option value="3">3 Stars</option>
-            <option value="4">4 Stars</option>
-            <option value="5">5 Stars</option>
-        </select>
+        <label for="star">Đánh giá:</label>
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5" title="5 sao"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4" title="4 sao"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3" title="3 sao"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2" title="2 sao"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1" title="1 sao"></label>
+        </div>
     </div>
-    <button type="submit" onclick="submitReview()">Submit Review</button>
+    <button type="submit" onclick="submitReview()">Gửi đánh giá</button>
 </form>
 <script src="script.js"></script>
 </body>

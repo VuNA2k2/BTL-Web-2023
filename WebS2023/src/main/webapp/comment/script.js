@@ -58,9 +58,11 @@ function getProductReviews(productId) {
 
 // Hiển thị thông tin sản phẩm
 function displayProductInfo(avgRates, countRates) {
-    document.getElementById('avg-rates').textContent = avgRates.toFixed(1);
+    var avgRatesText = avgRates.toFixed(1) + "/5.0 ";
+    document.getElementById('avg-rates').textContent = avgRatesText;
     document.getElementById('count-rates').textContent = countRates;
 }
+
 
 // Hiển thị danh sách đánh giá sản phẩm
 function displayProductReviews(reviews) {
@@ -71,9 +73,9 @@ function displayProductReviews(reviews) {
         const reviewItem = document.createElement('li');
         reviewItem.className = 'review-item';
         reviewItem.innerHTML = `
-            <p>Comment: ${review.comment}</p>
-            <p>Rating: ${review.star}</p>
-            <p>Created At: ${review.createdAt}</p>
+            <p>Bình luận: ${review.comment}</p>
+            <p>Đánh giá: ${review.star} <span class="star-fill"></span></p>
+            <p>Thời gian: ${review.createdAt}</p>
         `;
         reviewList.appendChild(reviewItem);
     });
