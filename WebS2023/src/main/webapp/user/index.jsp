@@ -193,8 +193,6 @@
             <input type="hidden" id="id">
             <label for="username">Username:</label>
             <input type="text" id="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
             <label for="fullName">Full Name:</label>
             <input type="text" id="fullName" required>
             <label for="email">Email:</label>
@@ -203,8 +201,7 @@
             <input type="text" id="phone" required>
             <label for="address">Address:</label>
             <input type="text" id="address" required>
-            <label for="role">Role:</label>
-            <input type="text" id="role" required>
+            <input type="hidden" id="role" required>
             <button type="submit" id="save-button">Save</button>
         </form>
     </div>
