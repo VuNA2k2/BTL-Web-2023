@@ -3,6 +3,7 @@ package com.example.webs2023.service.auth;
 
 import com.example.webs2023.dto.login.LoginInput;
 import com.example.webs2023.dto.login.LoginOutput;
+import com.example.webs2023.dto.user.UserInput;
 import com.example.webs2023.dto.user.UserOutput;
 import com.example.webs2023.service.jwt.JwtService;
 import com.example.webs2023.service.user.UserService;
@@ -30,5 +31,10 @@ public class AuthServiceImpl implements AuthService {
             return null;
         }
 
+    }
+
+    @Override
+    public UserOutput register(UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return userService.saveUser(userInput);
     }
 }
