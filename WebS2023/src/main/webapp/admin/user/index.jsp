@@ -1,66 +1,42 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>User Management</title>
-    <style>
-        .user-card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
 
-        #popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-        }
-
-        #popup-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            width: 400px;
-        }
-
-        #popup-content h2 {
-            margin-top: 0;
-        }
-
-        #popup-content label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        #popup-content input[type="text"],
-        #popup-content input[type="email"],
-        #popup-content input[type="password"] {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        #popup-content button {
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
 <%@include file="../../layout/header.jsp" %>
-<h1>User Management</h1>
-<div id="users-container"></div>
-
+<div id="container">
+    <h1>User Management</h1>
+    <div class="filter-container">
+        <div>
+            <select id="userFilterSelect">
+                <option value="ALL">Tất cả</option>
+                <option value="USER">User</option>
+                <option value="ADMIN">Admin</option>
+            </select>
+            <button id="filterButton" class="filter">
+                <i class="fa-solid fa-filter filter-icon"></i>
+            </button>
+        </div>
+    </div>
+    <table id="users-container">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Detail</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button class="add-user-button" onclick="showAddUserForm()">Add User</button>
+</div>
 <div id="popup">
     <div id="popup-content">
         <h2>User Details</h2>
@@ -80,14 +56,13 @@
             <input type="text" id="address" required>
             <label for="role">Role:</label>
             <input type="text" id="role" required>
-            <button type="submit">Save</button>
+            <button type="submit" id="save-button">Save</button>
             <button type="button" id="delete-button">Delete</button>
         </form>
     </div>
 </div>
-
-<button onclick="showAddUserForm()">Add User</button>
 <%@include file="../../layout/footer.jsp" %>
+
 <script src="script.js"></script>
 </body>
 </html>

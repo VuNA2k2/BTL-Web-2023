@@ -41,6 +41,10 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
 
     @Override
     public UserOutput updateUser(Long id, UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        if (userInput.getPassword() == null) {
+            UserEntity userEntity = repository.getById(id);
+            userInput.setPassword(userEntity.getPassword());
+        }
         return updateById(id, userInput);
     }
 

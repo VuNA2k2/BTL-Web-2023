@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.Objects;
 
 @WebServlet(value = "/api/users")
 public class UserController extends BaseController {
@@ -37,6 +38,9 @@ public class UserController extends BaseController {
                 if (request.getParameter("id") != null && !request.getParameter("id").isEmpty()) {
                     return Response.success(service.getUserById(Long.parseLong(request.getParameter("id"))));
                 } else if (request.getParameter("role") != null && !request.getParameter("role").isEmpty()) {
+                    if(Objects.equals(request.getParameter("role"), "ALL")) {
+                        return Response.success(service.getAllUsers());
+                    }
                     return Response.success(service.getUserByRole(request.getParameter("role")));
                 } else if (request.getParameter("username") != null && !request.getParameter("username").isEmpty()) {
                     return Response.success(service.getUserByUsername(request.getParameter("username")));
@@ -45,7 +49,7 @@ public class UserController extends BaseController {
                 } else if (request.getParameter("phone") != null && !request.getParameter("phone").isEmpty()) {
                     return Response.success(service.getUserByPhone(request.getParameter("phone")));
                 } else {
-                    return Response.success(service.getAllUsers());
+                    return Response.success(userOutput);
                 }
             } else {
                 return Response.success(userOutput);
@@ -62,7 +66,6 @@ public class UserController extends BaseController {
             UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
             UserOutput userOutput = service.saveUser(userInput);
             return Response.success(userOutput);
-//            TODO: Using more methods here and return result
         } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
                  InstantiationException | IllegalAccessException e) {
             return new Response("fail", "That bai", null);
@@ -73,7 +76,7 @@ public class UserController extends BaseController {
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
-            UserOutput userOutput = (UserOutput) service.updateUser(Long.parseLong(request.getParameter("id")), userInput);
+            UserOutput userOutput = service.updateUser(Long.parseLong(request.getParameter("id")), userInput);
             return new Response("success", "Thanh Cong", userOutput);
 //        TODO: Using more methods here and return result
         } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |

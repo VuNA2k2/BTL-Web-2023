@@ -2,6 +2,8 @@ package com.example.webs2023.entity;
 
 public class UserEntity {
     private Long id;
+    private String username;
+    private String password;
     private String fullName;
     private String email;
     private String phone;
@@ -11,8 +13,10 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(Long id, String fullName, String email, String phone, String address, String role) {
+    public UserEntity(Long id, String username, String password,String fullName, String email, String phone, String address, String role) {
         this.id = id;
+        this.username = username;
+        this.password = password;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -20,7 +24,8 @@ public class UserEntity {
         this.role = role;
     }
 
-public UserEntity(String fullName, String email, String phone, String address, String role) {
+public UserEntity(String username, String fullName, String email, String phone, String address, String role) {
+        this.username = username;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -74,5 +79,21 @@ public UserEntity(String fullName, String email, String phone, String address, S
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
