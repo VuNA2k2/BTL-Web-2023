@@ -96,6 +96,10 @@ function displayCartData(data) {
     });
 
     cartTotal.textContent = 'Total Money: ' + totalMoney + ' đ';
+
+    const buyButton = document.getElementById('buyBtn');
+    buyButton.style.display = totalMoney === 0 ? 'none' : 'block';
+
 }
 
 function updateQuantity(productId, quantity) {
