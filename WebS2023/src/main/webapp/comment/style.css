@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#product-info {
+    margin-bottom: 20px;
+}
+
+#product-info p {
+    margin: 0;
+}
+
+#review-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#review-form {
+    margin-top: 20px;
+}
+
+#review-form div {
+    margin-bottom: 10px;
+}
+
+#review-form label {
+    display: inline-block;
+    width: 80px;
+}
+
+#review-form textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+#review-form button {
+    padding: 10px 20px;
+}
