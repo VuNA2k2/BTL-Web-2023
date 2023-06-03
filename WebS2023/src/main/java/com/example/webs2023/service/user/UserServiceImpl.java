@@ -5,6 +5,7 @@ import com.example.webs2023.dto.user.UserInput;
 import com.example.webs2023.dto.user.UserOutput;
 import com.example.webs2023.entity.UserEntity;
 import com.example.webs2023.repository.UserRepository;
+import com.example.webs2023.utils.BcryptUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -30,12 +31,16 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
 
     @Override
     public UserOutput exitsWithUsernameAndPassword(String username, String password) throws SQLException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        UserEntity userEntity = ((UserRepository) repository).exitsWithUsernameAndPassword(username, password);
-        return mapper.getOutputFromEntity(userEntity);
+        UserEntity userEntity = ((UserRepository) repository).getByUsername(username);
+        if (BcryptUtils.checkPassword(password, userEntity.getPassword())) {
+            return mapper.getOutputFromEntity(userEntity);
+        }
+        return null;
     }
 
     @Override
     public UserOutput saveUser(UserInput userInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        userInput.setPassword(BcryptUtils.hashPassword(userInput.getPassword()));
         return save(userInput);
     }
 
@@ -45,6 +50,7 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
             UserEntity userEntity = repository.getById(id);
             userInput.setPassword(userEntity.getPassword());
         }
+        userInput.setPassword(BcryptUtils.hashPassword(userInput.getPassword()));
         return updateById(id, userInput);
     }
 
@@ -78,4 +84,6 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
     public List<UserOutput> getAllUsers() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return getAll();
     }
+
+
 }
