@@ -47,6 +47,7 @@ function displayProductData(data) {
         const priceCell = newRow.insertCell();
         const categoryCell = newRow.insertCell();
         const discriptionCell = newRow.insertCell();
+        const actionsCell = newRow.insertCell(); // Thêm ô cho các nút sửa và xóa
 
         idCell.textContent = productData.id;
         nameCell.textContent = productData.name;
@@ -62,6 +63,7 @@ function displayProductData(data) {
             // Gọi hàm để sửa sản phẩm
             editProduct(productData.id);
         });
+        actionsCell.appendChild(editBtn); // Thêm nút sửa vào ô hành động
 
         // Tạo nút xóa sản phẩm
         const deleteBtn = document.createElement('button');
@@ -71,6 +73,7 @@ function displayProductData(data) {
             // Gọi hàm để xóa sản phẩm
             deleteProduct(productData.id);
         });
+        actionsCell.appendChild(deleteBtn); // Thêm nút xóa vào ô hành động
     });
 }
 
@@ -131,11 +134,35 @@ function updateProductTable(name, price, category, description, image) {
     var cell3 = newRow.insertCell(2);
     var cell4 = newRow.insertCell(3);
     var cell5 = newRow.insertCell(4);
+    var cell6 = newRow.insertCell(5);
+    var cell7 = newRow.insertCell(6);
+
     cell1.innerHTML = ""; // Thay bằng ID sản phẩm
     cell2.innerHTML = name;
     cell3.innerHTML = price;
     cell4.innerHTML = category;
     cell5.innerHTML = description;
+
+    // Tạo nút sửa sản phẩm
+        const editBtn = document.createElement('button');
+        editBtn.classList.add('edit-product');
+        editBtn.textContent = 'Edit';
+        editBtn.addEventListener('click', () => {
+            // Gọi hàm để sửa sản phẩm
+            editProduct(productId); // Thay productId bằng ID sản phẩm tương ứng
+        });
+        cell6.appendChild(editBtn); // Thêm nút sửa vào ô hành động
+
+    // Tạo nút xóa sản phẩm
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-product');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', () => {
+            // Gọi hàm để xóa sản phẩm
+            deleteProduct(productId); // Thay productId bằng ID sản phẩm tương ứng
+        });
+        cell7.appendChild(deleteBtn); // Thêm nút xóa vào ô hành động
+
 }
 
 // Hàm sửa sản phẩm

@@ -1,43 +1,83 @@
 /* style.css */
 
-/* Header */
-header {
-    background-color: #f2f2f2;
-    padding: 10px;
+#container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+
 }
 
 /* Main content */
 h1 {
     color: #333;
+    text-align: center;
 }
 
 .filter-container {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+}
+
+#filterButton
+{
+    border: none;
+    background-color: transparent;
 }
 
 #statusFilterSelect {
     width: 200px;
 }
 
-.filter {
-    padding: 5px;
-    background-color: #f2f2f2;
-    border: none;
-    cursor: pointer;
-}
+/*.filter {*/
+/*    padding: 5px;*/
+/*    background-color: #f2f2f2;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .filter-icon {
     color: #555;
 }
 
+
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
-th, td {
+th {
+    background-color: #333;
+    color: #fff;
     padding: 10px;
-    border: 1px solid #ccc;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.add-product-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #34a853;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+}
+
+.add-product-button:hover {
+    background-color: #228b22;
+}
+
+.add-product-button:focus {
+    outline: none;
 }
 
 /* Modal */
@@ -109,4 +149,27 @@ button[type="button"] {
 
 button[type="button"]:hover {
     background-color: #45a049;
+}
+
+/* CSS cho nút sửa sản phẩm */
+.edit-product {
+    background-color: #4CAF50; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: none; /* Không viền */
+    padding: 5px 10px; /* Kích thước padding */
+    cursor: pointer; /* Con trỏ khi hover */
+}
+
+/* CSS cho nút xóa sản phẩm */
+.delete-product {
+    background-color: #f44336; /* Màu nền */
+    color: white; /* Màu chữ */
+    border: none; /* Không viền */
+    padding: 5px 10px; /* Kích thước padding */
+    cursor: pointer; /* Con trỏ khi hover */
+}
+
+/* CSS cho ô chứa các nút */
+td.actions-cell {
+    text-align: center; /* Căn giữa nội dung trong ô */
 }

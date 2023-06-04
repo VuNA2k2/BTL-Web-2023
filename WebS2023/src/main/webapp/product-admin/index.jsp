@@ -9,36 +9,38 @@
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
-<h1>Product Management</h1>
+    <div class="container">
+        <h1>Product Management</h1>
 
-<div class="filter-container">
-    <div>
-        <select id="statusFilterSelect">
-            <option value="">Tất cả</option>
-            <option value="1">category 1</option>
-            <option value="2">category 2</option>
-            <option value="3">category 3</option>
-            <option value="4">category 4</option>
-        </select>
-        <button id="filterButton" class="filter">
-            <i class="fa-solid fa-filter filter-icon"></i>
-        </button>
+        <div class="filter-container">
+            <div>
+                <select id="statusFilterSelect">
+                    <option value="">Tất cả</option>
+                    <option value="1">category 1</option>
+                    <option value="2">category 2</option>
+                    <option value="3">category 3</option>
+                    <option value="4">category 4</option>
+                </select>
+                <button id="filterButton" class="filter">
+                    <i class="fa-solid fa-filter filter-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <table id="productTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </table>
     </div>
-</div>
-
-<button onclick="openAddProductModal()">Add Product</button>
-
-<table id="productTable">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Description</th>
-    </tr>
-</table>
 
 <!-- Modal for adding product -->
+<button class="add-product-button" onclick="openAddProductModal()">Add Product</button>
 <div id="addProductModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeAddProductModal()">&times;</span>
