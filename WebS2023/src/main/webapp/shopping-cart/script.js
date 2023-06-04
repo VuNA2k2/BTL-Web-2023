@@ -78,7 +78,7 @@ function displayCartData(data) {
 
         const cartItemTotal = document.createElement('div');
         cartItemTotal.classList.add('cart-item-total');
-        cartItemTotal.textContent = 'Total: ' + item.quantity * item.product.price + ' đ';
+        cartItemTotal.textContent = 'Tổng: ' + item.quantity * item.product.price + ' đ';
         cartItemInfo.appendChild(cartItemTotal);
 
         cartItem.appendChild(cartItemInfo);
@@ -95,7 +95,7 @@ function displayCartData(data) {
         totalMoney += item.quantity * item.product.price;
     });
 
-    cartTotal.textContent = 'Total Money: ' + totalMoney + ' đ';
+    cartTotal.textContent = 'Tổng số tiền: ' + totalMoney + ' đ';
 
     const buyButton = document.getElementById('buyBtn');
     buyButton.style.display = totalMoney === 0 ? 'none' : 'block';
