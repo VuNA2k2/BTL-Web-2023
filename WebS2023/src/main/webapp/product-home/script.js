@@ -44,13 +44,12 @@ function displayProductData(data) {
         productItemImage.classList.add('product-item-image');
         productItemImage.src = product.image.images[0].link;
 
-        // Thêm sự kiện click vào ảnh sản phẩm
         productItemImage.addEventListener('click', function() {
             // Chuyển hướng đến trang chi tiết sản phẩm
-            window.location.href = 'productDetail.jsp?id=' + product.id;
+            const productId = product.productId;
+            window.location.href = 'https://localhost/WebS2023_war/product-detail?productId=' + productId;
         });
 
-        productItem.appendChild(productItemImage);
 
         const productItemInfo = document.createElement('div');
         productItemInfo.classList.add('product-item-info');
