@@ -59,7 +59,7 @@ function displayCartData(data) {
 
         const cartItemPrice = document.createElement('div');
         cartItemPrice.classList.add('cart-item-price');
-        cartItemPrice.textContent = 'Price: ' + item.product.price + ' đ';
+        cartItemPrice.textContent = 'Giá: ' + item.product.price + ' đ';
         cartItemInfo.appendChild(cartItemPrice);
 
         const cartItemQuantity = document.createElement('div');

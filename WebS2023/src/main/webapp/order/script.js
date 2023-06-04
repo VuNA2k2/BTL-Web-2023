@@ -161,8 +161,9 @@ function openOrderDetailsModal(orderId, data) {
         quantityCell.textContent = product.productQuantity;
         const actionCell = newRow.insertCell();
 
-        const rate = document.createElement('i');
-        rate.className = 'fa-solid fa-arrow-right';
+        const rate = document.createElement('button');
+        rate.textContent = 'Đánh giá';
+        rate.classList.add('rate-btn');
         rate.addEventListener('click', function () {
             const productId = product.productId;
             window.location.href = 'https://localhost/WebS2023_war/comment?productId=' + productId;

@@ -12,7 +12,7 @@
     <div id="sidebar">
         <ul>
             <li>
-                <i class="fas fa-cart-shopping"></i>
+                <a href="https://localhost/WebS2023_war/order/"><i class="fas fa-cart-shopping" ></i></a>
                 <a href="https://localhost/WebS2023_war/order/">Lịch sử mua hàng</a>
             </li>
             <li>
@@ -38,6 +38,10 @@
         </div>
     </div>
 </div>
+<div id="logout-button" onclick="logOut()">
+    Đăng xuất
+</div>
+
 <%@ include file="../layout/footer.jsp" %>
 <div id="popup">
     <div id="popup-content">
