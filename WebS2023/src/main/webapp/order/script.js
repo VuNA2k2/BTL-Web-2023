@@ -165,7 +165,7 @@ function openOrderDetailsModal(orderId, data) {
         rate.textContent = 'Đánh giá';
         rate.classList.add('rate-btn');
         rate.addEventListener('click', function () {
-            const productId = product.productId;
+            const productId = product.id;
             window.location.href = 'https://localhost/WebS2023_war/comment?productId=' + productId;
         });
         actionCell.appendChild(rate);
