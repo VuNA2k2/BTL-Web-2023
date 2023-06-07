@@ -10,4 +10,8 @@ public class BcryptUtils {
     public static boolean checkPassword(String password, String hashedPassword) {
         return BCrypt.checkpw(password, hashedPassword);
     }
+
+    public static void main(String[] args) {
+        System.out.println(hashPassword("123"));
+    }
 }
