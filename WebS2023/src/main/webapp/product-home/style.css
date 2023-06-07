@@ -1,0 +1,88 @@
+/* style.css */
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    border: none;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Product container */
+#productItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.product-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.product-item-info {
+    flex-grow: 0; /* Đổi từ "1" sang "0" */
+}
+
+.product-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-description {
+    margin-bottom: 5px;
+}
+
+.product-price {
+    margin-bottom: 5px;
+}
+
+.product-category {
+    font-style: italic;
+}
+
+
+/* Product table */
+#productTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#productTable th, #productTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+#productTable th {
+    background-color: #f0f0f0;
+}
+
+#productTable td:last-child {
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+}
