@@ -19,7 +19,7 @@
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
             </select>
-            <button id="filterButton" class="filter">
+            <button id="filterButton" class="filter" onclick="applyFilter()">
                 <i class="fa-solid fa-filter filter-icon"></i>
             </button>
         </div>
@@ -28,7 +28,7 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Username</th>
+            <th>Name</th>
             <th>Role</th>
             <th>Detail</th>
         </tr>
