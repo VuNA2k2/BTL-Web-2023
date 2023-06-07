@@ -63,7 +63,7 @@ function displayProductData(data) {
             // Gọi hàm để sửa sản phẩm
             editProduct(productData.id);
         });
-        actionsCell.appendChild(editBtn); // Thêm nút sửa vào ô hành động
+        actionsCell.appendChild(editBtn); // Thêm nút sửa vào ô action
 
         // Tạo nút xóa sản phẩm
         const deleteBtn = document.createElement('button');
@@ -71,9 +71,10 @@ function displayProductData(data) {
         deleteBtn.textContent = 'Delete';
         deleteBtn.addEventListener('click', () => {
             // Gọi hàm để xóa sản phẩm
-            deleteProduct(productData.id);
+            deleteProduct(productData.id); // Truyền ID sản phẩm cho hàm deleteProduct
         });
-        actionsCell.appendChild(deleteBtn); // Thêm nút xóa vào ô hành động
+        actionsCell.appendChild(deleteBtn); // Thêm nút xóa vào ô action
+
     });
 }
 
@@ -88,7 +89,6 @@ function closeAddProductModal() {
     modal.style.display = "none";
 }
 
-// Hàm thêm sản phẩm
 function addProduct() {
     // Lấy thông tin sản phẩm từ người dùng
     const name = document.getElementById('productName').value;
@@ -98,7 +98,7 @@ function addProduct() {
     const image = document.getElementById('productImage').value;
 
     // Gửi yêu cầu POST tới API để thêm sản phẩm
-    fetch('https://localhost/WebS2023_war/api/products', {
+    fetch('https://localhost:443/WebS2023_war/api/products', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -117,9 +117,10 @@ function addProduct() {
         .then(function () {
             // Sau khi thêm sản phẩm thành công, gọi hàm fetchData để cập nhật danh sách sản phẩm
             fetchData();
+            closeAddProductModal(); // Đóng modal thêm sản phẩm
         })
         .catch(function (error) {
-           console.error(error);
+            console.error(error);
             alert('Error adding product. Please try again.');
         });
 }
@@ -165,14 +166,31 @@ function updateProductTable(name, price, category, description, image) {
 
 }
 
-// Hàm sửa sản phẩm
-function editProduct(productId) {
-    // Lấy thông tin sản phẩm từ người dùng
-    const newName = prompt('Enter the new name for the product:');
-    const newPrice = prompt('Enter the new price for the product:');
-    const newCategory = prompt('Enter the new category for the product:');
-    const newDescription = prompt('Enter the new description for the product:');
-    const newImage = prompt('Enter the new image URL for the product:');
+function editProduct(productData) {
+    // Trích xuất thông tin cần thiết từ đối tượng productData
+    const productId = productData.id;
+    const currentName = productData.name;
+    const currentPrice = productData.price;
+    const currentCategory = productData.category.description;
+    const currentDescription = productData.description;
+    const currentImage = productData.image;
+
+    // Yêu cầu người dùng nhập giá trị mới cho sản phẩm
+    const newName = prompt('Enter the new name for the product:', currentName);
+    const newPrice = prompt('Enter the new price for the product:', currentPrice);
+    const newCategory = prompt('Enter the new category for the product:', currentCategory);
+    const newDescription = prompt('Enter the new description for the product:', currentDescription);
+    const newImage = prompt('Enter the new image URL for the product:', currentImage);
+
+    // Tạo đối tượng updatedProduct với các giá trị mới
+    const updatedProduct = {
+        id: productId,
+        name: newName,
+        price: newPrice,
+        category: newCategory,
+        description: newDescription,
+        image: newImage
+    };
 
     // Gửi yêu cầu PUT tới API để cập nhật sản phẩm
     fetch(`https://localhost/WebS2023_war/api/products?id=${productId}`, {
@@ -182,7 +200,7 @@ function editProduct(productId) {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + getTokenFromCookie(),
         },
-        body: JSON.stringify({ name: newName, price: newPrice, category: newCategory, description: newDescription, image: newImage }),
+        body: JSON.stringify(updatedProduct),
     })
         .then(function (response) {
             if (response.status === 200) {
@@ -208,7 +226,7 @@ function deleteProduct(productId) {
 
     if (confirmDelete) {
         // Gửi yêu cầu DELETE tới API để xóa sản phẩm
-        fetch(`https://localhost/WebS2023_war/api/products?id=${productId}`, {
+        fetch(`https://localhost:443/WebS2023_war/api/products?id=${productId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -234,12 +252,10 @@ function deleteProduct(productId) {
     }
 }
 
-// Hàm lọc sản phẩm
-function applyFilter() {
-    const selectedCategory = document.getElementById('categoryFilterSelect').value;
 
-    // Gửi yêu cầu GET tới API để lấy danh sách sản phẩm theo danh mục lọc
-    fetch(`https://localhost/WebS2023_war/api/products?category=${selectedCategory}`, {
+// Hàm lọc sản phẩm
+function filterProductsByCategory(category) {
+    fetch(`https://localhost/WebS2023_war/api/products?category=${category}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -262,6 +278,12 @@ function applyFilter() {
             alert('Error fetching product data. Please try again.');
         });
 }
+
+function applyFilter() {
+    const selectedCategory = document.getElementById('categoryFilterSelect').value;
+    filterProductsByCategory(selectedCategory);
+}
+
 
 // Gọi hàm fetchData để hiển thị danh sách sản phẩm ban đầu
 fetchData();
