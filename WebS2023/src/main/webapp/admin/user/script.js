@@ -17,8 +17,7 @@ checkLogged('ADMIN');
 
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
-    const token = cookie[0].substring("token=".length, cookie[0].length);
-    return token;
+    return cookie[0].substring("token=".length, cookie[0].length);
 }
 
 function fetchDataUser(role) {
@@ -47,6 +46,86 @@ function fetchDataUser(role) {
             alert('Error fetching user data. Please try again.');
         });
 }
+function saveUserData(user, id) {
+    let api = 'https://localhost:443/WebS2023_war/api/users?id=' + id;
+    fetch(api, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+        body: JSON.stringify(user),
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error putting user data');
+            }
+        })
+        .then(function () {
+            applyFilter();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error putting user data. Please try again.');
+        });
+}
+
+function createUserData(user) {
+    let api = 'https://localhost:443/WebS2023_war/api/users';
+    fetch(api, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+        body: JSON.stringify(user),
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error posting user data');
+            }
+        })
+        .then(function () {
+            console.log('ok');
+            applyFilter();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error posting user data. Please try again.');
+        });
+}
+
+function deleteUserData(id) {
+    let api = 'https://localhost:443/WebS2023_war/api/users?id=' + id;
+    fetch(api, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error putting user data');
+            }
+        })
+        .then(function () {
+            applyFilter();
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert('Error putting user data. Please try again.');
+        });
+}
 function displayUsers(data) {
     const usersContainer = document.getElementById('users-container');
 
@@ -56,14 +135,14 @@ function displayUsers(data) {
         usersContainer.deleteRow(1);
     }
 
-    data.users.forEach(function (user) {
+    data.forEach(function (user) {
         const row = document.createElement('tr');
 
         const idCell = document.createElement('td');
         idCell.textContent = user.id;
 
         const usernameCell = document.createElement('td');
-        usernameCell.textContent = user.username;
+        usernameCell.textContent = user.fullName;
 
         const roleCell = document.createElement('td');
         roleCell.textContent = user.role;
@@ -87,28 +166,26 @@ function displayUsers(data) {
 
 function openUserDetailsModal(user) {
     const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popup-content');
     const userForm = document.getElementById('user-form');
 
     document.getElementById('id').value = user.id;
     document.getElementById('username').value = user.username;
-    document.getElementById('password').value = user.password;
-    document.getElementById('fullName').value = user.full_name;
+    document.getElementById('password').value = '########';
+    document.getElementById('fullName').value = user.fullName;
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
     document.getElementById('address').value = user.address;
     document.getElementById('role').value = user.role;
-
     const deleteButton = document.getElementById('delete-button');
 
     deleteButton.addEventListener('click', function () {
-        deleteUser(user.id);
+        deleteUserData(user.id);
         popup.style.display = 'none';
     });
 
     userForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        saveUser();
+        saveUser('save');
         popup.style.display = 'none';
     });
 
@@ -127,14 +204,14 @@ function showAddUserForm() {
 
     userForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        saveUser();
+        saveUser('create');
         popup.style.display = 'none';
     });
 
     popup.style.display = 'flex';
 }
 
-function saveUser() {
+function saveUser(func) {
     const userForm = document.getElementById('user-form');
     const id = userForm.elements['id'].value;
     const username = userForm.elements['username'].value;
@@ -155,41 +232,35 @@ function saveUser() {
     console.log("Phone:", phone);
     console.log("Address:", address);
     console.log("Role:", role);
+    if(func==='save'){
+        const user = {
+            username: username,
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            address: address,
+            role: role
+        };
+        console.log(func);
+        saveUserData(user,id);
+    }
 
-    // Viết api vào đây và chỉnh sửa
+    if(func==='create'){
+        const user = {
+            username: username,
+            password: password,
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            address: address,
+            role: role
+        };
+        console.log(func);
+        createUserData(user);
+    }
 
-    // Refresh user list
-    getUsers();
 }
 
-function deleteUser(id) {
-    // Perform delete logic here
-    //     fetch('api', {
-//         method: 'DELETE',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json',
-//             'Authorization': 'Bearer ' + getTokenFromCookie(),
-//         },
-//     })
-//         .then(function (response) {
-//             if (response.status === 200) {
-//                 return response.json();
-//             } else {
-//                 throw new Error('Error fetching order data');
-//             }
-//         })
-//         .then(function (data) {
-//             console.log(data);
-//             fetchDataUser();
-//         })
-//         .catch(function (error) {
-//             console.error(error);
-//             alert('Error fetching order data. Please try again.');
-//         })
-    // Refresh user list
-    getUsers();
-}
 
 window.addEventListener('click', function (event) {
     const popup = document.getElementById('popup');
@@ -199,11 +270,14 @@ window.addEventListener('click', function (event) {
         popup.style.display = 'none';
     }
 });
-const filterButton = document.getElementById('filterButton');
-filterButton.addEventListener('click', applyFilter);
+// const filterButton = document.getElementById('filterButton');
+// filterButton.onclick = ;
 
 function applyFilter() {
     const selectedRole = document.getElementById('userFilterSelect').value;
     fetchDataUser(selectedRole);
 }
+
 applyFilter();
+
+
