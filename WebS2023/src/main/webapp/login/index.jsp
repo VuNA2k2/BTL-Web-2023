@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Đăng nhập</title>
     <meta charset="UTF-8">
     <title>Đăng nhập</title>
     <script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
@@ -28,6 +28,8 @@
             <input type="password" id="password" placeholder="Mật khẩu">
         </div>
         <button class="login_btn" type="submit" onclick="login()">Đăng nhập</button>
+        <div class="register">
+            <p>Bạn chưa có tài khoản? <a href="../register">Đăng ký</a></p>
 </div>
 </body>
 <script src="./script.js"></script>
