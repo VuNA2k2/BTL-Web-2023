@@ -1,0 +1,60 @@
+#register {
+    width: 30%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+
+}
+
+.input_data {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input_data input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input_data i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #aaa;
+}
+
+
+#register .tieu_de {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.tieu_de p {
+    margin: 0 0 20px 0;
+    font-size: 27px;
+}
+
+.register_btn {
+    background-color: green;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: large;
+    padding: 10px;
+    border: none;
+}
+
+body {
+    background-image: url(https://t4.ftcdn.net/jpg/01/19/11/55/360_F_119115529_mEnw3lGpLdlDkfLgRcVSbFRuVl6sMDty.jpg);
+    background-size: cover;
+}
