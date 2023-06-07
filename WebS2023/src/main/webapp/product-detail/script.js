@@ -69,7 +69,7 @@ function displayProductDetail(product) {
 
     const buyButton = document.createElement('button');
     buyButton.textContent = 'Buy';
-    buyButton.classList.add('buy-button'); // Thêm lớp CSS 'buy-button' vào nút
+    buyButton.classList.add('buy-button');
     buyButton.addEventListener('click', function() {
         buyProduct(product.productId);
     });
