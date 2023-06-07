@@ -5,26 +5,37 @@ function getTokenFromCookie() {
     return token;
 }
 
-// Lấy đánh giá sản phẩm theo productId
-function getProductReviews(productId) {
-    const url = `https://localhost:443/WebS2023_war/api/rates/avg?productId=${productId}`;
+// Lấy id product
+function getProductIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('productId');
+    return productId;
+}
 
-    const token = getTokenFromCookie();
+// Lấy id product in order
+function getProductInOrderIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productInOrderId = urlParams.get('productInOrder');
+    return productInOrderId;
+}
+
+// Lấy đánh giá sản phẩm theo productId
+function getProductReviews() {
+    const productId = getProductIdFromURL();
+    console.log(productId);
     const headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        // 'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json', 'Accept': 'application/json',
     };
 
-    fetch(url, {
+    fetch(`https://localhost:443/WebS2023_war/api/rates/avg?productId=${productId}`, {
         headers: headers,
     })
         .then(response => response.json())
         .then(data => {
             if (data.code === 'success') {
+                console.log('Lấy thành công');
                 const avgRates = data.data.avgRate;
                 const countRates = data.data.countRate;
-
                 displayProductInfo(avgRates, countRates);
             } else {
                 console.log('Lỗi lấy đánh giá sản phẩm');
@@ -33,17 +44,16 @@ function getProductReviews(productId) {
         .catch(error => {
             console.log('Error connect to API: ', error);
         });
+
     fetch(`https://localhost:443/WebS2023_war/api/rates?productId=${productId}`, {
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            // 'Authorization': 'Bearer ' + getTokenFromCookie(),
+            'Accept': 'application/json', // 'Authorization': 'Bearer ' + getTokenFromCookie(),
         }
     })
         .then(response => response.json())
         .then(data => {
             if (data.code === 'success') {
-
                 const reviews = data.data;
                 displayProductReviews(reviews)
             } else {
@@ -55,14 +65,12 @@ function getProductReviews(productId) {
         });
 }
 
-
 // Hiển thị thông tin sản phẩm
 function displayProductInfo(avgRates, countRates) {
     var avgRatesText = avgRates.toFixed(1) + "/5.0 ";
     document.getElementById('avg-rates').textContent = avgRatesText;
     document.getElementById('count-rates').textContent = countRates;
 }
-
 
 // Hiển thị danh sách đánh giá sản phẩm
 function displayProductReviews(reviews) {
@@ -75,7 +83,7 @@ function displayProductReviews(reviews) {
         reviewItem.innerHTML = `
             <p>Bình luận: ${review.comment}</p>
             <p>Đánh giá: ${review.star} <span class="star-fill"></span></p>
-            <p>Thời gian: ${review.createdAt}</p>
+            <p style="font-size: 13px">${review.createdAt}</p>
         `;
         reviewList.appendChild(reviewItem);
     });
@@ -83,39 +91,48 @@ function displayProductReviews(reviews) {
 
 // Gửi đánh giá lên api
 function submitReview() {
-    const productId = parseInt(document.getElementById('product-id-hidden').value);
+    const productInOrderId = getProductInOrderIdFromURL();
+
     const comment = document.getElementById('comment').value;
-    const star = parseInt(document.getElementById('star').value);
-    const url = 'https://localhost:443/WebS2023_war/api/rates?';
+    const ratingInputs = document.querySelectorAll('.rating input[type="radio"]');
+    let star = 0;
+
+    ratingInputs.forEach(input => {
+        if (input.checked) {
+            star = parseInt(input.value);
+        }
+    });
+
+    if (!comment || star === 0) {
+        console.log('Vui lòng nhập đủ thông tin!');
+        alert('Vui lòng nhập đủ thông tin!');
+        return;
+    }
 
     const token = getTokenFromCookie();
     const headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer ' + token,
     };
 
+    console.log(productInOrderId);
     const data = {
-        comment: comment,
-        star: parseInt(star),
-        productInOrderId: parseInt(productId),
-        images: [],
+        comment: comment, star: star, productInOrderId: productInOrderId, images: [],
     };
 
-    fetch(url, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(data)
+    fetch(`https://localhost:443/WebS2023_war/api/rates`, {
+        method: 'POST', headers: headers, body: JSON.stringify(data)
     })
-        .then(response => response.json())
+        .then(response => {
+            return response.json();
+        })
         .then(data => {
+            console.log(data);
             if (data.code === 'success') {
-                // Gửi thành công, cập nhật lại danh sách đánh giá
-                getProductReviews(productId);
-                document.getElementById('comment').value = '';
-                document.getElementById('star').value = '';
+                console.log("Gửi thành công!");
+                alert("Gửi thành công!");
             } else {
                 console.log('Lỗi gửi đánh giá');
+                alert("Lỗi gửi đánh giá!");
             }
         })
         .catch(error => {
@@ -123,7 +140,9 @@ function submitReview() {
         });
 }
 
+document.getElementById("btnSubmit").onclick = submitReview;
+
 // Khi tải xong trang, lấy danh sách đánh giá cho sản phẩm
-window.onload = function() {
-    getProductReviews(2);
+window.onload = function () {
+    getProductReviews();
 }
