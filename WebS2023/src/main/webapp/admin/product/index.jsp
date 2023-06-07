@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<%@ include file="../layout/header.jsp" %>
+<%@ include file="../../layout/header.jsp" %>
     <div class="container">
         <h1>Product Management</h1>
 
@@ -63,7 +63,7 @@
 </div>
 
 
-<%@ include file="../layout/footer.jsp" %>
+<%@ include file="../../layout/footer.jsp" %>
 <script src="script.js"></script>
 </body>
 
