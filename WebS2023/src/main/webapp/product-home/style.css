@@ -3,8 +3,8 @@
 /* General styles */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 0 auto;
+    border: none;
 }
 
 h1 {
@@ -13,30 +13,52 @@ h1 {
 }
 
 /* Product container */
-#productContainer {
-    max-width: 800px;
-    margin: 20px auto;
-}
-
-#filterContainer {
+#productItems {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.product-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
     margin-bottom: 10px;
+    align-self: center;
 }
 
-#filterContainer label {
-    margin-right: 10px;
+.product-item-info {
+    flex-grow: 0; /* Đổi từ "1" sang "0" */
 }
 
-#filterBtn {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.product-name {
+    font-weight: bold;
+    margin-bottom: 5px;
 }
+
+.product-description {
+    margin-bottom: 5px;
+}
+
+.product-price {
+    margin-bottom: 5px;
+}
+
+.product-category {
+    font-style: italic;
+}
+
 
 /* Product table */
 #productTable {

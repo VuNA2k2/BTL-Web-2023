@@ -74,7 +74,8 @@ function displayProductData(data) {
         productCategory.classList.add('product-category');
         productCategory.textContent = 'Category: ' + product.category.description;
         productItemInfo.appendChild(productCategory);
-        
+
+        productItem.appendChild(productItemImage);
         productItem.appendChild(productItemInfo);
         productItems.appendChild(productItem);
     });
@@ -82,11 +83,9 @@ function displayProductData(data) {
 
 
 // Hàm lọc sản phẩm
-function applyFilter() {
-    const selectedCategory = document.getElementById('categoryFilterSelect').value;
 
-    // Gửi yêu cầu GET tới API để lấy danh sách sản phẩm theo danh mục lọc
-    fetch(`https://localhost/WebS2023_war/api/products?category=${selectedCategory}`, {
+function filterProductsByCategory(category) {
+    fetch(`https://localhost:443/WebS2023_war/api/products?category=${category}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -102,12 +101,19 @@ function applyFilter() {
             }
         })
         .then(function (data) {
+            // Filtered products are fetched successfully, display them
             displayProductData(data.data);
         })
         .catch(function (error) {
             console.error(error);
             alert('Error fetching product data. Please try again.');
         });
+}
+
+
+function applyFilter() {
+    const selectedCategory = document.getElementById('categoryFilterSelect').value;
+    filterProductsByCategory(selectedCategory);
 }
 
 fetchData();
