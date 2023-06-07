@@ -25,37 +25,37 @@
         <p>Đăng ký</p>
     </div>
     <div class="thong_tin">
-        <form>
             <div class="input_data">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" id="username" name="password" placeholder="Tên đăng nhập">
+                <input type="text" id="username" placeholder="Tên đăng nhập">
             </div>
             <div class="input_data">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" name="password" placeholder="Mật khẩu">
+                <input type="password" id="password" placeholder="Mật khẩu">
             </div>
             <div class="input_data">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="confirmPassword" name="confirm-password" placeholder="Xác nhận mật khẩu">
+                <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu">
             </div>
             <div class="input_data">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" id="fullName" name="username" placeholder="Tên">
+                <input type="text" id="fullName" placeholder="Tên">
             </div>
             <div class="input_data">
                 <i class="fa-solid fa-phone"></i>
-                <input type="text" id="phone" name="phone" placeholder="Số điện thoại">
+                <input type="text" id="phone" placeholder="Số điện thoại">
             </div>
             <div class="input_data">
                 <i class="fa-solid fa-location-dot"></i>
-                <input type="text" id="address" name="address" placeholder="Địa chỉ">
+                <input type="text" id="address" placeholder="Địa chỉ">
             </div>
             <div class="input_data">
                 <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="email" name="email" placeholder="Email">
+                <input type="email" id="email" placeholder="Email">
             </div>
-            <button class="btnRegister" onclick="register()">Đăng kí</button>
-        </form>
+            <button id="btnRegister" class="btnRegister" onclick="register()">Đăng kí</button>
+            <div class="link">
+                <p>Bạn đã có tài khoản? <a href="../login">Đăng nhập</a></p>
     </div>
 </div>
 

@@ -33,16 +33,15 @@ function register() {
     }).then(function (response) {
         if (response.status === 200) {
             response.json().then(function (data) {
-                alert(JSON.stringify(data));
-                // if (data.code === 'success') {
-                //     alert('Register successfully');
-                //     window.location.href = '/WebS2023_war/login';
-                // }
+                if (data.code === 'success') {
+                    alert('Đăng ký thành công');
+                    window.location.href = '/WebS2023_war/login';
+                }
             });
         } else {
-            // response.json().then(function (data) {
-            //     alert(data.message);
-            // });
+            response.json().then(function (data) {
+                alert(data.message);
+            });
         }
     });
 }
