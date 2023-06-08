@@ -4,8 +4,12 @@ function getTokenFromCookie() {
     return token;
 }
 
-function fetchData() {
-    fetch('https://localhost:443/WebS2023_war/api/products', {
+function fetchData(categoryId) {
+    let url='https://localhost:443/WebS2023_war/api/products';
+    if (categoryId) {
+        url += '?categoryId=' +categoryId;
+    }
+    fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +58,7 @@ function displayProductData(data) {
         idCell.textContent = productData.id;
         nameCell.textContent = productData.name;
         priceCell.textContent = productData.price + 'đ';
-        categoryCell.textContent = productData.category.description;
+        categoryCell.textContent = productData.category.name;
         discriptionCell.textContent = productData.description;
         statusCell.textContent = productData.status;
 
@@ -142,7 +146,7 @@ function addProduct() {
         })
         .then(function () {
             // Sau khi thêm sản phẩm thành công, gọi hàm fetchData để cập nhật danh sách sản phẩm
-            fetchData();
+            applyFilter();
             closeAddProductModal(); // Đóng modal thêm sản phẩm
         })
         .catch(function (error) {
@@ -232,7 +236,7 @@ function saveEditedProduct() {
         })
         .then(function () {
             // Sau khi cập nhật sản phẩm thành công, gọi hàm fetchData để cập nhật danh sách sản phẩm
-            fetchData();
+            applyFilter();
             closeEditProductModal(); // Đóng modal sửa sản phẩm
         })
         .catch(function (error) {
@@ -267,7 +271,7 @@ function deleteProduct(productId) {
             })
             .then(function () {
                 // Sau khi xóa sản phẩm thành công, gọi hàm fetchData để cập nhật danh sách sản phẩm
-                fetchData();
+                applyFilter();
             })
             .catch(function (error) {
                 console.error(error);
@@ -287,5 +291,3 @@ function applyFilter() {
 }
 applyFilter();
 
-// Gọi hàm fetchData để hiển thị danh sách sản phẩm ban đầu
-fetchData();
