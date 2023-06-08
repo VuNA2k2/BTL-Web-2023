@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
-<h1>Product Detail</h1>
+<h1>Chi tiết sản phẩm</h1>
 
 <div id="productDetail">
     <div id="slideshow-container">
