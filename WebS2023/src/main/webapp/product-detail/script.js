@@ -94,6 +94,11 @@ function displayProductDetail(product) {
     });
     productItem.appendChild(buyButton);
 
+    const commentLink = document.createElement('a');
+    commentLink.href = `https://localhost:443/WebS2023_war/api/rates?productId=${productIdFromProduct}`;
+    commentLink.textContent = 'View Comments';
+    productItem.appendChild(commentLink);
+
     productDetail.appendChild(productItem);
 }
 
