@@ -9,11 +9,6 @@
 <body>
 <%@ include file="../layout/header.jsp" %>
 <h1>Đánh giá sản phẩm</h1>
-<%--<div id="product-info">--%>
-<%--    <p>Trung bình: <span id="avg-rates"></span><span class="star-fill"></span></p>--%>
-<%--    <p>Số lượt đánh giá: <span id="count-rates"></span></p>--%>
-<%--</div>--%>
-<%--<ul id="review-list"></ul>--%>
 <form id="review-form" onsubmit="event.preventDefault();">
     <h3>Đánh giá của bạn</h3>
     <div class="comment-form">
@@ -35,10 +30,10 @@
             <label for="star1" title="1 sao"></label>
         </div>
     </div>
-<%--    <div class="image-form">--%>
-<%--        <label for="image" class="text-image">Hình ảnh kèm theo(nếu có):</label>--%>
-<%--        <input type="file" id="image" multiple accept="image/*">--%>
-<%--    </div>--%>
+    <div class="image-form">
+        <label for="image" class="text-image">Hình ảnh kèm theo(nếu có):</label>
+        <input type="file" id="image" multiple accept="image/*">
+    </div>
     <button id="btnSubmit" type="submit" class="submit-comment">Gửi đánh giá</button>
 </form>
 <%@ include file="../layout/footer.jsp" %>
