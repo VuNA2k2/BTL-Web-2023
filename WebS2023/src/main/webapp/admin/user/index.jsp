@@ -35,7 +35,7 @@
         </thead>
         <tbody></tbody>
     </table>
-    <button class="add-user-button" onclick="showAddUserForm()">Add User</button>
+    <button class="add-user-button" id="add-user">Add User</button>
 </div>
 <div id="popup">
     <div id="popup-content">
@@ -62,7 +62,6 @@
     </div>
 </div>
 <%@include file="../../layout/footer.jsp" %>
-<script src="script.js" type="module">
-</script>
+<script src="script.js" type="module"></script>
 </body>
 </html>

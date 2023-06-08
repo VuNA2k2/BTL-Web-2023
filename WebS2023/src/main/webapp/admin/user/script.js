@@ -257,9 +257,11 @@ window.addEventListener('click', function (event) {
         popup.style.display = 'none';
     }
 });
-// const filterButton = document.getElementById('filterButton');
-// filterButton.onclick = ;
+const filterButton = document.getElementById('filterButton');
+filterButton.addEventListener('click', applyFilter);
 
+const addUser = document.getElementById('add-user');
+addUser.addEventListener('click', showAddUserForm);
 function applyFilter() {
     const selectedRole = document.getElementById('userFilterSelect').value;
     fetchDataUser(selectedRole);
