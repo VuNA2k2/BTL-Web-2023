@@ -19,7 +19,7 @@
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
             </select>
-            <button id="filterButton" class="filter">
+            <button id="filterButton" class="filter" onclick="applyFilter()">
                 <i class="fa-solid fa-filter filter-icon"></i>
             </button>
         </div>
@@ -62,7 +62,7 @@
     </div>
 </div>
 <%@include file="../../layout/footer.jsp" %>
-
-<script src="script.js"></script>
+<script src="script.js" type="module">
+</script>
 </body>
 </html>

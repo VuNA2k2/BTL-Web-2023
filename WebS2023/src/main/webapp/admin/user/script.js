@@ -1,24 +1,10 @@
-function checkLogged(role) {
-    let token;
-    document.cookie.split(';').forEach(function (c) {
-        if (c.includes('token')) {
-            token = c.split('=')[1];
-        }
-    });
-    if (token === undefined || token === null || token === '' || localStorage.getItem('user') === null || localStorage.getItem('user') === undefined || JSON.parse(localStorage.getItem('user')).role !== role) {
-        window.location.href = "/WebS2023_war/login";
-        return;
-    }
-    // const main = document.getElementById('main');
-    // main.innerHTML = `Hello ${localStorage.getItem('user')}`;
-}
+import {checkLogged} from '../../routing.js';
 
 checkLogged('ADMIN');
 
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
-    const token = cookie[0].substring("token=".length, cookie[0].length);
-    return token;
+    return cookie[0].substring("token=".length, cookie[0].length);
 }
 
 function fetchDataUser(role) {
@@ -271,14 +257,14 @@ window.addEventListener('click', function (event) {
         popup.style.display = 'none';
     }
 });
-const filterButton = document.getElementById('filterButton');
-filterButton.addEventListener('click', applyFilter);
+// const filterButton = document.getElementById('filterButton');
+// filterButton.onclick = ;
 
 function applyFilter() {
     const selectedRole = document.getElementById('userFilterSelect').value;
     fetchDataUser(selectedRole);
 }
-applyFilter();
 
+applyFilter();
 
 

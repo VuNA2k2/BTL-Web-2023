@@ -44,7 +44,7 @@ public class MyAppContextListener implements ServletContextListener {
             DependencyInjector.registerDependency(UserRepository.class, new UserRepository(UserEntity.class));
             DependencyInjector.registerDependency(UserService.class, new UserServiceImpl(DependencyInjector.getDependency(UserRepository.class)));
             DependencyInjector.registerDependency(JwtService.class, new JwtServiceImpl(DependencyInjector.getDependency(UserRepository.class)));
-            DependencyInjector.registerDependency(AuthService.class, new AuthServiceImpl(DependencyInjector.getDependency(UserRepository.class), DependencyInjector.getDependency(JwtService.class)));
+            DependencyInjector.registerDependency(AuthService.class, new AuthServiceImpl(DependencyInjector.getDependency(UserService.class), DependencyInjector.getDependency(JwtService.class)));
             DependencyInjector.registerDependency(CategoryRepository.class, new CategoryRepository(CategoryEntity.class));
             DependencyInjector.registerDependency(CategoryService.class, new CategoryService(DependencyInjector.getDependency(CategoryRepository.class)));
             DependencyInjector.registerDependency(ProductRepository.class, new ProductRepository(ProductEntity.class));
