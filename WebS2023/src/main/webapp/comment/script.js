@@ -7,87 +7,9 @@ function getTokenFromCookie() {
 
 // Lấy productId và productInOrderId
 const urlParams = new URLSearchParams(window.location.search);
-const productId = urlParams.get('productId');
-console.log(productId);
 const productInOrderId = urlParams.get('productInOrder');
 console.log(productInOrderId);
 
-// Lấy đánh giá sản phẩm theo productId
-function getProductReviews() {
-    fetch(`https://localhost:443/WebS2023_war/api/rates/avg?productId=${productId}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.code === 'success') {
-                console.log('Lấy thành công');
-                const avgRates = data.data.avgRate;
-                const countRates = data.data.countRate;
-                displayProductInfo(avgRates, countRates);
-            } else {
-                console.log('Lỗi lấy đánh giá sản phẩm');
-            }
-        })
-        .catch(error => {
-            console.log('Error connect to API: ', error);
-        });
-
-    fetch(`https://localhost:443/WebS2023_war/api/rates?productId=${productId}`, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.code === 'success') {
-                const reviews = data.data;
-                displayProductReviews(reviews);
-            } else {
-                console.log('Lỗi lấy đánh giá sản phẩm');
-            }
-        })
-        .catch(error => {
-            console.log('Error connect to API: ', error);
-        });
-}
-
-// Hiển thị đánh giá sản phẩm
-function displayProductInfo(avgRates, countRates) {
-    document.getElementById('avg-rates').textContent = avgRates.toFixed(1) + "/5.0 ";
-    document.getElementById('count-rates').textContent = countRates;
-}
-
-// Hiển thị danh sách đánh giá sản phẩm
-function displayProductReviews(reviews) {
-    const reviewList = document.getElementById('review-list');
-    reviewList.innerHTML = '';
-
-    reviews.forEach(review => {
-        const reviewItem = document.createElement('li');
-        reviewItem.className = 'review-item';
-        let imagesHtml = '';
-        if (review.images.length > 0) {
-            imagesHtml = '<div class="review-images">';
-            review.images.forEach(image => {
-                imagesHtml += `<img src="${image}" alt="Review Image">`;
-            });
-            imagesHtml += '</div>';
-        }
-        reviewItem.innerHTML = `
-            <p>Bình luận: ${review.comment}</p>
-            <p>Đánh giá: ${review.star} <span class="star-fill"></span></p>
-            ${imagesHtml}
-            <p style="font-size: 13px">${review.createdAt}</p>
-        `;
-        reviewList.appendChild(reviewItem);
-    });
-}
-
-// Gửi đánh giá lên api
 function submitReview() {
     const comment = document.getElementById('comment').value;
     const ratingInputs = document.querySelectorAll('.rating input[type="radio"]');
@@ -143,7 +65,3 @@ function submitReview() {
 
 document.getElementById("btnSubmit").onclick = submitReview;
 
-// Khi tải xong trang, lấy danh sách đánh giá cho sản phẩm
-window.onload = function () {
-    getProductReviews();
-}

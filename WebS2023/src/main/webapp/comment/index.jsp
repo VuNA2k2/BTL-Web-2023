@@ -9,11 +9,11 @@
 <body>
 <%@ include file="../layout/header.jsp" %>
 <h1>Đánh giá sản phẩm</h1>
-<div id="product-info">
-    <p>Trung bình: <span id="avg-rates"></span><span class="star-fill"></span></p>
-    <p>Số lượt đánh giá: <span id="count-rates"></span></p>
-</div>
-<ul id="review-list"></ul>
+<%--<div id="product-info">--%>
+<%--    <p>Trung bình: <span id="avg-rates"></span><span class="star-fill"></span></p>--%>
+<%--    <p>Số lượt đánh giá: <span id="count-rates"></span></p>--%>
+<%--</div>--%>
+<%--<ul id="review-list"></ul>--%>
 <form id="review-form" onsubmit="event.preventDefault();">
     <h3>Đánh giá của bạn</h3>
     <div class="comment-form">
