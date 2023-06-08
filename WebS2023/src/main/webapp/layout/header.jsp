@@ -148,7 +148,6 @@
         <li><a href="#">iPad</a></li>
         <li><a href="#">Mac</a></li>
         <li><a href="#">Liên hệ</a></li>
-        <li><a href="https://localhost/WebS2023_war/order">Đơn hàng</a></li>
 
       </ul>
 
@@ -161,7 +160,7 @@
       <a href="https://localhost/WebS2023_war/shopping-cart"><i class="fa-solid fa-cart-shopping"></i></a>
     </div>
     <div class="login">
-      <a href="#"><i class="fa-solid fa-user"></i> </a>
+      <a href="https://localhost/WebS2023_war/user/"><i class="fa-solid fa-user"></i> </a>
     </div>
   </div>
 </header>
