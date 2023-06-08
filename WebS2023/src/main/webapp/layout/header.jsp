@@ -145,16 +145,8 @@
         <li><a href="#">Trang chủ</a></li>
         <li><a href="#">Sản phẩm</a></li>
         <li><a href="#">iPhone</a></li>
-        <li><a href="#">iPad</a></li>
-        <li><a href="#">Mac</a></li>
         <li><a href="#">Liên hệ</a></li>
-
       </ul>
-
-    </div>
-    <div class="search-box">
-      <input type="text" placeholder="Tìm kiếm...">
-      <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div class="cart">
       <a href="https://localhost/WebS2023_war/shopping-cart"><i class="fa-solid fa-cart-shopping"></i></a>
