@@ -157,7 +157,6 @@ function openUserDetailsModal(user) {
 
     document.getElementById('id').value = user.id;
     document.getElementById('username').value = user.username;
-    document.getElementById('password').value = '########';
     document.getElementById('fullName').value = user.fullName;
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
@@ -202,7 +201,6 @@ function saveUser(func) {
     const userForm = document.getElementById('user-form');
     const id = userForm.elements['id'].value;
     const username = userForm.elements['username'].value;
-    const password = userForm.elements['password'].value;
     const fullName = userForm.elements['fullName'].value;
     const email = userForm.elements['email'].value;
     const phone = userForm.elements['phone'].value;
@@ -213,7 +211,6 @@ function saveUser(func) {
     console.log("Saving user...");
     console.log("ID:", id);
     console.log("Username:", username);
-    console.log("Password:", password);
     console.log("Full Name:", fullName);
     console.log("Email:", email);
     console.log("Phone:", phone);
