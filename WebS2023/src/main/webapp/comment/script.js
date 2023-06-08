@@ -5,16 +5,29 @@ function getTokenFromCookie() {
     return token;
 }
 
-// Lấy productId và productInOrderId
+// Lấy productInOrderId
 const urlParams = new URLSearchParams(window.location.search);
-const productInOrderId = urlParams.get('productInOrder');
+const productInOrderId = 2;
 console.log(productInOrderId);
+
+let imageUrls = [];
+
+const image = document.getElementById('image');
+image.addEventListener('change', function(event) {
+    const files = event.target.files;
+
+    imageUrls = [];
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const imageUrl = URL.createObjectURL(file);
+        imageUrls.push(imageUrl);
+    }
+});
 
 function submitReview() {
     const comment = document.getElementById('comment').value;
     const ratingInputs = document.querySelectorAll('.rating input[type="radio"]');
-    // const files = document.getElementById('image').files;
-    // const images = [];
     let star = 0;
 
     ratingInputs.forEach(input => {
@@ -33,7 +46,7 @@ function submitReview() {
         comment: comment,
         star: star,
         productInOrderId: productInOrderId,
-        images: [],
+        images: imageUrls,
     };
 
     fetch(`https://localhost:443/WebS2023_war/api/rates`, {
@@ -64,4 +77,3 @@ function submitReview() {
 }
 
 document.getElementById("btnSubmit").onclick = submitReview;
-
