@@ -48,7 +48,7 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public CustomerRevenueOutput getCustomerRevenue() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<UserOutput> userOutputs = userService.getAllUsers();
+        List<UserOutput> userOutputs = userService.getUserByRole("USER");
         CustomerRevenueOutput customerRevenueOutput = new CustomerRevenueOutput();
         List<CustomerRevenue> customerRevenues = userOutputs.stream().map(e -> {
             CustomerRevenue customerRevenue = new CustomerRevenue();
