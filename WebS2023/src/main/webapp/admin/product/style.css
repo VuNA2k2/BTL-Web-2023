@@ -27,15 +27,8 @@ h1 {
 }
 
 #statusFilterSelect {
-    width: 200px;
+    width: 100px;
 }
-
-/*.filter {*/
-/*    padding: 5px;*/
-/*    background-color: #f2f2f2;*/
-/*    border: none;*/
-/*    cursor: pointer;*/
-/*}*/
 
 .filter-icon {
     color: #555;
@@ -52,11 +45,16 @@ th {
     background-color: #333;
     color: #fff;
     padding: 10px;
+    word-wrap: break-word;
+    white-space: nowrap;
 }
 
 td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    text-align: center;
+    word-wrap: break-word;
+    white-space: nowrap;
 }
 
 .add-product-button {
@@ -153,23 +151,24 @@ button[type="button"]:hover {
 
 /* CSS cho nút sửa sản phẩm */
 .edit-product {
-    background-color: #4CAF50; /* Màu nền */
-    color: white; /* Màu chữ */
-    border: none; /* Không viền */
-    padding: 5px 10px; /* Kích thước padding */
-    cursor: pointer; /* Con trỏ khi hover */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 /* CSS cho nút xóa sản phẩm */
 .delete-product {
-    background-color: #f44336; /* Màu nền */
-    color: white; /* Màu chữ */
-    border: none; /* Không viền */
-    padding: 5px 10px; /* Kích thước padding */
-    cursor: pointer; /* Con trỏ khi hover */
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 /* CSS cho ô chứa các nút */
 td.actions-cell {
-    text-align: center; /* Căn giữa nội dung trong ô */
+    text-align: center;
 }
+
