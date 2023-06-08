@@ -42,28 +42,7 @@ function displayProductDetail(product) {
     productItem.classList.add('product-item');
 
     const imageList = product.images;
-
-    var currentIndex = 0;
-    var slideshowImage = document.getElementById("slideshow-image");
-
-    function startSlideshow() {
-        // Hiển thị hình ảnh đầu tiên
-        slideshowImage.src = imageList[currentIndex];
-
-        // Tăng chỉ số hiện tại và kiểm tra xem có đến cuối danh sách hay không
-        currentIndex++;
-        if (currentIndex >= imageList.length) {
-            currentIndex = 0;
-        }
-
-        // Lặp lại quá trình sau mỗi 3 giây
-        setTimeout(startSlideshow, 3000);
-    }
-
-    // Bắt đầu slideshow
-        startSlideshow();
-
-
+    displaySlideshow(imageList);
 
 
     const productName = document.createElement('div');
@@ -95,7 +74,7 @@ function displayProductDetail(product) {
     productItem.appendChild(buyButton);
 
     const commentLink = document.createElement('a');
-    commentLink.href = `https://localhost:443/WebS2023_war/api/rates?productId=${productIdFromProduct}`;
+    commentLink.href = `https://localhost:443/WebS2023_war/api/list-cmt?productId=${productIdFromProduct}`;
     commentLink.textContent = 'View Comments';
     productItem.appendChild(commentLink);
 
@@ -131,6 +110,22 @@ function buyProduct(productId) {
             console.error(error);
             alert('Error updating cart data. Please try again.');
         });
+}
+
+function displaySlideshow(imageList) {
+    const slideshowContainer = document.getElementById('slideshow-container');
+    const slideshowImage = document.getElementById('slideshow-image');
+    const linkList = imageList.map((image) => image.link);
+    let currentIndex = 0;
+
+    function changeSlide() {
+        slideshowImage.src = linkList[currentIndex];
+        currentIndex = (currentIndex + 1) % linkList.length;
+    }
+
+    // Bắt đầu slideshow
+    changeSlide();
+    setInterval(changeSlide, 2000); // Thay đổi hình ảnh sau mỗi 2 giây
 }
 
 
