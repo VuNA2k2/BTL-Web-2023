@@ -62,7 +62,7 @@
     </div>
 </div>
 <%@include file="../../layout/footer.jsp" %>
-
-<script src="script.js"></script>
+<script src="script.js" type="module">
+</script>
 </body>
 </html>
