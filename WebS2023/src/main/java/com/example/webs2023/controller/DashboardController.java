@@ -1,8 +1,8 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
 import com.example.webs2023.base.Response;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.service.dashboard.DashboardService;
 
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/api/dashboard")
 public class DashboardController extends BaseController {
-    private final DashboardService dashboardService = DependencyInjector.getDependency(DashboardService.class);
+    private final DashboardService dashboardService = ServiceLocator.getDependency(DashboardService.class);
 
     @Override
     protected Response getMethod(HttpServletRequest request, HttpServletResponse response) {
@@ -20,12 +20,11 @@ public class DashboardController extends BaseController {
             if (action == null) {
                 return new Response("error", "action is required", null);
             }
-            switch (action) {
-                case "revenue":
-                    return Response.success(dashboardService.getRevenue());
-                default:
-                    return new Response("error", "action is invalid", null);
-            }
+            return switch (action) {
+                case "PRODUCT_REVENUE" -> Response.success(dashboardService.getRevenue());
+                case "CUSTOMER_REVENUE" -> Response.success(dashboardService.getCustomerRevenue());
+                default -> new Response("error", "action is invalid", null);
+            };
         } catch (Exception e) {
             e.printStackTrace();
             return new Response("error", e.getMessage(), e);

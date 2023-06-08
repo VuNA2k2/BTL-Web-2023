@@ -2,14 +2,14 @@ package com.example.webs2023.dto.dashboard;
 
 import java.util.List;
 
-public class RevenueOutput {
+public class ProductRevenueOutput {
     List<ProductRevenue> productRevenues;
     private Long totalRevenue;
 
-    public RevenueOutput() {
+    public ProductRevenueOutput() {
     }
 
-    public RevenueOutput(Long totalRevenue, List<ProductRevenue> productRevenues) {
+    public ProductRevenueOutput(Long totalRevenue, List<ProductRevenue> productRevenues) {
         this.totalRevenue = totalRevenue;
         this.productRevenues = productRevenues;
     }
