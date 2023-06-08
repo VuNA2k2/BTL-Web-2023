@@ -1,0 +1,85 @@
+#container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Product container */
+#productItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+    flex-basis: calc(33.33% - 20px); /* Định rõ độ rộng của mỗi mục */
+    margin-right: 20px;
+}
+
+.product-item:last-child {
+    margin-right: 0; /* Loại bỏ margin-right cho mục cuối cùng trong hàng */
+}
+
+.product-item-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.product-item-info {
+    flex-grow: 0;
+}
+
+.product-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-description {
+    margin-bottom: 5px;
+}
+
+.product-price {
+    margin-bottom: 5px;
+}
+
+.product-category {
+    font-style: italic;
+}
+
+
+/* Product table */
+#productTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#productTable th, #productTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+#productTable th {
+    background-color: #f0f0f0;
+}
+
+#productTable td:last-child {
+    text-align: center;
+}
