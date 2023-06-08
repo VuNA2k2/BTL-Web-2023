@@ -4,8 +4,12 @@ function getTokenFromCookie() {
     return token;
 }
 
-function fetchData() {
-    fetch('https://localhost:443/WebS2023_war/api/products', {
+function fetchData(categoryId) {
+    let url='https://localhost:443/WebS2023_war/api/products';
+    if (categoryId) {
+        url += '?categoryId=' +categoryId;
+    }
+    fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -30,7 +34,6 @@ function fetchData() {
             alert('Error fetching product data. Please try again.');
         });
 }
-
 function displayProductData(data) {
     const productItems = document.getElementById('productItems');
 
@@ -72,7 +75,7 @@ function displayProductData(data) {
 
         const productCategory = document.createElement('div');
         productCategory.classList.add('product-category');
-        productCategory.textContent = 'Category: ' + product.category.description;
+        productCategory.textContent = 'Category: ' + product.category.name;
         productItemInfo.appendChild(productCategory);
 
 
@@ -110,10 +113,13 @@ function filterProductsByCategory(category) {
         });
 }
 
+// Hàm lọc sản phẩm
+const filterButton = document.getElementById('filterButton');
+filterButton.addEventListener('click', applyFilter);
 
 function applyFilter() {
-    const selectedCategory = document.getElementById('categoryFilterSelect').value;
-    filterProductsByCategory(selectedCategory);
+    const selectedStatus = document.getElementById('statusFilterSelect').value;
+    fetchData(selectedStatus);
 }
+applyFilter();
 
-fetchData();
