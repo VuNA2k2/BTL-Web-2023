@@ -7,7 +7,7 @@ function getTokenFromCookie() {
 
 // Lấy productInOrderId
 const urlParams = new URLSearchParams(window.location.search);
-const productInOrderId = 2;
+const productInOrderId = urlParams.get('productInOrder');
 console.log(productInOrderId);
 
 let imageUrls = [];
