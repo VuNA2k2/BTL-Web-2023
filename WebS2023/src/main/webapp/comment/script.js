@@ -57,8 +57,7 @@ function getProductReviews() {
 
 // Hiển thị đánh giá sản phẩm
 function displayProductInfo(avgRates, countRates) {
-    var avgRatesText = avgRates.toFixed(1) + "/5.0 ";
-    document.getElementById('avg-rates').textContent = avgRatesText;
+    document.getElementById('avg-rates').textContent = avgRates.toFixed(1) + "/5.0 ";
     document.getElementById('count-rates').textContent = countRates;
 }
 
