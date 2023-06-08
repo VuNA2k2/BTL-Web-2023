@@ -15,7 +15,6 @@
 </div>
 <ul id="review-list"></ul>
 <form id="review-form" onsubmit="event.preventDefault();">
-    <input type="hidden" id="product-id-hidden" value="3">
     <h3>Đánh giá của bạn</h3>
     <div class="comment-form">
         <label for="comment" class="text-comment">Bình luận:</label>
@@ -36,6 +35,10 @@
             <label for="star1" title="1 sao"></label>
         </div>
     </div>
+<%--    <div class="image-form">--%>
+<%--        <label for="image" class="text-image">Hình ảnh kèm theo(nếu có):</label>--%>
+<%--        <input type="file" id="image" multiple accept="image/*">--%>
+<%--    </div>--%>
     <button id="btnSubmit" type="submit" class="submit-comment">Gửi đánh giá</button>
 </form>
 <%@ include file="../layout/footer.jsp" %>

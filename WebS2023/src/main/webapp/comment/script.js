@@ -5,30 +5,20 @@ function getTokenFromCookie() {
     return token;
 }
 
-// Lấy id product
-function getProductIdFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('productId');
-    return productId;
-}
-
-// Lấy id product in order
-function getProductInOrderIdFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productInOrderId = urlParams.get('productInOrder');
-    return productInOrderId;
-}
+// Lấy productId và productInOrderId
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('productId');
+console.log(productId);
+const productInOrderId = urlParams.get('productInOrder');
+console.log(productInOrderId);
 
 // Lấy đánh giá sản phẩm theo productId
 function getProductReviews() {
-    const productId = getProductIdFromURL();
-    console.log(productId);
-    const headers = {
-        'Content-Type': 'application/json', 'Accept': 'application/json',
-    };
-
     fetch(`https://localhost:443/WebS2023_war/api/rates/avg?productId=${productId}`, {
-        headers: headers,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
     })
         .then(response => response.json())
         .then(data => {
@@ -48,14 +38,14 @@ function getProductReviews() {
     fetch(`https://localhost:443/WebS2023_war/api/rates?productId=${productId}`, {
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json', // 'Authorization': 'Bearer ' + getTokenFromCookie(),
+            'Accept': 'application/json',
         }
     })
         .then(response => response.json())
         .then(data => {
             if (data.code === 'success') {
                 const reviews = data.data;
-                displayProductReviews(reviews)
+                displayProductReviews(reviews);
             } else {
                 console.log('Lỗi lấy đánh giá sản phẩm');
             }
@@ -65,7 +55,7 @@ function getProductReviews() {
         });
 }
 
-// Hiển thị thông tin sản phẩm
+// Hiển thị đánh giá sản phẩm
 function displayProductInfo(avgRates, countRates) {
     var avgRatesText = avgRates.toFixed(1) + "/5.0 ";
     document.getElementById('avg-rates').textContent = avgRatesText;
@@ -80,9 +70,18 @@ function displayProductReviews(reviews) {
     reviews.forEach(review => {
         const reviewItem = document.createElement('li');
         reviewItem.className = 'review-item';
+        let imagesHtml = '';
+        if (review.images.length > 0) {
+            imagesHtml = '<div class="review-images">';
+            review.images.forEach(image => {
+                imagesHtml += `<img src="${image}" alt="Review Image">`;
+            });
+            imagesHtml += '</div>';
+        }
         reviewItem.innerHTML = `
             <p>Bình luận: ${review.comment}</p>
             <p>Đánh giá: ${review.star} <span class="star-fill"></span></p>
+            ${imagesHtml}
             <p style="font-size: 13px">${review.createdAt}</p>
         `;
         reviewList.appendChild(reviewItem);
@@ -91,10 +90,10 @@ function displayProductReviews(reviews) {
 
 // Gửi đánh giá lên api
 function submitReview() {
-    const productInOrderId = getProductInOrderIdFromURL();
-
     const comment = document.getElementById('comment').value;
     const ratingInputs = document.querySelectorAll('.rating input[type="radio"]');
+    // const files = document.getElementById('image').files;
+    // const images = [];
     let star = 0;
 
     ratingInputs.forEach(input => {
@@ -109,18 +108,21 @@ function submitReview() {
         return;
     }
 
-    const token = getTokenFromCookie();
-    const headers = {
-        'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer ' + token,
-    };
-
-    console.log(productInOrderId);
     const data = {
-        comment: comment, star: star, productInOrderId: productInOrderId, images: [],
+        comment: comment,
+        star: star,
+        productInOrderId: productInOrderId,
+        images: [],
     };
 
     fetch(`https://localhost:443/WebS2023_war/api/rates`, {
-        method: 'POST', headers: headers, body: JSON.stringify(data)
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+        body: JSON.stringify(data)
     })
         .then(response => {
             return response.json();
