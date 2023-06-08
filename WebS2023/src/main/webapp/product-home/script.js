@@ -42,12 +42,12 @@ function displayProductData(data) {
 
         const productItemImage = document.createElement('img');
         productItemImage.classList.add('product-item-image');
-        productItemImage.src = product.image.images[0].link;
-
+        productItemImage.src = product.images[0].link;
+        productItem.appendChild(productItemImage);
         productItemImage.addEventListener('click', function() {
             // Chuyển hướng đến trang chi tiết sản phẩm
-            const productId = product.productId;
-            window.location.href = 'https://localhost/WebS2023_war/product-detail?productId=' + productId;
+            const productId = product.id;
+            window.location.href = 'https://localhost/WebS2023_war/product-detail/?productId=' + productId;
         });
 
 
@@ -57,17 +57,17 @@ function displayProductData(data) {
 
         const productName = document.createElement('div');
         productName.classList.add('product-name');
-        productName.textContent = 'Name: ' + product.name;
+        productName.textContent = product.name;
         productItemInfo.appendChild(productName);
 
         const productDescription = document.createElement('div');
         productDescription.classList.add('product-description');
-        productDescription.textContent = 'Description: ' + product.description;
+        productDescription.textContent =  product.description;
         productItemInfo.appendChild(productDescription);
 
         const productPrice = document.createElement('div');
         productPrice.classList.add('product-price');
-        productPrice.textContent = 'Price: ' + product.price + ' đ';
+        productPrice.textContent = product.price + ' đ';
         productItemInfo.appendChild(productPrice);
 
         const productCategory = document.createElement('div');
@@ -75,7 +75,7 @@ function displayProductData(data) {
         productCategory.textContent = 'Category: ' + product.category.description;
         productItemInfo.appendChild(productCategory);
 
-        productItem.appendChild(productItemImage);
+
         productItem.appendChild(productItemInfo);
         productItems.appendChild(productItem);
     });
