@@ -3,9 +3,11 @@ function getTokenFromCookie() {
     const token = cookie[0].substring("token=".length, cookie[0].length);
     return token;
 }
-
+// Lấy ID sản phẩm từ URL
+const urlParams = new URLSearchParams(window.location.search);
+const productIdFromProduct = urlParams.get('productId');
 function fetchData() {
-    fetch('https://localhost:443/WebS2023_war/api/products', {
+    fetch(`https://localhost/WebS2023_war/api/products?id=${productIdFromProduct}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ function fetchData() {
         })
         .then(function (data) {
             console.log(data);
-            displayProductData(data.data);
+            displayProductDetail(data.data);
         })
         .catch(function (error) {
             console.error(error);
@@ -31,10 +33,7 @@ function fetchData() {
         });
 }
 
-// Lấy ID sản phẩm từ URL
-const urlParams = new URLSearchParams(window.location.search);
-const productIdFromProduct = urlParams.get('productId');
-console.log(productIdFromProduct);
+
 
 function displayProductDetail(product) {
     const productDetail = document.getElementById('productDetail');
@@ -42,10 +41,30 @@ function displayProductDetail(product) {
     const productItem = document.createElement('div');
     productItem.classList.add('product-item');
 
-    const productItemImage = document.createElement('img');
-    productItemImage.classList.add('product-item-image');
-    productItemImage.src = product.image;
-    productItem.appendChild(productItemImage);
+    const imageList = product.images;
+
+    var currentIndex = 0;
+    var slideshowImage = document.getElementById("slideshow-image");
+
+    function startSlideshow() {
+        // Hiển thị hình ảnh đầu tiên
+        slideshowImage.src = imageList[currentIndex];
+
+        // Tăng chỉ số hiện tại và kiểm tra xem có đến cuối danh sách hay không
+        currentIndex++;
+        if (currentIndex >= imageList.length) {
+            currentIndex = 0;
+        }
+
+        // Lặp lại quá trình sau mỗi 3 giây
+        setTimeout(startSlideshow, 3000);
+    }
+
+    // Bắt đầu slideshow
+        startSlideshow();
+
+
+
 
     const productName = document.createElement('div');
     productName.classList.add('product-name');
@@ -71,7 +90,7 @@ function displayProductDetail(product) {
     buyButton.textContent = 'Buy';
     buyButton.classList.add('buy-button');
     buyButton.addEventListener('click', function() {
-        buyProduct(product.productId);
+        buyProduct(productIdFromProduct);
     });
     productItem.appendChild(buyButton);
 
@@ -79,29 +98,36 @@ function displayProductDetail(product) {
 }
 
 function buyProduct(productId) {
-    //Gửi yêu cầu POST đến một API để thêm sản phẩm vào giỏ hàng
+    console.log(productId);
+    const updateData = {
+        productId: productId,
+        quantity: 1
+    };
     fetch('https://localhost:443/WebS2023_war/api/carts', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + getTokenFromCookie(),
         },
-        body: JSON.stringify({ productId: productId }),
+        body: JSON.stringify(updateData),
     })
         .then(function (response) {
-            if (response.status === 201) {
-                alert('Product added to cart successfully!');
+            if (response.status === 200) {
+                return response.json();
             } else {
-                throw new Error('Error adding product to cart');
+                throw new Error('Error updating cart data');
             }
+        })
+        .then(function (data) {
+            console.log(data);
         })
         .catch(function (error) {
             console.error(error);
-            // Xử lý lỗi hoặc hiển thị thông báo lỗi
-            alert('Error adding product to cart. Please try again.');
+            alert('Error updating cart data. Please try again.');
         });
 }
+
 
 
 fetchData();
