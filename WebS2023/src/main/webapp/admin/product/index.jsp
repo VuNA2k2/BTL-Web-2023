@@ -9,17 +9,17 @@
 </head>
 <body>
 <%@ include file="../../layout/header.jsp" %>
-    <div class="container">
+    <div id="container">
         <h1>Product Management</h1>
 
         <div class="filter-container">
             <div>
-                <select id="categoryFilterSelect" onchange="applyFilter()">
-                    <option value="">All</option>
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
-                    <option value="3">Category 3</option>
-                    <option value="4">Category 4</option>
+                <select id="statusFilterSelect">
+                    <option value="">Tất cả</option>
+                    <option value="1">iphone 11</option>
+                    <option value="2">iphone 12</option>
+                    <option value="3">iphone 13</option>
+                    <option value="4">iphone 14</option>
                 </select>
                 <button id="filterButton" class="filter">
                     <i class="fa-solid fa-filter filter-icon"></i>
@@ -56,11 +56,36 @@
             <label for="productDescription">Description:</label>
             <textarea id="productDescription" required></textarea><br>
             <label for="productImage">Image:</label>
-            <input type="file" id="productImage"><br>
+            <input type="text" id="productImage"><br>
             <button type="button" onclick="addProduct()">Add</button>
         </form>
     </div>
 </div>
+
+
+<!-- Modal sửa sản phẩm -->
+<div id="editProductModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditProductModal()">&times;</span>
+        <!-- Các trường thông tin sản phẩm -->
+        <label for="editProductName">Name:</label>
+        <input type="text" id="editProductName" >
+        <label for="editProductDescription">Description:</label>
+        <input type="text" id="editProductDescription" >
+        <label for="editProductPrice">Price:</label>
+        <input type="text" id="editProductPrice" >
+        <label for="editProductCategory">Category:</label>
+        <input type="text" id="editProductCategory" >
+        <label for="editProductImage">Image:</label>
+        <input type="text" id="editProductImage" >
+
+        <!-- Nút lưu chỉnh sửa -->
+        <button onclick="saveEditedProduct()">Save</button>
+    </div>
+</div>
+
+
+
 
 
 <%@ include file="../../layout/footer.jsp" %>
