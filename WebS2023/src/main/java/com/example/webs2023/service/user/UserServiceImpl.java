@@ -49,8 +49,9 @@ public class UserServiceImpl extends BaseService<UserEntity, Long, UserInput, Us
         if (userInput.getPassword() == null) {
             UserEntity userEntity = repository.getById(id);
             userInput.setPassword(userEntity.getPassword());
+        } else {
+            userInput.setPassword(BcryptUtils.hashPassword(userInput.getPassword()));
         }
-        userInput.setPassword(BcryptUtils.hashPassword(userInput.getPassword()));
         return updateById(id, userInput);
     }
 
