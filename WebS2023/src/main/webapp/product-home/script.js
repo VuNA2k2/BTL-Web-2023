@@ -4,8 +4,12 @@ function getTokenFromCookie() {
     return token;
 }
 
-function fetchData() {
-    fetch('https://localhost:443/WebS2023_war/api/products', {
+function fetchData(categoryId) {
+    let url='https://localhost:443/WebS2023_war/api/products';
+    if (categoryId) {
+        url += '?categoryId=' +categoryId;
+    }
+    fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -30,7 +34,6 @@ function fetchData() {
             alert('Error fetching product data. Please try again.');
         });
 }
-
 function displayProductData(data) {
     const productItems = document.getElementById('productItems');
 
@@ -42,12 +45,12 @@ function displayProductData(data) {
 
         const productItemImage = document.createElement('img');
         productItemImage.classList.add('product-item-image');
-        productItemImage.src = product.image.images[0].link;
-
+        productItemImage.src = product.images[0].link;
+        productItem.appendChild(productItemImage);
         productItemImage.addEventListener('click', function() {
             // Chuyển hướng đến trang chi tiết sản phẩm
-            const productId = product.productId;
-            window.location.href = 'https://localhost/WebS2023_war/product-detail?productId=' + productId;
+            const productId = product.id;
+            window.location.href = 'https://localhost/WebS2023_war/product-detail/?productId=' + productId;
         });
 
 
@@ -57,25 +60,25 @@ function displayProductData(data) {
 
         const productName = document.createElement('div');
         productName.classList.add('product-name');
-        productName.textContent = 'Name: ' + product.name;
+        productName.textContent = product.name;
         productItemInfo.appendChild(productName);
 
         const productDescription = document.createElement('div');
         productDescription.classList.add('product-description');
-        productDescription.textContent = 'Description: ' + product.description;
+        productDescription.textContent =  product.description;
         productItemInfo.appendChild(productDescription);
 
         const productPrice = document.createElement('div');
         productPrice.classList.add('product-price');
-        productPrice.textContent = 'Price: ' + product.price + ' đ';
+        productPrice.textContent = product.price + ' đ';
         productItemInfo.appendChild(productPrice);
 
         const productCategory = document.createElement('div');
         productCategory.classList.add('product-category');
-        productCategory.textContent = 'Category: ' + product.category.description;
+        productCategory.textContent = 'Category: ' + product.category.name;
         productItemInfo.appendChild(productCategory);
 
-        productItem.appendChild(productItemImage);
+
         productItem.appendChild(productItemInfo);
         productItems.appendChild(productItem);
     });
@@ -110,10 +113,13 @@ function filterProductsByCategory(category) {
         });
 }
 
+// Hàm lọc sản phẩm
+const filterButton = document.getElementById('filterButton');
+filterButton.addEventListener('click', applyFilter);
 
 function applyFilter() {
-    const selectedCategory = document.getElementById('categoryFilterSelect').value;
-    filterProductsByCategory(selectedCategory);
+    const selectedStatus = document.getElementById('statusFilterSelect').value;
+    fetchData(selectedStatus);
 }
+applyFilter();
 
-fetchData();

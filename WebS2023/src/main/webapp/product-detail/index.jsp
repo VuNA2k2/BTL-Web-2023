@@ -10,7 +10,12 @@
 <%@ include file="../layout/header.jsp" %>
 <h1>Product Detail</h1>
 
-<div id="productDetail"></div>
+<div id="productDetail">
+    <div id="slideshow-container">
+        <img id="slideshow-image" src="" alt="Slideshow Image">
+    </div>
+
+</div>
 
 <%@ include file="../layout/footer.jsp" %>
 <script src="script.js"></script>
