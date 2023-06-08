@@ -9,6 +9,8 @@ import com.example.webs2023.service.product_in_order.ProductInOrderService;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DashboardServiceImpl implements DashboardService {
 
@@ -22,11 +24,15 @@ public class DashboardServiceImpl implements DashboardService {
     public RevenueOutput getRevenue() throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         List<ProductInOrderOutput> productInOrderOutputs = ((BaseService) productInOrderService).getAll();
         RevenueOutput revenueOutput = new RevenueOutput();
-        Long totalRevenue = productInOrderOutputs.stream().mapToLong(e -> {
-            return e.getProductPrice() * e.getProductQuantity();
-        }).sum();
+        Long totalRevenue = productInOrderOutputs.stream().mapToLong(e -> e.getProductPrice() * e.getProductQuantity()).sum();
         revenueOutput.setTotalRevenue(totalRevenue);
-        List<ProductRevenue> productRevenues = productInOrderOutputs.stream().map(e -> new ProductRevenue(e.getProductId(), e.getProductName(), e.getProductPrice() * e.getProductQuantity())).toList();
+        Map<Long, List<ProductInOrderOutput>> mapGroupByProductId = productInOrderOutputs
+                .stream().collect(Collectors.groupingBy(ProductInOrderOutput::getProductId));
+        List<ProductRevenue> productRevenues = mapGroupByProductId.keySet().stream().map(e -> {
+            List<ProductInOrderOutput> productInOrderOutputs1 = mapGroupByProductId.get(e);
+            Long revenue = productInOrderOutputs1.stream().mapToLong(e1 -> e1.getProductPrice() * e1.getProductQuantity()).sum();
+            return new ProductRevenue(e, productInOrderOutputs1.get(0).getProductName(), revenue);
+        }).toList();
         revenueOutput.setProductRevenues(productRevenues);
         return revenueOutput;
     }

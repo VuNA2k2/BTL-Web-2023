@@ -27,12 +27,26 @@ h1 {
     margin-right: 20px;
 }
 
+.product-details {
+    flex: 1;
+}
+
 .product-name,
 .product-description,
 .product-price,
 .product-category {
     margin-bottom: 10px;
+    display: block;
 }
+
+.product-name {
+    font-weight: bold;
+}
+
+.product-price {
+    color: #4caf50;
+}
+
 
 /* Modal */
 .modal {
