@@ -26,17 +26,17 @@ h1 {
     align-items: center;
     margin-bottom: 20px;
     text-align: center;
-    flex-basis: calc(33.33% - 20px); /* Định rõ độ rộng của mỗi mục */
+    flex-basis: calc(33.33% - 20px);
     margin-right: 20px;
 }
 
 .product-item:last-child {
-    margin-right: 0; /* Loại bỏ margin-right cho mục cuối cùng trong hàng */
+    margin-right: 0;
 }
 
 .product-item-image {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     object-fit: cover;
     margin-bottom: 10px;
     align-self: center;

@@ -47,6 +47,7 @@ function displayProductData(data) {
         productItemImage.classList.add('product-item-image');
         productItemImage.src = product.images[0].link;
         productItem.appendChild(productItemImage);
+
         productItemImage.addEventListener('click', function() {
             // Chuyển hướng đến trang chi tiết sản phẩm
             const productId = product.id;
