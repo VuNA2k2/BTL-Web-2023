@@ -3,14 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Product List</title>
+    <title>Danh sách sản phẩm</title>
     <script src="https://kit.fontawesome.com/62d833ae64.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <%@ include file="../../layout/header.jsp" %>
     <div id="container">
-        <h1>Product Management</h1>
+        <h1>Danh sách sản phẩm</h1>
 
         <div class="filter-container">
             <div>
@@ -31,33 +31,33 @@
         <table id="productTable">
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Action</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Loại</th>
+                <th>Dung lượng</th>
+                <th></th>
             </tr>
         </table>
     </div>
 
-<!-- Modal for adding product -->
-<button class="add-product-button" onclick="openAddProductModal()">Add Product</button>
+<!-- Modal Thêm sản phẩm -->
+<button class="add-product-button" onclick="openAddProductModal()">Thêm sản phẩm</button>
 <div id="addProductModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeAddProductModal()">&times;</span>
         <h2>Add Product</h2>
         <form>
-            <label for="productName">Name:</label>
+            <label for="productName">Tên sản phẩm:</label>
             <input type="text" id="productName" required><br>
-            <label for="productPrice">Price:</label>
+            <label for="productPrice">Giá:</label>
             <input type="number" id="productPrice" required><br>
-            <label for="productCategory">Category:</label>
+            <label for="productCategory">Loại:</label>
             <input type="text" id="productCategory" required><br>
-            <label for="productDescription">Description:</label>
+            <label for="productDescription">Dung lượng:</label>
             <textarea id="productDescription" required></textarea><br>
-            <label for="productImage">Image:</label>
+            <label for="productImage">Ảnh:</label>
             <input type="text" id="productImage"><br>
-            <button type="button" onclick="addProduct()">Add</button>
+            <button type="button" onclick="addProduct()">Thêm</button>
         </form>
     </div>
 </div>
@@ -68,19 +68,19 @@
     <div class="modal-content">
         <span class="close" onclick="closeEditProductModal()">&times;</span>
         <!-- Các trường thông tin sản phẩm -->
-        <label for="editProductName">Name:</label>
+        <label for="editProductName">Tên sản phẩm:</label>
         <input type="text" id="editProductName" >
-        <label for="editProductDescription">Description:</label>
+        <label for="editProductDescription">Mô tả:</label>
         <input type="text" id="editProductDescription" >
-        <label for="editProductPrice">Price:</label>
+        <label for="editProductPrice">Giá:</label>
         <input type="text" id="editProductPrice" >
-        <label for="editProductCategory">Category:</label>
+        <label for="editProductCategory">Loại:</label>
         <input type="text" id="editProductCategory" >
-        <label for="editProductImage">Image:</label>
+        <label for="editProductImage">Ảnh:</label>
         <input type="text" id="editProductImage" >
 
         <!-- Nút lưu chỉnh sửa -->
-        <button onclick="saveEditedProduct()">Save</button>
+        <button onclick="saveEditedProduct()">Lưu</button>
     </div>
 </div>
 

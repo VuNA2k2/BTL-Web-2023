@@ -47,26 +47,26 @@ function displayProductDetail(product) {
 
     const productName = document.createElement('div');
     productName.classList.add('product-name');
-    productName.textContent = 'Name: ' + product.name;
+    productName.textContent = product.name;
     productItem.appendChild(productName);
 
     const productDescription = document.createElement('div');
     productDescription.classList.add('product-description');
-    productDescription.textContent = 'Description: ' + product.description;
+    productDescription.textContent = 'Dung lượng: ' + product.description;
     productItem.appendChild(productDescription);
 
     const productPrice = document.createElement('div');
     productPrice.classList.add('product-price');
-    productPrice.textContent = 'Price: ' + product.price + ' đ';
+    productPrice.textContent =  product.price + ' đ';
     productItem.appendChild(productPrice);
 
     const productCategory = document.createElement('div');
     productCategory.classList.add('product-category');
-    productCategory.textContent = 'Category: ' + product.category.description;
+    productCategory.textContent = 'Loại: ' + product.category.name;
     productItem.appendChild(productCategory);
 
     const buyButton = document.createElement('button');
-    buyButton.textContent = 'Buy';
+    buyButton.textContent = 'Thêm vào giỏ hàng';
     buyButton.classList.add('buy-button');
     buyButton.addEventListener('click', function() {
         buyProduct(productIdFromProduct);
@@ -75,6 +75,7 @@ function displayProductDetail(product) {
 
     const commentLink = document.createElement('a');
     commentLink.href = `https://localhost:443/WebS2023_war/api/list-cmt?productId=${productIdFromProduct}`;
+    commentLink.classList.add('view');
     commentLink.textContent = 'View Comments';
     productItem.appendChild(commentLink);
 
