@@ -35,7 +35,7 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
             return null;
         }
         RateEntity rateEntity = mapper.getEntityFromInput(rateInput);
-        rateEntity.setProductInOrderId(productInOrderRepository.getById(rateInput.getProductInOrderId()).getProductId());
+        rateEntity.setProductId(productInOrderRepository.getById(rateInput.getProductInOrderId()).getProductId());
         rateEntity.setUserId(userId);
         rateEntity.setCreatedAt(Timestamp.from(Instant.now()));
         rateEntity = repository.save(rateEntity);
