@@ -76,9 +76,9 @@ function displayOrderData(data) {
 
         const updateStatusBtn = document.createElement('button');
         updateStatusBtn.classList.add('update-order');
-        updateStatusBtn.textContent = 'Hủy';
+        updateStatusBtn.textContent = 'Cập nhật';
         updateStatusBtn.addEventListener('click', function () {
-            const selectedStatus = 'CANCEL';
+            const selectedStatus = statusSelect.value;
             fetch('https://localhost/WebS2023_war/api/orders?orderId=' + orderData.id, {
                 method: 'PUT',
                 headers: {
@@ -96,6 +96,7 @@ function displayOrderData(data) {
                     }
                 })
                 .then(function () {
+
                     applyFilter();
                 })
                 .catch(function (error) {
