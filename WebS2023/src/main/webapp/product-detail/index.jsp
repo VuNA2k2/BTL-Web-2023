@@ -14,7 +14,6 @@
         <img id="slideshow-image" src="" alt="Slideshow Image">
     </div>
     <div class="product-data">
-        <h1>Chi tiết sản phẩm</h1>
         <div id="productDetail">
         </div>
         <div class="product-details">
