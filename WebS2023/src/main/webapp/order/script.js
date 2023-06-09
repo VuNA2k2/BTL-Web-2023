@@ -48,7 +48,7 @@ function displayOrderData(data) {
         const newRow = orderTable.insertRow();
 
         const idCell = newRow.insertCell();
-        const userIdCell = newRow.insertCell();
+
         const orderDateCell = newRow.insertCell();
         const totalMoneyCell = newRow.insertCell();
         const statusCell = newRow.insertCell();
@@ -56,7 +56,6 @@ function displayOrderData(data) {
         const orderDetailsCell = newRow.insertCell();
 
         idCell.textContent = orderData.id;
-        userIdCell.textContent = orderData.userId;
         orderDateCell.textContent = orderData.orderDate;
         totalMoneyCell.textContent = orderData.totalMoney+'đ ';
         statusCell.textContent = orderData.status;

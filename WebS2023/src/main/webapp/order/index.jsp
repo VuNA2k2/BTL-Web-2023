@@ -32,7 +32,6 @@
 <table id="orderTable">
   <tr>
     <th>ID</th>
-    <th>ID người dùng</th>
     <th>Ngày đặt</th>
     <th>Tổng tiền</th>
     <th>Tình trạng đơn hàng</th>
