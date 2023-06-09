@@ -11,7 +11,7 @@
 <body>
 <%@include file="../../layout/header.jsp" %>
 <div id="container">
-    <h1>User Management</h1>
+    <h1>Quản lý người dùng</h1>
     <div class="filter-container">
         <div>
             <select id="userFilterSelect">
@@ -28,35 +28,35 @@
         <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Detail</th>
+            <th>Tên</th>
+            <th>Vai trò</th>
+            <th></th>
         </tr>
         </thead>
         <tbody></tbody>
     </table>
-    <button class="add-user-button" id="add-user">Add User</button>
+    <button class="add-user-button" id="add-user">Thêm</button>
 </div>
 <div id="popup">
     <div id="popup-content">
-        <h2>User Details</h2>
+        <h2>Tài khoản</h2>
         <form id="user-form">
             <input type="hidden" id="id">
             <label for="username">Username:</label>
             <input type="text" id="username" required>
 
-            <label for="fullName">Full Name:</label>
+            <label for="fullName">Tên:</label>
             <input type="text" id="fullName" required>
             <label for="email">Email:</label>
             <input type="email" id="email" required>
-            <label for="phone">Phone:</label>
+            <label for="phone">Số điện thoại:</label>
             <input type="text" id="phone" required>
-            <label for="address">Address:</label>
+            <label for="address">Địa chỉ:</label>
             <input type="text" id="address" required>
-            <label for="role">Role:</label>
+            <label for="role">Vai trò:</label>
             <input type="text" id="role" required>
-            <button type="submit" id="save-button">Save</button>
-            <button type="button" id="delete-button">Delete</button>
+            <button type="submit" id="save-button">Lưu</button>
+            <button type="button" id="delete-button">Xóa</button>
         </form>
     </div>
 </div>

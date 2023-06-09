@@ -136,7 +136,7 @@ function displayUsers(data) {
 
         const detailCell = document.createElement('button');
         detailCell.classList.add('user-card');
-        detailCell.textContent = 'View Details';
+        detailCell.textContent = 'Chi tiết';
 
         detailCell.addEventListener('click', function () {
             openUserDetailsModal(user);
