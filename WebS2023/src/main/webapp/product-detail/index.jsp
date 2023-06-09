@@ -18,6 +18,7 @@
     </div>
 
 </div>
+<%@ include file="../list-comment/index.jsp" %>
 <%@ include file="../layout/footer.jsp" %>
 <script src="script.js"></script>
 </body>
