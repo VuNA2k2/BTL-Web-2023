@@ -80,4 +80,11 @@ public class CartServiceImpl extends BaseService<CartEntity, Long, CartInput, Ca
         CartEntity cartEntity = repository.getAll("WHERE user_id = " + userId + " ORDER BY id DESC LIMIT 1").get(0);
         cartRefProductService.deleteByCartId(cartEntity.getId());
     }
+
+    @Override
+    public CartDetailOutput createCart(Long userId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        CartInput cartInput = new CartInput(userId);
+        CartEntity cartEntity = repository.save(mapper.getEntityFromInput(cartInput));
+        return getDetailCartFromCartEntity(cartEntity);
+    }
 }
