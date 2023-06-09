@@ -9,26 +9,26 @@ public class RateOutput {
     private Long id;
     private String comment;
     private Long star;
-    private Long productInOrderId;
+    private Long productId;
     private Timestamp createdAt;
     private List<ImageOutput> images;
 
     public RateOutput() {
     }
 
-    public RateOutput(String comment, Long star, Long productInOrderId, Timestamp createdAt, List<ImageOutput> images) {
+    public RateOutput(String comment, Long star, Long productId, Timestamp createdAt, List<ImageOutput> images) {
         this.comment = comment;
         this.star = star;
-        this.productInOrderId = productInOrderId;
+        this.productId = productId;
         this.createdAt = createdAt;
         this.images = images;
     }
 
-    public RateOutput(Long id, String comment, Long star, Long productInOrderId, Timestamp createdAt, List<ImageOutput> images) {
+    public RateOutput(Long id, String comment, Long star, Long productId, Timestamp createdAt, List<ImageOutput> images) {
         this.id = id;
         this.comment = comment;
         this.star = star;
-        this.productInOrderId = productInOrderId;
+        this.productId = productId;
         this.createdAt = createdAt;
         this.images = images;
     }
@@ -49,12 +49,12 @@ public class RateOutput {
         this.star = star;
     }
 
-    public Long getProductInOrderId() {
-        return productInOrderId;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProductInOrderId(Long productInOrderId) {
-        this.productInOrderId = productInOrderId;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public Timestamp getCreatedAt() {

@@ -31,11 +31,11 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
 
     @Override
     public RateOutput createRate(Long userId, RateInput rateInput) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        if (productInOrderRepository.existsByUserOrderAndId(userId, rateInput.getProductInOrderId())) {
+        if (!productInOrderRepository.existsByUserOrderAndId(userId, rateInput.getProductInOrderId())) {
             return null;
         }
         RateEntity rateEntity = mapper.getEntityFromInput(rateInput);
-        rateEntity.setProductInOrderId(productInOrderRepository.getById(rateInput.getProductInOrderId()).getProductId());
+        rateEntity.setProductId(productInOrderRepository.getById(rateInput.getProductInOrderId()).getProductId());
         rateEntity.setUserId(userId);
         rateEntity.setCreatedAt(Timestamp.from(Instant.now()));
         rateEntity = repository.save(rateEntity);

@@ -16,3 +16,6 @@ drop constraint rates_product_in_order_id_fkey;
 alter table rates
     add constraint rates_product_id_fkey
         foreign key (product_in_order_id) references products;
+
+alter table rates
+    rename column product_in_order_id to product_id;
