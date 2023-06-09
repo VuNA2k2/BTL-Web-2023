@@ -21,7 +21,7 @@ function fetchData(categoryId) {
             if (response.status === 200) {
                 return response.json();
             } else {
-                throw new Error('Error fetching product data');
+                throw new Error('Lỗi khi tìm nạp dữ liệu sản phẩm');
             }
         })
         .then(function (data) {
@@ -31,7 +31,7 @@ function fetchData(categoryId) {
         .catch(function (error) {
             console.error(error);
             // Xử lý lỗi tìm nạp hoặc hiển thị thông báo lỗi
-            alert('Error fetching product data. Please try again.');
+            alert('Lỗi khi tìm nạp dữ liệu sản phẩm. Vui lòng thử lại.');
         });
 }
 function displayProductData(data) {
@@ -101,7 +101,7 @@ function filterProductsByCategory(category) {
             if (response.status === 200) {
                 return response.json();
             } else {
-                throw new Error('Error fetching product data');
+                throw new Error('Lỗi khi tìm nạp dữ liệu sản phẩm');
             }
         })
         .then(function (data) {
@@ -110,7 +110,7 @@ function filterProductsByCategory(category) {
         })
         .catch(function (error) {
             console.error(error);
-            alert('Error fetching product data. Please try again.');
+            alert('Lỗi khi tìm nạp dữ liệu sản phẩm. Vui lòng thử lại.');
         });
 }
 
