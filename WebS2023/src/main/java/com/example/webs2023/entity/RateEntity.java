@@ -8,26 +8,26 @@ public class RateEntity {
     private String comment;
     private Long star;
     private Timestamp createdAt;
-    private Long productInOrderId;
+    private Long productId;
 
     public RateEntity() {
     }
 
-    public RateEntity(Long id, Long userId, String comment, Long star, Timestamp createdAt, Long productInOrderId) {
+    public RateEntity(Long id, Long userId, String comment, Long star, Timestamp createdAt, Long productId) {
         this.id = id;
         this.userId = userId;
         this.comment = comment;
         this.star = star;
         this.createdAt = createdAt;
-        this.productInOrderId = productInOrderId;
+        this.productId = productId;
     }
 
-    public RateEntity(Long userId, String comment, Long star, Timestamp createdAt, Long productInOrderId) {
+    public RateEntity(Long userId, String comment, Long star, Timestamp createdAt, Long productId) {
         this.userId = userId;
         this.comment = comment;
         this.star = star;
         this.createdAt = createdAt;
-        this.productInOrderId = productInOrderId;
+        this.productId = productId;
     }
 
     public Long getId() {
@@ -70,11 +70,11 @@ public class RateEntity {
         this.createdAt = createdAt;
     }
 
-    public Long getProductInOrderId() {
-        return productInOrderId;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProductInOrderId(Long productInOrderId) {
-        this.productInOrderId = productInOrderId;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }
