@@ -1,7 +1,7 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.jwt.JwtPayload;
 import com.example.webs2023.dto.order.OrderInput;
@@ -21,7 +21,7 @@ public class OrderController extends BaseController {
 
     @Override
     public void init() throws ServletException {
-        this.service = (OrderServiceImpl) DependencyInjector.getDependency(OrderService.class);
+        this.service = (OrderServiceImpl) ServiceLocator.getDependency(OrderService.class);
         super.init();
     }
 

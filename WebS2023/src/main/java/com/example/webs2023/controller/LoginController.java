@@ -1,12 +1,10 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.login.LoginInput;
-import com.example.webs2023.repository.UserRepository;
 import com.example.webs2023.service.auth.AuthService;
-import com.example.webs2023.service.auth.AuthServiceImpl;
 import com.example.webs2023.utils.JsonFromInputConverter;
 
 import javax.servlet.ServletException;
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(value = "/api/auth/login")
 public class LoginController extends BaseController {
-    private final AuthService authService = DependencyInjector.getDependency(AuthService.class);
+    private final AuthService authService = ServiceLocator.getDependency(AuthService.class);
 
     @Override
     public void init() throws ServletException {

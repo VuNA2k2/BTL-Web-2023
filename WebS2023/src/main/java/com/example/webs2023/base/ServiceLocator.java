@@ -3,7 +3,7 @@ package com.example.webs2023.base;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DependencyInjector {
+public class ServiceLocator {
     private static final Map<Class<?>, Object> dependencies = new HashMap<>();
 
     public static <T> void registerDependency(Class<T> type, T instance) {
