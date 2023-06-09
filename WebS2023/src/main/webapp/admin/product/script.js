@@ -191,7 +191,7 @@ function editProduct(productData) {
         imageString += productData.images[i].link;
         if(i<productData.images.length-1)
         {
-            imageString += ",";
+            imageString += ";";
         }
     }
     document.getElementById('editProductImage').value = imageString;
