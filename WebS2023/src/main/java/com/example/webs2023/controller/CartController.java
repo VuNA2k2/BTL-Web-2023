@@ -1,7 +1,7 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.cart.ProductInCartRequest;
 import com.example.webs2023.dto.cart.CartDetailOutput;
@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/api/carts")
 public class CartController extends BaseController {
-    private final JwtService jwtService = DependencyInjector.getDependency(JwtService.class);
-    private final UserService userService = DependencyInjector.getDependency(UserService.class);
+    private final JwtService jwtService = ServiceLocator.getDependency(JwtService.class);
+    private final UserService userService = ServiceLocator.getDependency(UserService.class);
     ;
 
     @Override
     public void init() throws ServletException {
-        this.service = (CartServiceImpl) DependencyInjector.getDependency(CartService.class);
+        this.service = (CartServiceImpl) ServiceLocator.getDependency(CartService.class);
         super.init();
     }
 
