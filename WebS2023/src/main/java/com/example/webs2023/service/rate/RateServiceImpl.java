@@ -60,7 +60,7 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
 
     @Override
     public List<RateOutput> getListRateByProductId(Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<RateEntity> rateEntities = repository.getAll("WHERE product_in_order_id = " + productId);
+        List<RateEntity> rateEntities = repository.getAll("WHERE product_id = " + productId);
         List<RateOutput> rateOutputs = new ArrayList<>();
         rateEntities.forEach(rateEntity -> {
             try {
@@ -77,7 +77,7 @@ public class RateServiceImpl extends BaseService<RateEntity, Long, RateInput, Ra
 
     @Override
     public AvgRateOutput avgRateByProductId(Long productId) throws SQLException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        List<RateEntity> rateEntities = repository.getAll("WHERE product_in_order_id = " + productId);
+        List<RateEntity> rateEntities = repository.getAll("WHERE product_id = " + productId);
         AvgRateOutput avgRateOutput = new AvgRateOutput();
         if (rateEntities.size() == 0) {
             avgRateOutput.setAvgRate(0.0);
