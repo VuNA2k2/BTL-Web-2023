@@ -1,6 +1,6 @@
 // Lấy productId
 const urlParamsProduct = new URLSearchParams(window.location.search);
-const productId = urlParamsProduct.get("productId");
+const productId = parseInt(urlParamsProduct.get("productId"));
 console.log(productId);
 
 // Lấy đánh giá sản phẩm theo productId
