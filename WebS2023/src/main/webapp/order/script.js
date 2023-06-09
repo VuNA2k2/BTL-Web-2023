@@ -89,7 +89,10 @@ function displayOrderData(data) {
                     alert('Error updating order status. Please try again.');
                 });
         });
-
+        if(orderData.status !== 'PENDING')
+        {
+            updateStatusBtn.style.display='none';
+        }
         const orderDetailsBtn = document.createElement('button');
         orderDetailsBtn.classList.add('order-details-button');
         orderDetailsBtn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
