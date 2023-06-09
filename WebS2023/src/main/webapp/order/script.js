@@ -60,19 +60,6 @@ function displayOrderData(data) {
         totalMoneyCell.textContent = orderData.totalMoney+'đ ';
         statusCell.textContent = orderData.status;
 
-        const statusSelect = document.createElement('select');
-        statusSelect.id = 'statusSelect_' + orderData.id;
-
-        const statuses = ['PENDING', 'IN SHIPPING', 'DONE', 'CANCEL'];
-        statuses.forEach(function (status) {
-            const option = document.createElement('option');
-            option.value = status;
-            option.textContent = status;
-            statusSelect.appendChild(option);
-        });
-
-        statusSelect.value = orderData.status;
-
         const updateStatusBtn = document.createElement('button');
         updateStatusBtn.classList.add('update-order');
         updateStatusBtn.textContent = 'Hủy';
@@ -112,7 +99,7 @@ function displayOrderData(data) {
         });
 
 
-        updateStatusCell.appendChild(statusSelect);
+
         updateStatusCell.appendChild(updateStatusBtn);
         orderDetailsCell.appendChild(orderDetailsBtn);
 
