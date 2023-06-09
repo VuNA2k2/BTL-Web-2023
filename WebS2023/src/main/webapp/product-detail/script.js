@@ -19,7 +19,7 @@ function fetchData() {
             if (response.status === 200) {
                 return response.json();
             } else {
-                throw new Error('Error fetching product data');
+                throw new Error('Lỗi khi tìm nạp dữ liệu sản phẩm');
             }
         })
         .then(function (data) {
@@ -29,7 +29,7 @@ function fetchData() {
         .catch(function (error) {
             console.error(error);
             // Xử lý lỗi tìm nạp hoặc hiển thị thông báo lỗi
-            alert('Error fetching product data. Please try again.');
+            alert('Lỗi khi tìm nạp dữ liệu sản phẩm. Vui lòng thử lại.');
         });
 }
 
@@ -73,12 +73,6 @@ function displayProductDetail(product) {
     });
     productItem.appendChild(buyButton);
 
-    const commentLink = document.createElement('a');
-    commentLink.href = `https://localhost:443/WebS2023_war/api/list-cmt?productId=${productIdFromProduct}`;
-    commentLink.classList.add('view');
-    commentLink.textContent = 'View Comments';
-    productItem.appendChild(commentLink);
-
     productDetail.appendChild(productItem);
 }
 
@@ -101,7 +95,7 @@ function buyProduct(productId) {
             if (response.status === 200) {
                 return response.json();
             } else {
-                throw new Error('Error updating cart data');
+                throw new Error('Lỗi khi cập nhật dữ liệu giỏ hàng');
             }
         })
         .then(function (data) {
@@ -109,7 +103,7 @@ function buyProduct(productId) {
         })
         .catch(function (error) {
             console.error(error);
-            alert('Error updating cart data. Please try again.');
+            alert('Lỗi khi cập nhật dữ liệu giỏ hàng. Vui lòng thử lại.');
         });
 }
 
