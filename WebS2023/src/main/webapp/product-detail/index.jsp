@@ -15,6 +15,7 @@
             <img id="slideshow-image" src="" alt="Slideshow Image">
         </div>
 
+        <div></div>
     </div>
 
     <div class="product-details">
