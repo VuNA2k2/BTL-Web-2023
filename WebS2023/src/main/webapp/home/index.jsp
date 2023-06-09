@@ -11,14 +11,16 @@
 <div id="container">
     <h1>Danh sách sản phẩm</h1>
 
+<%--     khi xóa category đi rồi tạo mới 1 cái khác => categoryId bị nhảy => cần sửa lại filter--%>
+<%--     lúc thêm/sửa sản phẩm cần chú ý categoryId--%>
     <div class="filter-container">
         <div>
             <select id="statusFilterSelect">
                 <option value="">Tất cả</option>
-                <option value="1">iphone 11</option>
-                <option value="2">iphone 12</option>
-                <option value="3">iphone 13</option>
-                <option value="4">iphone 14</option>
+                <option value="5">iphone 11</option>
+                <option value="6">iphone 12</option>
+                <option value="7">iphone 13</option>
+                <option value="8">iphone 14</option>
             </select>
             <button id="filterButton" class="filter">
                 <i class="fa-solid fa-filter filter-icon"></i>
