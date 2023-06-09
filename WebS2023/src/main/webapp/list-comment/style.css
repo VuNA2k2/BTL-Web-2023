@@ -1,13 +1,4 @@
 /* style.css */
-
-body {
-    font-family: Arial, sans-serif;
-}
-
-h1 {
-    text-align: center;
-}
-
 #product-info {
     text-align: center;
 }
@@ -23,39 +14,35 @@ h1 {
 .rating input {
     display: none;
 }
-
 .rating label {
     float: right;
     cursor: pointer;
     width: 20px;
     height: 20px;
-    background-image: url("star.png");
+    background-image: url("https://i.imgur.com/6xuZ1Ki.png");
     background-size: contain;
     margin: 0 5px;
 }
-
 .rating label:before {
     content: "";
     position: absolute;
     width: 20px;
     height: 20px;
-    background-image: url("star-fill.png");
+    background-image: url("https://i.imgur.com/fnINRRG.png");
     background-size: contain;
     opacity: 0;
     transition: opacity 0.2s linear;
 }
-
 .rating label:hover:before,
 .rating label:hover ~ label:before,
 .rating input:checked ~ label:before {
     opacity: 1;
 }
-
 .star-fill {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url('star-fill.png');
+    background-image: url('https://i.imgur.com/fnINRRG.png');
     background-repeat: no-repeat;
     background-size: contain;
     vertical-align: middle;
@@ -103,5 +90,7 @@ h1 {
     padding:10px;
     margin: 5px 0;
     list-style-type: none
-
+}
+.image-form{
+    margin-bottom: 25px;
 }

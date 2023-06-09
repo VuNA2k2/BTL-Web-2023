@@ -1,13 +1,6 @@
-// Lấy token từ cookie
-function getTokenFromCookie() {
-    const cookie = document.cookie.split(';');
-    const token = cookie[0].substring("token=".length, cookie[0].length);
-    return token;
-}
-
-// Lấy productId và productInOrderId
-const urlParams = new URLSearchParams(window.location.search);
-const productId = urlParams.get('productId');
+// Lấy productId
+const urlParamsProduct = new URLSearchParams(window.location.search);
+const productId = urlParamsProduct.get("productId");
 console.log(productId);
 
 // Lấy đánh giá sản phẩm theo productId
@@ -76,8 +69,8 @@ function displayListProductReviews(reviews) {
             imagesHtml += '</div>';
         }
         reviewItems.innerHTML = `
-            <p>Bình luận: ${review.comment}</p>
             <p>Đánh giá: ${review.star} <span class="star-fill"></span></p>
+            <p>Bình luận: ${review.comment}</p>
             ${imagesHtml}
             <p style="font-size: 13px">${review.createdAt}</p>
         `;
