@@ -1,7 +1,7 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.service.category.CategoryService;
 
@@ -15,7 +15,7 @@ public class CategoryController extends BaseController {
     @Override
     public void init() throws ServletException {
         super.init();
-        service = DependencyInjector.getDependency(CategoryService.class);
+        service = ServiceLocator.getDependency(CategoryService.class);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.user.UserInput;
 import com.example.webs2023.service.auth.AuthService;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/api/auth/register")
 public class RegisterController extends BaseController {
 
-    private final AuthService authService = DependencyInjector.getDependency(AuthService.class);
+    private final AuthService authService = ServiceLocator.getDependency(AuthService.class);
 
 
     @Override

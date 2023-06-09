@@ -1,6 +1,6 @@
 package com.example.webs2023.filter;
 
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.service.jwt.JwtService;
 
 import javax.servlet.*;
@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class AuthFilter implements Filter {
 
-    private final JwtService jwtService = DependencyInjector.getDependency(JwtService.class);
+    private final JwtService jwtService = ServiceLocator.getDependency(JwtService.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

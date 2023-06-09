@@ -1,7 +1,7 @@
 package com.example.webs2023.controller;
 
 import com.example.webs2023.base.BaseController;
-import com.example.webs2023.base.DependencyInjector;
+import com.example.webs2023.base.ServiceLocator;
 import com.example.webs2023.base.Response;
 import com.example.webs2023.dto.jwt.JwtPayload;
 import com.example.webs2023.dto.rate.RateInput;
@@ -20,7 +20,7 @@ public class RateController extends BaseController {
 
     @Override
     public void init() throws ServletException {
-        this.service = (RateServiceImpl) DependencyInjector.getDependency(RateService.class);
+        this.service = (RateServiceImpl) ServiceLocator.getDependency(RateService.class);
         super.init();
     }
 
