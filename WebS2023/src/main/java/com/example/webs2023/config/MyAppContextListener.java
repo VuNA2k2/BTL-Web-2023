@@ -44,7 +44,6 @@ public class MyAppContextListener implements ServletContextListener {
             ServiceLocator.registerDependency(UserRepository.class, new UserRepository(UserEntity.class));
             ServiceLocator.registerDependency(UserService.class, new UserServiceImpl(ServiceLocator.getDependency(UserRepository.class)));
             ServiceLocator.registerDependency(JwtService.class, new JwtServiceImpl(ServiceLocator.getDependency(UserRepository.class)));
-            ServiceLocator.registerDependency(AuthService.class, new AuthServiceImpl(ServiceLocator.getDependency(UserService.class), ServiceLocator.getDependency(JwtService.class)));
             ServiceLocator.registerDependency(CategoryRepository.class, new CategoryRepository(CategoryEntity.class));
             ServiceLocator.registerDependency(CategoryService.class, new CategoryService(ServiceLocator.getDependency(CategoryRepository.class)));
             ServiceLocator.registerDependency(ProductRepository.class, new ProductRepository(ProductEntity.class));
@@ -60,6 +59,7 @@ public class MyAppContextListener implements ServletContextListener {
             ServiceLocator.registerDependency(RateRepository.class, new RateRepository(RateEntity.class));
             ServiceLocator.registerDependency(RateService.class, new RateServiceImpl(ServiceLocator.getDependency(RateRepository.class), ServiceLocator.getDependency(ProductInOrderRepository.class), ServiceLocator.getDependency(ImageService.class)));
             ServiceLocator.registerDependency(DashboardService.class, new DashboardServiceImpl(ServiceLocator.getDependency(ProductInOrderService.class), ServiceLocator.getDependency(UserService.class), ServiceLocator.getDependency(OrderService.class)));
+            ServiceLocator.registerDependency(AuthService.class, new AuthServiceImpl(ServiceLocator.getDependency(UserService.class), ServiceLocator.getDependency(JwtService.class), ServiceLocator.getDependency(CartService.class)));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
