@@ -12,12 +12,20 @@ h1 {
 
 #productDetail {
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .product-item {
-    display: flex;
+
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    text-align: center;
+    flex-basis: calc(33.33% - 20px);
+    margin-right: 20px;
 }
 
 .product-item-image {
@@ -28,83 +36,72 @@ h1 {
 }
 
 .product-details {
-    flex: 1;
+    width: 45%;
+    padding: 0 10% 0 3%;
 }
 
 .product-name,
 .product-description,
 .product-price,
-.product-category {
+.product-category,
+.view {
     margin-bottom: 10px;
     display: block;
 }
 
 .product-name {
     font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 10px;
 }
 
 .product-price {
-    color: #4caf50;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
+.product-details {
+    width: 45%;
+    padding: 0 10% 0 3%;
+    display: flex;
+    flex-direction: column;
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    width: 80%;
-    max-width: 500px;
+.product-promotion {
+    background-color: #eeebeb;
+    border: 1px solid #f2f2f2;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-form {
-    margin-top: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="number"],
-textarea {
-    width: 100%;
-    padding: 5px;
+.product-promotion h3 {
+    color: black;
+    font-size: 18px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
 }
+
+.product-promotion ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.product-promotion li {
+    margin-bottom: 5px;
+    padding-left: 10px;
+    position: relative;
+}
+
+.product-promotion li:before {
+    content: "•";
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
 
 button[type="button"] {
     padding: 8px 12px;
@@ -136,4 +133,13 @@ button[type="button"]:hover {
 .buy-button:active {
     background-color: #3e8e41;
 }
+
+.product-description {
+    margin: 20px 0;
+}
+
+.product-description p {
+    margin: 7px 0;
+}
+
 
