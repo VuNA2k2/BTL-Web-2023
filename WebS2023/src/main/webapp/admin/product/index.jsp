@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<%@ include file="../../layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
     <div id="container">
         <h1>Danh sách sản phẩm</h1>
 

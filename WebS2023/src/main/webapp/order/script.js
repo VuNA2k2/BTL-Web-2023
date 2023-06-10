@@ -1,4 +1,3 @@
-
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
     const token = cookie[0].substring("token=".length, cookie[0].length);
@@ -6,13 +5,12 @@ function getTokenFromCookie() {
 }
 
 function fetchData(status) {
-    let url='https://localhost:443/WebS2023_war/api/orders';
+    let url = 'https://localhost:443/WebS2023_war/api/orders';
     if (status) {
         url += '?status=' + status;
     }
     fetch(url, {
-        method: 'GET',
-        headers: {
+        method: 'GET', headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + getTokenFromCookie(),
@@ -57,7 +55,7 @@ function displayOrderData(data) {
 
         idCell.textContent = orderData.id;
         orderDateCell.textContent = orderData.orderDate;
-        totalMoneyCell.textContent = orderData.totalMoney+'đ ';
+        totalMoneyCell.textContent = orderData.totalMoney + 'đ ';
         statusCell.textContent = orderData.status;
 
         const updateStatusBtn = document.createElement('button');
@@ -66,13 +64,11 @@ function displayOrderData(data) {
         updateStatusBtn.addEventListener('click', function () {
             const selectedStatus = 'CANCEL';
             fetch('https://localhost/WebS2023_war/api/orders?orderId=' + orderData.id, {
-                method: 'PUT',
-                headers: {
+                method: 'PUT', headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                     'Authorization': 'Bearer ' + getTokenFromCookie(),
-                },
-                body: JSON.stringify({ status: selectedStatus }),
+                }, body: JSON.stringify({status: selectedStatus}),
             })
                 .then(function (response) {
                     if (response.status === 200) {
@@ -89,9 +85,8 @@ function displayOrderData(data) {
                     alert('Error updating order status. Please try again.');
                 });
         });
-        if(orderData.status !== 'PENDING')
-        {
-            updateStatusBtn.style.display='none';
+        if (orderData.status !== 'PENDING') {
+            updateStatusBtn.style.display = 'none';
         }
         const orderDetailsBtn = document.createElement('button');
         orderDetailsBtn.classList.add('order-details-button');
@@ -100,7 +95,6 @@ function displayOrderData(data) {
         orderDetailsBtn.addEventListener('click', function () {
             openOrderDetailsModal(orderData.id, data);
         });
-
 
 
         updateStatusCell.appendChild(updateStatusBtn);
@@ -144,7 +138,7 @@ function openOrderDetailsModal(orderId, data) {
         const productNameCell = newRow.insertCell();
         productNameCell.textContent = product.productName;
         const priceCell = newRow.insertCell();
-        priceCell.textContent = product.productPrice+'đ';
+        priceCell.textContent = product.productPrice + 'đ';
         const quantityCell = newRow.insertCell();
         quantityCell.textContent = product.productQuantity;
         const actionCell = newRow.insertCell();
@@ -154,11 +148,13 @@ function openOrderDetailsModal(orderId, data) {
         rate.classList.add('rate-btn');
         rate.addEventListener('click', function () {
             const productId = product.productId;
-            const productInOrder=product.id;
-            window.location.href = 'https://localhost/WebS2023_war/comment?productId=' + productId+'&productInOrder='+productInOrder;
+            const productInOrder = product.id;
+            window.location.href = 'https://localhost/WebS2023_war/comment?productId=' + productId + '&productInOrder=' + productInOrder;
         });
         actionCell.appendChild(rate);
-
+        if (order.status !== 'DONE') {
+            rate.style.display = 'none';
+        }
     });
 
     modal.style.display = 'block';
@@ -185,4 +181,5 @@ function applyFilter() {
     const selectedStatus = document.getElementById('statusFilterSelect').value;
     fetchData(selectedStatus);
 }
+
 applyFilter();
