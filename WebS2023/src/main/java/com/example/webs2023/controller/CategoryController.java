@@ -38,7 +38,7 @@ public class CategoryController extends BaseController {
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            CategoryInput categoryInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), CategoryInput.class);
+            CategoryInput categoryInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), CategoryInput.class);
             return new Response("success", "Thanh Cong", service.save(categoryInput));
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class CategoryController extends BaseController {
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             String id = request.getParameter("id");
-            CategoryInput categoryInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), CategoryInput.class);
+            CategoryInput categoryInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), CategoryInput.class);
             if (id != null && !id.isEmpty()) {
                 return new Response("success", "Thanh Cong", service.updateById(Long.parseLong(id), categoryInput));
             } else {

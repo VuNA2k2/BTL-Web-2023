@@ -25,7 +25,7 @@ public class RegisterController extends BaseController {
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
+            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), UserInput.class);
             userInput.setRole("USER");
             return Response.success(authService.register(userInput));
         } catch (Exception e) {

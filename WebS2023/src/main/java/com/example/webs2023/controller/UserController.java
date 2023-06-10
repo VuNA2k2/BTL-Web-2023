@@ -63,7 +63,7 @@ public class UserController extends BaseController {
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
+            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), UserInput.class);
             UserOutput userOutput = service.saveUser(userInput);
             return Response.success(userOutput);
         } catch (IOException | SQLException | InvocationTargetException | NoSuchMethodException |
@@ -75,7 +75,7 @@ public class UserController extends BaseController {
     @Override
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), UserInput.class);
+            UserInput userInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), UserInput.class);
             UserOutput userOutput = service.updateUser(Long.parseLong(request.getParameter("id")), userInput);
             return new Response("success", "Thanh Cong", userOutput);
 //        TODO: Using more methods here and return result
