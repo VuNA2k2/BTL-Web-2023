@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <title>Đánh giá sản phẩm</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDwwT0-a3QmZUFWdHmcxVguvHxNF_hnc6M",
+            authDomain: "image-storage-bdbae.firebaseapp.com",
+            projectId: "image-storage-bdbae",
+            storageBucket: "image-storage-bdbae.appspot.com",
+            messagingSenderId: "659858191609",
+            appId: "1:659858191609:web:e64cda24c4b14cabfb9e28",
+            measurementId: "G-MPR5X9E15K"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
