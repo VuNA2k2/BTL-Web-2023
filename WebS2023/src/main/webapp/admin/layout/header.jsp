@@ -146,18 +146,17 @@
 <header>
     <div class="header-container">
         <h1>Admin</h1>
-        <%--    <div class="header-menu">--%>
-        <%--      <ul>--%>
-        <%--        <li><a href="#">Trang chủ</a></li>--%>
-        <%--        <li><a href="#">Sản phẩm</a></li>--%>
-        <%--        <li><a href="#">iPhone</a></li>--%>
-        <%--        <li><a href="#">iPad</a></li>--%>
-        <%--        <li><a href="#">Mac</a></li>--%>
-        <%--        <li><a href="#">Liên hệ</a></li>--%>
-        <%--        <li><a href="https://localhost/WebS2023_war/order">Đơn hàng</a></li>--%>
-
-        <%--      </ul>--%>
-
+        <div class="header-menu">
+            <ul>
+                <li><a href="#">Người dùng</a></li>
+                <li><a href="https://localhost/WebS2023_war/admin/product">Sản phẩm</a></li>
+                <li><a href="https://localhost/WebS2023_war/admin/comment">Đánh giá</a></li>
+                <li><a href="https://localhost/WebS2023_war/admin/dashboard">Thống kê</a></li>
+                <li><a href="https://localhost/WebS2023_war/admin/order-list">Đơn hàng</a></li>
+                <li><a href="#" onclick="logOut()">Đăng xuất</a></li>
+            </ul>
+        </div>
+        >
         <%--    </div>--%>
         <%--    <div class="search-box">--%>
         <%--      <input type="text" placeholder="Tìm kiếm...">--%>
@@ -171,7 +170,16 @@
         <%--    </div>--%>
     </div>
 </header>
+<script type="module">
+    import {checkLogged} from "../../routing.js";
+    checkLogged("ADMIN");
+    function logOut() {
+        document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        localStorage.removeItem('user');
+        window.location.href = 'https://localhost/WebS2023_war/login/';
+    }
 
+</script>
 </body>
 </html>
 

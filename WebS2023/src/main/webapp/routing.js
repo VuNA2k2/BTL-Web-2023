@@ -6,7 +6,9 @@ export function checkLogged(role) {
             token = c.split('=')[1];
         }
     });
-    if (token === undefined || token === null || token === '' || localStorage.getItem('user') === null || localStorage.getItem('user') === undefined || JSON.parse(localStorage.getItem('user')).role !== role) {
+    if (!token || localStorage.getItem('user') === null || !localStorage.getItem('user')|| JSON.parse(localStorage.getItem('user')).role !== role) {
         window.location.href = "/WebS2023_war/login";
+        return false;
     }
+    return true;
 }
