@@ -47,7 +47,7 @@ public class CartController extends BaseController {
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
-            ProductInCartRequest productInCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductInCartRequest.class);
+            ProductInCartRequest productInCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), ProductInCartRequest.class);
             return Response.success(((CartService) service).addProductToCart(productInCartRequest, jwtPayload.getUserId()));
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +59,7 @@ public class CartController extends BaseController {
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
-            ProductInCartRequest productInCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductInCartRequest.class);
+            ProductInCartRequest productInCartRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), ProductInCartRequest.class);
             return Response.success(((CartService) service).update(productInCartRequest, jwtPayload.getUserId()));
         } catch (Exception e) {
             e.printStackTrace();
