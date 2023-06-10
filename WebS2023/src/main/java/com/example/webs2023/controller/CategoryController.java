@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(value = "/categories")
+@WebServlet(value = "/api/categories")
 public class CategoryController extends BaseController {
 
     @Override
