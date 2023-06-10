@@ -7,6 +7,7 @@ export function checkLogged(role) {
         }
     });
     if (!token || localStorage.getItem('user') === null || !localStorage.getItem('user')|| JSON.parse(localStorage.getItem('user')).role !== role) {
+        alert('Chưa đăng nhập');
         window.location.href = "/WebS2023_war/login";
         return false;
     }

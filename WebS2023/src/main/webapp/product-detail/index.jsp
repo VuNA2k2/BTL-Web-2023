@@ -31,6 +31,6 @@
 </div>
 <%@ include file="../list-comment/index.jsp" %>
 <%@ include file="../layout/footer.jsp" %>
-<script src="script.js"></script>
+<script src="script.js" type="module"></script>
 </body>
 </html>
