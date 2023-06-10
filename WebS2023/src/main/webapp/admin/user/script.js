@@ -154,26 +154,42 @@ function displayUsers(data) {
 function openUserDetailsModal(user) {
     const popup = document.getElementById('popup');
     const userForm = document.getElementById('user-form');
-
+    const passwordLabel = document.getElementById("pass-text");
+    const passwordInput = document.getElementById("password");
+    const originalDisplayLabel = passwordLabel.style.display;
+    const originalDisplayInput = passwordInput.style.display;
+    passwordLabel.style.display = 'none';
+    passwordInput.style.display = 'none';
     document.getElementById('id').value = user.id;
     document.getElementById('username').value = user.username;
+    document.getElementById('password').value = '1';
     document.getElementById('fullName').value = user.fullName;
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
     document.getElementById('address').value = user.address;
     document.getElementById('role').value = user.role;
     const deleteButton = document.getElementById('delete-button');
-
+    const closeButton = document.getElementById('close-button');
     deleteButton.addEventListener('click', function () {
         deleteUserData(user.id);
-        popup.style.display = 'none';
+        closePopup();
     });
 
     userForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        closePopup();
         saveUser('save');
-        popup.style.display = 'none';
+
     });
+    closeButton.addEventListener('click', function () {
+        closePopup();
+    });
+
+    function closePopup() {
+        popup.style.display = 'none';
+        passwordLabel.style.display = originalDisplayLabel;
+        passwordInput.style.display = originalDisplayInput;
+    }
 
     popup.style.display = 'flex';
 }
@@ -181,7 +197,8 @@ function openUserDetailsModal(user) {
 function showAddUserForm() {
     const userForm = document.getElementById('user-form');
     userForm.reset();
-
+    var passwordLabel = document.getElementById("pass-text");
+    var passwordInput = document.getElementById("password");
     const popup = document.getElementById('popup');
     const popupContent = document.getElementById('popup-content');
 
@@ -191,6 +208,10 @@ function showAddUserForm() {
     userForm.addEventListener('submit', function (e) {
         e.preventDefault();
         saveUser('create');
+        popup.style.display = 'none';
+    });
+    const closeButton = document.getElementById('close-button');
+    closeButton.addEventListener('click', function () {
         popup.style.display = 'none';
     });
 
@@ -207,15 +228,6 @@ function saveUser(func) {
     const address = userForm.elements['address'].value;
     const role = userForm.elements['role'].value;
 
-    // Perform save logic here
-    console.log("Saving user...");
-    console.log("ID:", id);
-    console.log("Username:", username);
-    console.log("Full Name:", fullName);
-    console.log("Email:", email);
-    console.log("Phone:", phone);
-    console.log("Address:", address);
-    console.log("Role:", role);
     if(func==='save'){
         const user = {
             username: username,
@@ -245,15 +257,6 @@ function saveUser(func) {
 
 }
 
-
-window.addEventListener('click', function (event) {
-    const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popup-content');
-
-    if (event.target == popup) {
-        popup.style.display = 'none';
-    }
-});
 const filterButton = document.getElementById('filterButton');
 filterButton.addEventListener('click', applyFilter);
 

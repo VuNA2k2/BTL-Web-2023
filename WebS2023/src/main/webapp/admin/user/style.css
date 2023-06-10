@@ -155,3 +155,21 @@ td {
     border: none;
     background-color: transparent;
 }
+
+#close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#close-button:hover {
+    color: red;
+}
+
+#role {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+}

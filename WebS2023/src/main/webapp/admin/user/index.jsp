@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<%@include file="../layout/header.jsp" %>
+<%@include file="../../layout/header.jsp" %>
 <div id="container">
     <h1>Quản lý người dùng</h1>
     <div class="filter-container">
@@ -39,12 +39,14 @@
 </div>
 <div id="popup">
     <div id="popup-content">
+        <div id="close-button"><i class="fa-sharp fa-solid fa-xmark"></i></div>
         <h2>Tài khoản</h2>
         <form id="user-form">
             <input type="hidden" id="id">
             <label for="username">Username:</label>
             <input type="text" id="username" required>
-
+            <label for="password" id="pass-text">Password:</label>
+            <input type="text" id="password" required>
             <label for="fullName">Tên:</label>
             <input type="text" id="fullName" required>
             <label for="email">Email:</label>
@@ -54,7 +56,11 @@
             <label for="address">Địa chỉ:</label>
             <input type="text" id="address" required>
             <label for="role">Vai trò:</label>
-            <input type="text" id="role" required>
+            <select id="role" required>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+
             <button type="submit" id="save-button">Lưu</button>
             <button type="button" id="delete-button">Xóa</button>
         </form>
