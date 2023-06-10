@@ -154,6 +154,7 @@ function buyCart() {
         })
         .then(function (data) {
             console.log(data);
+            alert('Bạn đã mua hàng thành công');
             fetchCartData();
         })
         .catch(function (error) {
