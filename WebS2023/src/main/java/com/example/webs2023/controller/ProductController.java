@@ -44,7 +44,7 @@ public class ProductController extends BaseController {
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductRequest.class);
+            ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), ProductRequest.class);
             return Response.success(((ProductService) service).createProduct(productRequest));
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class ProductController extends BaseController {
     protected Response putMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
             String id = request.getParameter("id");
-            ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), ProductRequest.class);
+            ProductRequest productRequest = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), ProductRequest.class);
             return Response.success(((ProductService) service).updateProduct(Long.parseLong(id), productRequest));
         } catch (Exception e) {
             e.printStackTrace();

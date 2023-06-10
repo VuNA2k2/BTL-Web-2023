@@ -29,7 +29,7 @@ public class LoginController extends BaseController {
     @Override
     protected Response postMethod(HttpServletRequest request, HttpServletResponse response) {
         try {
-            LoginInput loginInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), LoginInput.class);
+            LoginInput loginInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), LoginInput.class);
             return new Response(
                     "success",
                     "Thanh cong",

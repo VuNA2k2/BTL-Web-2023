@@ -45,8 +45,8 @@ public class MyAppContextListener implements ServletContextListener {
             ServiceLocator.registerDependency(UserService.class, new UserServiceImpl(ServiceLocator.getDependency(UserRepository.class)));
             ServiceLocator.registerDependency(JwtService.class, new JwtServiceImpl(ServiceLocator.getDependency(UserRepository.class)));
             ServiceLocator.registerDependency(CategoryRepository.class, new CategoryRepository(CategoryEntity.class));
-            ServiceLocator.registerDependency(CategoryService.class, new CategoryService(ServiceLocator.getDependency(CategoryRepository.class)));
             ServiceLocator.registerDependency(ProductRepository.class, new ProductRepository(ProductEntity.class));
+            ServiceLocator.registerDependency(CategoryService.class, new CategoryService(ServiceLocator.getDependency(CategoryRepository.class), ServiceLocator.getDependency(ProductRepository.class)));
             ServiceLocator.registerDependency(ProductService.class, new ProductServiceImpl(ServiceLocator.getDependency(ProductRepository.class), ServiceLocator.getDependency(CategoryService.class), ServiceLocator.getDependency(ImageService.class)));
             ServiceLocator.registerDependency(CartRepository.class, new CartRepository(CartEntity.class));
             ServiceLocator.registerDependency(CartRefProductRepository.class, new CartRefProductRepository(CartsRefProductEntity.class));
