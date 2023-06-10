@@ -66,7 +66,7 @@ public class OrderController extends BaseController {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
             String orderId = request.getParameter("orderId");
-            OrderInput orderInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), OrderInput.class);
+            OrderInput orderInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), OrderInput.class);
             if (orderId != null && !orderId.isBlank()) {
                 if (jwtPayload.getRole().equals("USER")) {
                     if (orderInput.getStatus().equals("CANCEL")) {

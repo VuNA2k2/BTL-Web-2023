@@ -1,6 +1,4 @@
-import {checkLogged} from '../../routing.js';
 
-checkLogged('ADMIN');
 
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');

@@ -42,7 +42,7 @@ public class RateController extends BaseController {
         try {
             JwtPayload jwtPayload = (JwtPayload) request.getAttribute("payload");
             Long userId = jwtPayload.getUserId();
-            RateInput rateInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getReader()), RateInput.class);
+            RateInput rateInput = GSON.fromJson(JsonFromInputConverter.getInputStream(request.getInputStream()), RateInput.class);
             RateOutput rateOutput = ((RateServiceImpl) this.service).createRate(userId, rateInput);
             if (rateOutput == null) return new Response("error", "You can't rate this product", null);
             return Response.success(rateOutput);
