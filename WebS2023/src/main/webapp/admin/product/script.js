@@ -65,7 +65,9 @@ function displayProductData(data) {
         const statusSelect = document.createElement('select');
         statusSelect.id = 'statusSelect_' + productData.id;
 
-        const statuses = ['1', '2', '3', '4'];
+        // khi xóa category đi rồi tạo mới 1 cái khác => categoryId bị nhảy => cần sửa lại filter
+        // lúc thêm/sửa sản phẩm cần chú ý categoryId
+        const statuses = ['5', '6', '7', '8'];
         statuses.forEach(function (status) {
             const option = document.createElement('option');
             option.value = status;
@@ -155,7 +157,7 @@ function addProduct() {
         });
 }
 function splitString(str) {
-    var list = str.split(",");
+    var list = str.split(";");
     return list;
 }
 
@@ -189,7 +191,7 @@ function editProduct(productData) {
         imageString += productData.images[i].link;
         if(i<productData.images.length-1)
         {
-            imageString += ",";
+            imageString += ";";
         }
     }
     document.getElementById('editProductImage').value = imageString;
@@ -250,7 +252,7 @@ function saveEditedProduct() {
 // Hàm xóa sản phẩm
 function deleteProduct(productId) {
     // Xác nhận từ người dùng trước khi xóa sản phẩm
-    const confirmDelete = confirm('Are you sure you want to delete this product?');
+    const confirmDelete = confirm('Bạn chắc chắn muốn xóa sản phẩm này?');
 
     if (confirmDelete) {
         // Gửi yêu cầu DELETE tới API để xóa sản phẩm
