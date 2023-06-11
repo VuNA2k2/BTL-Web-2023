@@ -1,6 +1,6 @@
 // Lấy productId từ URL
 const urlParamsProduct = new URLSearchParams(window.location.search);
-const productId = 5;
+const productId = parseInt(urlParamsProduct.get('productId'));
 console.log(productId);
 
 let reviews = [];
