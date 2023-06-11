@@ -1,3 +1,5 @@
+import {checkLogged} from "../routing.js";
+
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
     const token = cookie[0].substring("token=".length, cookie[0].length);
@@ -69,7 +71,9 @@ function displayProductDetail(product) {
     buyButton.textContent = 'Thêm vào giỏ hàng';
     buyButton.classList.add('buy-button');
     buyButton.addEventListener('click', function() {
-        buyProduct(productIdFromProduct);
+        if(checkLogged("USER")) {
+            buyProduct(productIdFromProduct);
+        }
     });
     productItem.appendChild(buyButton);
 
