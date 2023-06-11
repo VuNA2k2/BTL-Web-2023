@@ -1,4 +1,4 @@
-.cart-item {
+.san-pham-trong-gio {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
@@ -8,12 +8,12 @@
     margin: 0 auto;
 }
 
-.cart-item-image {
+.anh-san-pham {
     width: 200px;
     margin-right: 20px;
 
 }
-.delete-btn {
+.xoa-san-pham {
     border: none;
     background-color: transparent;
     color: red;
@@ -23,41 +23,41 @@
 }
 
 
-.cart-item-info {
+.thong-tin-san-pham {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.cart-item-name {
+.ten-san-pham {
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 10px;
 }
 
-.cart-item-price {
+.gia-san-pham {
     font-size: 16px;
 }
 
-.cart-item-quantity {
+.so-luong-san-pham {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
 
-.cart-item-quantity input {
+.so-luong-san-pham input {
     width: 30px;
     text-align: center;
     margin-left: 10px;
 }
 
-.cart-item-total {
+.tong-tien-san-pham {
     font-weight: bold;
     font-size: 18px;
     margin-top: 10px;
 }
 
-.buy-btn {
+#nut-mua {
     border: none;
     width: 40%;
     margin: 20px auto;
@@ -72,7 +72,7 @@
     display: block;
 }
 
-.user-history, .total {
+#tong-tien {
     text-align: right;
     margin: 20px 10px 0 0;
 }

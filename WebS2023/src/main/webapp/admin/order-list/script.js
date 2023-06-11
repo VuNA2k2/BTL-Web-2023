@@ -1,4 +1,3 @@
-
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
     const token = cookie[0].substring("token=".length, cookie[0].length);
@@ -36,7 +35,7 @@ function fetchData(status) {
 }
 
 function displayOrderData(data) {
-    const orderTable = document.getElementById('orderTable');
+    const orderTable = document.getElementById('bang-don-hang');
 
     // Remove existing rows
     const rows = orderTable.getElementsByTagName('tr');
@@ -73,7 +72,7 @@ function displayOrderData(data) {
         statusSelect.value = orderData.status;
 
         const updateStatusBtn = document.createElement('button');
-        updateStatusBtn.classList.add('update-order');
+        updateStatusBtn.classList.add('nut-cap-nhat');
         updateStatusBtn.textContent = 'Cập nhật';
         updateStatusBtn.addEventListener('click', function () {
             const selectedStatus = statusSelect.value;
@@ -104,7 +103,7 @@ function displayOrderData(data) {
         });
 
         const orderDetailsBtn = document.createElement('button');
-        orderDetailsBtn.classList.add('order-details-button');
+        orderDetailsBtn.classList.add('nut-chi-tiet');
         orderDetailsBtn.innerHTML = '<i class="fa-solid fa-arrow-right"></i>';
 
         orderDetailsBtn.addEventListener('click', function () {
@@ -120,8 +119,8 @@ function displayOrderData(data) {
     });
 }
 
-const modal = document.getElementById('modal');
-const closeBtn = document.getElementsByClassName('close')[0];
+const modal = document.getElementById('san-pham');
+const closeBtn = document.getElementsByClassName('dong')[0];
 
 function openOrderDetailsModal(orderId, data) {
     const order = data.find(function (order) {
@@ -133,7 +132,7 @@ function openOrderDetailsModal(orderId, data) {
     }
 
     const products = order.products;
-    const productTable = document.getElementById('productTable');
+    const productTable = document.getElementById('bang-san-pham');
     productTable.innerHTML = '';
 
     const headerRow = productTable.insertRow();
@@ -178,11 +177,11 @@ window.onclick = function (event) {
         closeModal();
     }
 };
-const filterButton = document.getElementById('filterButton');
+const filterButton = document.getElementById('nut-loc');
 filterButton.addEventListener('click', applyFilter);
 
 function applyFilter() {
-    const selectedStatus = document.getElementById('statusFilterSelect').value;
+    const selectedStatus = document.getElementById('loc-trang-thai').value;
     fetchData(selectedStatus);
 }
 applyFilter();

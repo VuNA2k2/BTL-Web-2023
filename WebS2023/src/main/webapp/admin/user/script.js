@@ -1,5 +1,3 @@
-
-
 function getTokenFromCookie() {
     const cookie = document.cookie.split(';');
     return cookie[0].substring("token=".length, cookie[0].length);
@@ -112,7 +110,7 @@ function deleteUserData(id) {
         });
 }
 function displayUsers(data) {
-    const usersContainer = document.getElementById('users-container');
+    const usersContainer = document.getElementById('khung-nguoi-dung');
 
     // Remove existing rows
     const rows = usersContainer.getElementsByTagName('tr');
@@ -133,7 +131,7 @@ function displayUsers(data) {
         roleCell.textContent = user.role;
 
         const detailCell = document.createElement('button');
-        detailCell.classList.add('user-card');
+        detailCell.classList.add('nguoi-dung');
         detailCell.textContent = 'Chi tiết';
 
         detailCell.addEventListener('click', function () {
@@ -150,9 +148,9 @@ function displayUsers(data) {
 }
 
 function openUserDetailsModal(user) {
-    const popup = document.getElementById('popup');
-    const userForm = document.getElementById('user-form');
-    const passwordLabel = document.getElementById("pass-text");
+    const popup = document.getElementById('khung-chua');
+    const userForm = document.getElementById('dien-thong-tin');
+    const passwordLabel = document.getElementById("pass");
     const passwordInput = document.getElementById("password");
     const originalDisplayLabel = passwordLabel.style.display;
     const originalDisplayInput = passwordInput.style.display;
@@ -165,9 +163,9 @@ function openUserDetailsModal(user) {
     document.getElementById('email').value = user.email;
     document.getElementById('phone').value = user.phone;
     document.getElementById('address').value = user.address;
-    document.getElementById('role').value = user.role;
-    const deleteButton = document.getElementById('delete-button');
-    const closeButton = document.getElementById('close-button');
+    document.getElementById('quyen').value = user.role;
+    const deleteButton = document.getElementById('nut-xoa');
+    const closeButton = document.getElementById('nut-dong');
     deleteButton.addEventListener('click', function () {
         deleteUserData(user.id);
         closePopup();
@@ -193,14 +191,14 @@ function openUserDetailsModal(user) {
 }
 
 function showAddUserForm() {
-    const userForm = document.getElementById('user-form');
+    const userForm = document.getElementById('dien-thong-tin');
     userForm.reset();
-    var passwordLabel = document.getElementById("pass-text");
+    var passwordLabel = document.getElementById("pass");
     var passwordInput = document.getElementById("password");
-    const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popup-content');
+    const popup = document.getElementById('khung-chua');
+    const popupContent = document.getElementById('thong-tin');
 
-    const deleteButton = document.getElementById('delete-button');
+    const deleteButton = document.getElementById('nut-xoa');
     deleteButton.style.display = 'none';
 
     userForm.addEventListener('submit', function (e) {
@@ -208,7 +206,7 @@ function showAddUserForm() {
         saveUser('create');
         popup.style.display = 'none';
     });
-    const closeButton = document.getElementById('close-button');
+    const closeButton = document.getElementById('nut-dong');
     closeButton.addEventListener('click', function () {
         popup.style.display = 'none';
     });
@@ -217,14 +215,15 @@ function showAddUserForm() {
 }
 
 function saveUser(func) {
-    const userForm = document.getElementById('user-form');
+    const userForm = document.getElementById('dien-thong-tin');
     const id = userForm.elements['id'].value;
     const username = userForm.elements['username'].value;
+    const password = userForm.elements['password'].value;
     const fullName = userForm.elements['fullName'].value;
     const email = userForm.elements['email'].value;
     const phone = userForm.elements['phone'].value;
     const address = userForm.elements['address'].value;
-    const role = userForm.elements['role'].value;
+    const role = userForm.elements['quyen'].value;
 
     if(func==='save'){
         const user = {
@@ -255,16 +254,14 @@ function saveUser(func) {
 
 }
 
-const filterButton = document.getElementById('filterButton');
+const filterButton = document.getElementById('nut-loc');
 filterButton.addEventListener('click', applyFilter);
 
-const addUser = document.getElementById('add-user');
+const addUser = document.getElementById('them-nguoi-dung');
 addUser.addEventListener('click', showAddUserForm);
 function applyFilter() {
-    const selectedRole = document.getElementById('userFilterSelect').value;
+    const selectedRole = document.getElementById('loc-quyen').value;
     fetchDataUser(selectedRole);
 }
 
 applyFilter();
-
-

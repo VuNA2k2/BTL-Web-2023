@@ -33,37 +33,37 @@ function fetchCartData() {
 }
 
 function displayCartData(data) {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const buyBtn = document.getElementById('buyBtn');
+    const cartItems = document.getElementById('gio-hang');
+    const cartTotal = document.getElementById('tong-tien');
+    const buyBtn = document.getElementById('nut-mua');
 
     cartItems.innerHTML = '';
 
     let totalMoney = 0;
     data.products.forEach((item, index) => {
         const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
+        cartItem.classList.add('san-pham-trong-gio');
 
         const cartItemImage = document.createElement('img');
-        cartItemImage.classList.add('cart-item-image');
+        cartItemImage.classList.add('anh-san-pham');
         cartItemImage.src = item.product.images[0].link;
         cartItem.appendChild(cartItemImage);
 
         const cartItemInfo = document.createElement('div');
-        cartItemInfo.classList.add('cart-item-info');
+        cartItemInfo.classList.add('thong-tin-san-pham');
 
         const cartItemName = document.createElement('div');
-        cartItemName.classList.add('cart-item-name');
+        cartItemName.classList.add('ten-san-pham');
         cartItemName.textContent = item.product.name;
         cartItemInfo.appendChild(cartItemName);
 
         const cartItemPrice = document.createElement('div');
-        cartItemPrice.classList.add('cart-item-price');
+        cartItemPrice.classList.add('gia-san-pham');
         cartItemPrice.textContent = 'Giá: ' + item.product.price + ' đ';
         cartItemInfo.appendChild(cartItemPrice);
 
         const cartItemQuantity = document.createElement('div');
-        cartItemQuantity.classList.add('cart-item-quantity');
+        cartItemQuantity.classList.add('so-luong-san-pham');
 
         const quantityInput = document.createElement('input');
         quantityInput.type = 'number';
@@ -77,7 +77,7 @@ function displayCartData(data) {
         cartItemInfo.appendChild(cartItemQuantity);
 
         const cartItemTotal = document.createElement('div');
-        cartItemTotal.classList.add('cart-item-total');
+        cartItemTotal.classList.add('tong-tien-san-pham');
         cartItemTotal.textContent = 'Tổng: ' + item.quantity * item.product.price + ' đ';
         cartItemInfo.appendChild(cartItemTotal);
 
@@ -85,7 +85,7 @@ function displayCartData(data) {
         cartItems.appendChild(cartItem);
 
         const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('delete-btn');
+        deleteBtn.classList.add('xoa-san-pham');
         deleteBtn.textContent = 'Xóa';
         deleteBtn.addEventListener('click', () => {
             updateQuantity(item.product.id, 0);
@@ -97,7 +97,7 @@ function displayCartData(data) {
 
     cartTotal.textContent = 'Tổng số tiền: ' + totalMoney + ' đ';
 
-    const buyButton = document.getElementById('buyBtn');
+    const buyButton = document.getElementById('nut-mua');
     buyButton.style.display = totalMoney === 0 ? 'none' : 'block';
 
 }

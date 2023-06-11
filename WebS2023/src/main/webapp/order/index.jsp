@@ -13,23 +13,23 @@
 
 <h1>Danh sách đơn hàng</h1>
 
-<div class="filter-container">
+<div class="khung-loc">
   <div>
-    <select id="statusFilterSelect">
+    <select id="loc-trang-thai">
       <option value="">Tất cả</option>
       <option value="PENDING">PENDING</option>
       <option value="IN SHIPPING">IN SHIPPING</option>
       <option value="DONE">DONE</option>
       <option value="CANCEL">CANCEL</option>
     </select>
-    <button id="filterButton" class="filter">
-      <i class="fa-solid fa-filter filter-icon"></i>
+    <button id="nut-loc">
+      <i class="fa-solid fa-filter icon-loc"></i>
     </button>
   </div>
 </div>
 
 
-<table id="orderTable">
+<table id="bang-don-hang">
   <tr>
     <th>ID</th>
     <th>Ngày đặt</th>
@@ -40,10 +40,10 @@
   </tr>
 </table>
 
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close"><i class="fa-solid fa-x"></i></span>
-    <table id="productTable">
+<div id="san-pham">
+  <div class="noi-dung-san-pham">
+    <span class="dong"><i class="fa-solid fa-x"></i></span>
+    <table id="bang-san-pham">
       <h1>Danh sách sản phẩm</h1>
     </table>
   </div>

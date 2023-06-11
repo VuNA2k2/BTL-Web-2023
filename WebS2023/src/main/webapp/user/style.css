@@ -3,11 +3,11 @@ body {
     padding: 0;
 }
 
-#wrapper {
+#bao-chua {
     display: flex;
 }
 
-#sidebar {
+#thanh-ben {
     width: 20%;
     background-color: #f1f1f1;
     height: 70vh;
@@ -17,30 +17,30 @@ body {
     align-items: center;
 }
 
-#sidebar ul {
+#thanh-ben ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-#sidebar li {
+#thanh-ben li {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-#sidebar i {
+#thanh-ben i {
     margin-right: 10px;
     color: black;
     cursor: pointer;
 }
 
-#sidebar a {
+#thanh-ben a {
     text-decoration: none;
     color: black;
 }
 
-#content {
+#thong-tin {
     flex-grow: 1;
     background-color: #ffffff;
     padding: 40px 0 0 20px;
@@ -50,18 +50,18 @@ body {
     gap: 20px;
 }
 
-.info-label {
+.nhan-thong-tin {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.main-label {
+.nhan-chinh {
     font-weight: bold;
     font-size: xx-large;
     margin-bottom: 10px;
 }
 
-.info-value {
+.du-lieu-nguoi-dung {
     margin-bottom: 10px;
 }
 
@@ -69,7 +69,7 @@ body {
     margin-bottom: 20px;
 }
 
-#logout-button {
+#nut-thoat {
     position: absolute;
     bottom: 140px;
     right: 20px;
@@ -80,11 +80,11 @@ body {
     color: white;
 }
 
-.white {
+.trong-suot {
     color: transparent;
 }
 
-#popup {
+#khung-chua {
     display: none;
     position: fixed;
     top: 0;
@@ -96,7 +96,7 @@ body {
     justify-content: center;
 }
 
-#popup-content {
+#khung-thong-tin {
     position: relative;
     background-color: #fff;
     padding: 20px;
@@ -105,21 +105,21 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-#popup-content h2 {
+#khung-thong-tin h2 {
     margin-top: 0;
     margin-bottom: 20px;
     color: #333;
 }
 
-#popup-content label {
+#khung-thong-tin label {
     display: block;
     margin-bottom: 5px;
     color: #333;
 }
 
-#popup-content input[type="text"],
-#popup-content input[type="email"],
-#popup-content input[type="password"] {
+#khung-thong-tin input[type="text"],
+#khung-thong-tin input[type="email"],
+#khung-thong-tin input[type="password"] {
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;
@@ -127,7 +127,7 @@ body {
     border-radius: 3px;
 }
 
-#popup-content button {
+#khung-thong-tin button {
     margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -137,7 +137,7 @@ body {
     cursor: pointer;
 }
 
-#save-button {
+#nut-luu {
     background-color:green;
     display: flex;
     float: right;
