@@ -75,21 +75,21 @@
 							<div
 								class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
 								<input class="mdl-textfield__input" type="text" id="edit-name-input">
-								<label class="mdl-textfield__label" for="edit-name-input">Name</label>
+								<label class="mdl-textfield__label" for="edit-name-input">Tên</label>
 							</div>
 							<div
 								class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
 								<input class="mdl-textfield__input" type="text" id="edit-description-input">
-								<label class="mdl-textfield__label" for="edit-description-input">Description</label>
+								<label class="mdl-textfield__label" for="edit-description-input">Mô tả</label>
 							</div>
 						</form>
 					</div>
 					<div class="mdl-dialog__actions">
-						<button type="button" class="mdl-button mdl-js-button mdl-button--raised close">Close</button>
+						<button type="button" class="mdl-button mdl-js-button mdl-button--raised close">Đóng</button>
 						<button type="button" id="update-btn"
-							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Update</button>
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Cập nhật</button>
 						<button type="button" id="delete-btn"
-							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Delete</button>
+							class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Xóa</button>
 					</div>
 				</dialog>
 

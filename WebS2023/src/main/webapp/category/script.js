@@ -10,7 +10,7 @@ function fetchList() {
             if (data.code === "success") {
                 const categories = data.data;
                 const tbody = document.querySelector("#users-container tbody");
-
+                categories.sort((a, b) => a.id - b.id);
                 categories.forEach(category => {
                     const row = document.createElement("tr");
                     const idCell = document.createElement("td");
@@ -89,6 +89,12 @@ const saveBtn = createDialog.querySelector("#save-btn");
 saveBtn.addEventListener("click", () => {
     const createNameInput = document.getElementById("create-name-input").value;
     const createDescriptionInput = document.getElementById("create-description-input").value;
+
+    // Validate the input
+    if (createNameInput.trim() === "" || createDescriptionInput.trim() === "") {
+        alert("Xin vui lòng nhập đủ thông tin!");
+        return;
+    }
 
     const newCategory = {
         name: createNameInput,

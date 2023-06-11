@@ -52,6 +52,7 @@
     .header-menu li {
       display: inline-block;
       padding: 23px;
+      position: relative;
     }
 
     .header-menu li a {
@@ -59,8 +60,28 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 600;
+      transition: color 0.3s;
     }
 
+    .header-menu li:hover a {
+      color: #FFD700; /* Change color on hover */
+    }
+
+    .header-menu li::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: #FFD700; /* Initial underline color */
+      transition: width 0.3s ease-in-out;
+      transform: translateX(-50%);
+    }
+
+    .header-menu li:hover::before {
+      width: 100%; /* Expand underline on hover */
+    }
 
     .search-box {
       position: absolute;
@@ -106,12 +127,17 @@
       align-items: center;
       font-size: 16px;
       text-decoration: none;
+      transition: color 0.3s;
     }
 
     .login a i {
       font-size: 20px;
       margin-right: 5px;
       color: white;
+    }
+
+    .login a:hover {
+      color: #FFD700; /* Change color on hover */
     }
 
     .cart {
@@ -127,6 +153,7 @@
       align-items: center;
       font-size: 16px;
       text-decoration: none;
+      transition: color 0.3s;
     }
 
     .cart a i {
@@ -134,15 +161,18 @@
       margin-right: 5px;
       color: white;
     }
+
+    .cart a:hover {
+      color: #FFD700; /* Change color on hover */
+    }
   </style>
 </head>
 <body>
 <header>
   <div class="header-container">
-
     <div class="header-menu">
       <ul>
-        <li><a href="#">Trang chủ</a></li>
+        <li><a href="https://localhost/WebS2023_war/home">Trang chủ</a></li>
         <li><a href="#">Sản phẩm</a></li>
         <li><a href="#">iPhone</a></li>
         <li><a href="#">Liên hệ</a></li>
@@ -156,7 +186,5 @@
     </div>
   </div>
 </header>
-
 </body>
 </html>
-
