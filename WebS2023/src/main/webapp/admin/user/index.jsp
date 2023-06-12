@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<%@include file="../../layout/header.jsp" %>
+<%@include file="../layout/header.jsp" %>
 <div id="khung">
     <h1>Quản lý người dùng</h1>
     <div class="khung-loc">
@@ -66,7 +66,7 @@
         </form>
     </div>
 </div>
-<%@include file="../../layout/footer.jsp" %>
+<%@include file="../layout/footer.jsp" %>
 <script src="script.js" type="module"></script>
 </body>
 </html>
