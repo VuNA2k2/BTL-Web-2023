@@ -99,15 +99,17 @@ function buyProduct(productId) {
             if (response.status === 200) {
                 return response.json();
             } else {
-                throw new Error('Error updating cart data');
+                throw new Error('Lỗi khi thêm sản phẩm vào giỏ hàng');
             }
         })
         .then(function (data) {
             console.log(data);
+            alert('Sản phẩm đã được thêm vào giỏ hàng thành công!');
         })
+
         .catch(function (error) {
             console.error(error);
-            alert('Error updating cart data. Please try again.');
+            alert('Lỗi khi thêm sản phẩm vào giỏ hàng. Vui lòng thử lại.');
         });
 }
 
