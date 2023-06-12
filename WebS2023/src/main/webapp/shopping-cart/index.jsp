@@ -11,16 +11,12 @@
 
 <h1>Giỏ hàng</h1>
 
-<div class="user-history">
-  <a href="https://localhost/WebS2023_war/order/" class="user-history-link">Lịch sử</a>
-</div>
+<div id="gio-hang"></div>
 
-<div id="cartItems" class="center"></div>
+<div id="tong-tien"></div>
 
-<div id="cartTotal" class="total"></div>
-
-<div class="center">
-  <button id="buyBtn" class="buy-btn" onclick="buyCart()">Mua</button>
+<div>
+  <button id="nut-mua" onclick="buyCart()">Mua</button>
 </div>
 
 <%@ include file="../layout/footer.jsp" %>

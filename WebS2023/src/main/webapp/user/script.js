@@ -71,10 +71,10 @@ function saveUserData(user, id) {
 }
 
 function displayUser(userData) {
-    const nameElement = document.getElementById("nameV");
-    const emailElement = document.getElementById("emailV");
-    const phoneNumberElement = document.getElementById("phoneNumberV");
-    const addressElement = document.getElementById("addressV");
+    const nameElement = document.getElementById("ten");
+    const emailElement = document.getElementById("hom-thu");
+    const phoneNumberElement = document.getElementById("so-dien-thoai");
+    const addressElement = document.getElementById("dia-chi");
 
     nameElement.textContent = userData.fullName;
     emailElement.textContent = userData.email;
@@ -91,9 +91,9 @@ function logOut()
 }
 function showPopup() {
 
-    const popup = document.getElementById('popup');
+    const popup = document.getElementById('khung-chua');
     popup.style.display = 'flex';
-    const userForm = document.getElementById('user-form');
+    const userForm = document.getElementById('dien-thong-tin');
 
     document.getElementById('id').value = user.id;
     document.getElementById('username').value = user.username;
@@ -112,7 +112,7 @@ function showPopup() {
 
 }
 function saveUser() {
-    const userForm = document.getElementById('user-form');
+    const userForm = document.getElementById('dien-thong-tin');
     const id = userForm.elements['id'].value;
     const username = userForm.elements['username'].value;
     const fullName = userForm.elements['fullName'].value;
@@ -133,8 +133,8 @@ function saveUser() {
     saveUserData(userInput,id);
 }
 window.addEventListener('click', function (event) {
-    const popup = document.getElementById('popup');
-    const popupContent = document.getElementById('popup-content');
+    const popup = document.getElementById('khung-chua');
+    const popupContent = document.getElementById('thong-tin');
 
     if (event.target == popup) {
         popup.style.display = 'none';

@@ -9,22 +9,22 @@
 
 </head>
 <body>
-<%@include file="../layout/header.jsp" %>
-<div id="container">
+<%@include file="../../layout/header.jsp" %>
+<div id="khung">
     <h1>Quản lý người dùng</h1>
-    <div class="filter-container">
+    <div class="khung-loc">
         <div>
-            <select id="userFilterSelect">
+            <select id="loc-quyen">
                 <option value="ALL">Tất cả</option>
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
             </select>
-            <button id="filterButton" class="filter" onclick="applyFilter()">
-                <i class="fa-solid fa-filter filter-icon"></i>
+            <button id="nut-loc" class="filter" onclick="applyFilter()">
+                <i class="fa-solid fa-filter icon-loc"></i>
             </button>
         </div>
     </div>
-    <table id="users-container">
+    <table id="khung-nguoi-dung">
         <thead>
         <tr>
             <th>ID</th>
@@ -35,16 +35,18 @@
         </thead>
         <tbody></tbody>
     </table>
-    <button class="add-user-button" id="add-user">Thêm</button>
+    <button class="nut-them" id="them-nguoi-dung">Thêm</button>
 </div>
-<div id="popup">
-    <div id="popup-content">
+<div id="khung-chua">
+    <div id="thong-tin">
+        <div id="nut-dong"><i class="fa-sharp fa-solid fa-xmark"></i></div>
         <h2>Tài khoản</h2>
-        <form id="user-form">
+        <form id="dien-thong-tin">
             <input type="hidden" id="id">
             <label for="username">Username:</label>
             <input type="text" id="username" required>
-
+            <label for="password" id="pass">Password:</label>
+            <input type="text" id="password" required>
             <label for="fullName">Tên:</label>
             <input type="text" id="fullName" required>
             <label for="email">Email:</label>
@@ -53,10 +55,14 @@
             <input type="text" id="phone" required>
             <label for="address">Địa chỉ:</label>
             <input type="text" id="address" required>
-            <label for="role">Vai trò:</label>
-            <input type="text" id="role" required>
-            <button type="submit" id="save-button">Lưu</button>
-            <button type="button" id="delete-button">Xóa</button>
+            <label for="quyen">Vai trò:</label>
+            <select id="quyen" required>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+
+            <button type="submit" id="nut-luu">Lưu</button>
+            <button type="button" id="nut-xoa">Xóa</button>
         </form>
     </div>
 </div>
