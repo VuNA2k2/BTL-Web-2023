@@ -17,10 +17,6 @@
         <div>
             <select id="statusFilterSelect">
                 <option value="">Tất cả</option>
-                <option value="5">iphone 11</option>
-                <option value="6">iphone 12</option>
-                <option value="7">iphone 13</option>
-                <option value="8">iphone 14</option>
             </select>
             <button id="filterButton" class="filter">
                 <i class="fa-solid fa-filter filter-icon"></i>

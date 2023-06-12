@@ -34,6 +34,33 @@ function fetchData(categoryId) {
             alert('Lỗi khi tìm nạp dữ liệu sản phẩm. Vui lòng thử lại.');
         });
 }
+function fetchCategory() {
+    let url='https://localhost:443/WebS2023_war/api/categories';
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getTokenFromCookie(),
+        },
+    })
+        .then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Lỗi khi tìm nạp dữ liệu');
+            }
+        })
+        .then(function (data) {
+            console.log(data);
+            filterCategory(data.data);
+        })
+        .catch(function (error) {
+            console.error(error);
+            // Xử lý lỗi tìm nạp hoặc hiển thị thông báo lỗi
+            alert('Lỗi khi tìm nạp dữ liệu. Vui lòng thử lại.');
+        });
+}
 function displayProductData(data) {
     const productItems = document.getElementById('productItems');
 
@@ -122,5 +149,17 @@ function applyFilter() {
     const selectedStatus = document.getElementById('statusFilterSelect').value;
     fetchData(selectedStatus);
 }
+
+function filterCategory(data)
+{
+    const selectElement = document.getElementById('statusFilterSelect');
+    for (var i = 0; i < data.length; i++) {
+        const option = document.createElement('option');
+        option.value = data[i].id;
+        option.textContent = data[i].name;
+        selectElement.appendChild(option);
+    }
+}
+fetchCategory();
 applyFilter();
 
