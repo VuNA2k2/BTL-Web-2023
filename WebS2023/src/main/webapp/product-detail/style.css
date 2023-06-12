@@ -18,8 +18,13 @@ h1 {
 }
 
 #slideshow-container {
-    flex-basis: 30%;
+    flex-basis: 80%;
     padding: 20px;
+}
+
+#slideshow-image{
+    width: 100%;
+    height: auto;
 }
 
 .product-data {

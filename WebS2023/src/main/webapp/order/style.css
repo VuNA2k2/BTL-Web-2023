@@ -19,7 +19,7 @@ h1 {
     text-align: center;
 }
 
-.modal {
+#san-pham {
     display: none;
     position: fixed;
     z-index: 1;
@@ -31,7 +31,7 @@ h1 {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-content {
+.noi-dung-san-pham {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
@@ -39,7 +39,7 @@ h1 {
     width: 80%;
 }
 
-.close {
+.dong {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -47,14 +47,14 @@ h1 {
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
+.dong:hover,
+.dong:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-.order-details-button {
+.hien-thi-san-pham {
     padding: 5px 10px;
     background-color: transparent;
     border: none;
@@ -72,7 +72,7 @@ select {
     padding: 3px 0;
 }
 
-.update-order {
+.nut-cap-nhat {
     padding: 3px 16px;
     background-color: red;
     color: white;
@@ -85,26 +85,26 @@ select {
 
 }
 
-.filter-icon {
+.icon-loc {
     margin-right: 5px;
     color: darkgray;
 
 }
 
-.filter-container {
+.khung-loc {
     display: flex;
     justify-content: right;
     margin-right: 10px;
 }
 
-#filterButton
+#nut-loc
 {
     border: none;
     background-color: transparent;
 }
 
 
-.rate-btn
+.nut-danh-gia
 {
     border: none;
     background-color: transparent;
