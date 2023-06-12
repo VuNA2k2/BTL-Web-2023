@@ -9,36 +9,32 @@
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
-    <div id="container">
-        <h1>Danh sách sản phẩm</h1>
+<div id="container">
+    <h1>Danh sách sản phẩm</h1>
 
-        <div class="filter-container">
-            <div>
-                <select id="statusFilterSelect">
-                    <option value="">Tất cả</option>
-                    <option value="5">iphone 11</option>
-                    <option value="6">iphone 12</option>
-                    <option value="7">iphone 13</option>
-                    <option value="8">iphone 14</option>
-                </select>
-                <button id="filterButton" class="filter">
-                    <i class="fa-solid fa-filter filter-icon"></i>
-                </button>
-            </div>
+    <div class="filter-container">
+        <div>
+            <select id="statusFilterSelect">
+                <option value="">Tất cả</option>
+            </select>
+            <button id="filterButton" class="filter">
+                <i class="fa-solid fa-filter filter-icon"></i>
+            </button>
         </div>
-
-
-        <table id="productTable">
-            <tr>
-                <th>ID</th>
-                <th>Tên</th>
-                <th>Giá</th>
-                <th>Loại</th>
-                <th>Dung lượng</th>
-                <th></th>
-            </tr>
-        </table>
     </div>
+
+
+    <table id="productTable">
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Loại</th>
+            <th>Dung lượng</th>
+            <th></th>
+        </tr>
+    </table>
+</div>
 
 <!-- Modal Thêm sản phẩm -->
 <button class="add-product-button" onclick="openAddProductModal()">Thêm sản phẩm</button>
@@ -93,4 +89,3 @@
 </body>
 
 </html>
-
