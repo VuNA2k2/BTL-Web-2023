@@ -148,12 +148,12 @@
         <h1>Admin</h1>
         <div class="header-menu">
             <ul>
-                <li><a href="#">Người dùng</a></li>
+                <li><a href="https://localhost/WebS2023_war/admin/user">Người dùng</a></li>
                 <li><a href="https://localhost/WebS2023_war/admin/product">Sản phẩm</a></li>
                 <li><a href="https://localhost/WebS2023_war/admin/comment">Đánh giá</a></li>
                 <li><a href="https://localhost/WebS2023_war/admin/dashboard">Thống kê</a></li>
                 <li><a href="https://localhost/WebS2023_war/admin/order-list">Đơn hàng</a></li>
-                <li><a href="#" onclick="logOut()">Đăng xuất</a></li>
+                <li><a href="#" id="dang-xuat">Đăng xuất</a></li>
             </ul>
         </div>
         >
@@ -178,6 +178,8 @@
         localStorage.removeItem('user');
         window.location.href = 'https://localhost/WebS2023_war/login/';
     }
+    const logout = document.getElementById('dang-xuat');
+    logout.addEventListener('click', logOut);
 
 </script>
 </body>
