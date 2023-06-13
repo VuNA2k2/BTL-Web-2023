@@ -12,7 +12,7 @@
 	</head>
 
 	<body>
-		<%@include file="../layout/header.jsp" %>
+		<%@include file="../../layout/header.jsp" %>
 			<div id="container">
 				<h1>Phân loại</h1>
 
@@ -99,7 +99,7 @@
 					</div>
 				</dialog>
 			</div>
-			<%@include file="../layout/footer.jsp" %>
+			<%@include file="../../layout/footer.jsp" %>
 
 				<script src="script.js"></script>
 	</body>

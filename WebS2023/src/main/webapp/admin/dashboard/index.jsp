@@ -15,7 +15,7 @@
 	</head>
 
 	<body>
-		<%@include file="../layout/header.jsp" %>
+		<%@include file="../../layout/header.jsp" %>
 			<div id="container">
 				<h1>Dashboard</h1>
 				<div class="mdl-grid">
@@ -76,7 +76,7 @@
 				</div>
 			</dialog>
 
-			<%@include file="../layout/footer.jsp" %>
+			<%@include file="../../layout/footer.jsp" %>
 
 				<script src="script.js"></script>
 	</body>
