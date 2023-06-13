@@ -25,7 +25,7 @@ selectElement.addEventListener('change', function () {
     const tableHeaders = document.querySelectorAll('.mdl-data-table th');
     tableHeaders[0].textContent = 'ID';
     tableHeaders[1].textContent = 'Tên sản phẩm';
-    tableHeaders[2].textContent = 'Giá sản phẩm';
+    tableHeaders[2].textContent = 'Doanh thu sản phẩm';
     tableHeaders[3].textContent = 'Chi tiết';
     generateIncome();
   }

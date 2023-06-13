@@ -174,7 +174,6 @@
       <ul>
         <li><a href="https://localhost/WebS2023_war/home">Trang chủ</a></li>
         <li><a href="#">Sản phẩm</a></li>
-        <li><a href="#">iPhone</a></li>
         <li><a href="#">Liên hệ</a></li>
       </ul>
     </div>
