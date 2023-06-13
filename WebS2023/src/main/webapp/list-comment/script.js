@@ -69,7 +69,8 @@ function displayListProductReviews(reviews) {
             review.images.forEach(image => {
                 const aspectRatio = 150 / image.height;
                 const newWidth = Math.round(image.width * aspectRatio);
-                imagesHtml += `<img src="${image.link}" alt="Review Image" style="max-height: 150px; width: ${newWidth}px;">`;
+                imagesHtml +=
+                    `<img src="${image.link}" alt="Review Image" style="max-height: 150px; width: ${newWidth}px;">`;
             });
             imagesHtml += '</div>';
         }
@@ -119,7 +120,14 @@ function refreshReviewList() {
     const filterValue = document.querySelector('input[name="filterStar"]:checked').value;
     const filteredReviews = filterReviews(filterValue);
     const sortValue = document.getElementById('sortSelect').value;
-    sortReviews(sortValue, filteredReviews);
+    const reviewListProduct = document.getElementById('review-list');
+    reviewListProduct.innerHTML = '';
+    if (filteredReviews.length === 0) {
+        reviewListProduct.innerHTML =
+            '<div class="no-reviews">Không có đánh giá phù hợp!</div>';
+    } else {
+        sortReviews(sortValue, filteredReviews);
+    }
 }
 
 // Update bộ lọc và sắp xếp
