@@ -29,8 +29,9 @@
         </div>
     </div>
 </div>
+<script src="script.js"></script>
 <%@ include file="../list-comment/index.jsp" %>
 <%@ include file="../layout/footer.jsp" %>
-<script src="script.js"></script>
+
 </body>
 </html>
