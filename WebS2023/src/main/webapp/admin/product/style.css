@@ -1,0 +1,174 @@
+/* style.css */
+
+#container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+
+}
+
+/* Main content */
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+}
+
+#filterButton
+{
+    border: none;
+    background-color: transparent;
+}
+
+#statusFilterSelect {
+    width: 100px;
+}
+
+.filter-icon {
+    color: #555;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+
+.add-product-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #34a853;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+}
+
+.add-product-button:hover {
+    background-color: #228b22;
+}
+
+.add-product-button:focus {
+    outline: none;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button[type="button"] {
+    padding: 8px 12px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #45a049;
+}
+
+/* CSS cho nút sửa sản phẩm */
+.edit-product {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* CSS cho nút xóa sản phẩm */
+.delete-product {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* CSS cho ô chứa các nút */
+td.actions-cell {
+    text-align: center;
+}
+

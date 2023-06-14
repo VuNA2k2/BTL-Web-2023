@@ -1,0 +1,7 @@
+CREATE TABLE order_ref_product (
+    oid INTEGER REFERENCES orders(id),
+    pid INTEGER ,
+    pname VARCHAR(255);,
+    quantity INTEGER,
+    price DECIMAL(10, 2)
+);

@@ -1,0 +1,86 @@
+/* style.css */
+#product-info, #review-text, #filter, #sort {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 80px;
+    margin-bottom: 0;
+}
+.star-fill {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://i.imgur.com/fnINRRG.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+.review-item{
+    background-color:aliceblue;
+    padding:10px;
+    margin: 5px 0;
+    list-style-type: none;
+}
+.image-form{
+    margin-bottom: 25px;
+}
+#product-info p{
+    font-size: 20px;
+}
+#filter label {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    background-color: aliceblue;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#filter input[type="radio"] {
+    display: none;
+}
+#filter label:hover {
+    background-color: wheat;
+    border: 1px solid yellow;
+}
+#filter input[type="radio"]:checked + label {
+    background-color: #e8cd8e;
+    color: black;
+}
+#filter label.selected {
+    background-color: #efc76d;
+    color: black;
+    border-color: red;
+}
+#sort {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+#sortSelect {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #efc76d;
+    color: black;
+}
+#sortSelect option {
+    background-color: white;
+    color: black;
+}
+#sortSelect option:hover,
+#sortSelect option:checked {
+    background-color: #efc76d;
+    color: black;
+}
+#review-text {
+    margin: 16px 0 0 0;
+}
+ul {
+    padding: 0 80px;
+}

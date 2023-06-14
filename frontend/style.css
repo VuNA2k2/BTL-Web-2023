@@ -1,0 +1,250 @@
+/* Thiết lập font chữ và màu chữ chung cho toàn bộ trang web */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Thiết lập các phần tử header */
+  header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  /* Thiết lập menu điều hướng */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  /* Thiết lập phần banner trang web */
+  .banner {
+    position: relative;
+    height: 400px;
+  }
+  
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .banner-text h2 {
+    color: #fff;
+    font-size: 4em;
+    margin: 0;
+    animation: slide-top 1s ease-out forwards;
+  }
+  
+  .banner-text p {
+    color: #fff;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+    animation: slide-top 1s ease-out 0.5s forwards;
+  }
+  
+  @keyframes slide-top {
+    0% {
+      opacity: 0;
+      transform: translateY(-20%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Thiết lập phần sản phẩm */
+  .product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .product img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-out;
+  }
+  
+  .product:hover img {
+    transform: scale(1.2);
+  }
+  
+  .product h3 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .product p {
+    margin: 0;
+  }
+  
+  .product button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out;
+  }
+  
+  .product button:hover {
+    background-color: #0056b3;
+    animation: pulse 2s ease-out infinite;
+  }
+  
+  /* Thiết lập phần footer */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Thiết lập hiệu ứng cho button */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        }
+        100% {
+        transform: scale(1);
+        }
+        }
+        
+        /* Thiết lập hiệu ứng cho menu điều hướng */
+        nav ul li a {
+        position: relative;
+        }
+        
+        nav ul li a::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        bottom: -5px;
+        left: 0;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-out;
+        }
+        
+        nav ul li a:hover::before {
+        transform: scaleX(1);
+        }
+        
+        /* Thiết lập hiệu ứng cho nút mua hàng */
+        .buy-btn {
+        position: relative;
+        overflow: hidden;
+        }
+        
+        .buy-btn::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.2);
+        top: 0;
+        left: 0;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+        }
+        
+        .buy-btn:hover::before {
+        opacity: 1;
+        }
+        
+        .buy-btn::after {
+        content: '';
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        background-color: rgba(255, 255, 255, 0.1);
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        transform: translate(-50%, -50%) rotate(45deg);
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+        }
+        
+        .buy-btn:hover::after {
+        opacity: 1;
+        }
+        
+        .buy-btn span {
+        position: relative;
+        z-index: 2;
+        }
+        
+        /* Thiết lập hiệu ứng cho phần sản phẩm */
+        .product {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        
+        .product:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .product::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.2);
+        top: 0;
+        left: 0;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+        }
+        
+        .product:hover::before {
+        opacity: 1;
+        }
+  

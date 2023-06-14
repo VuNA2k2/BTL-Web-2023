@@ -1,0 +1,174 @@
+#khung {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: none;
+
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.nut-them {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #34a853;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    float: right;
+}
+
+.nut-them:hover {
+    background-color: #228b22;
+}
+
+.nut-them:focus {
+    outline: none;
+}
+
+.nguoi-dung {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #34a853;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 5px 35% 0 0;
+    float: right;
+}
+
+.nguoi-dung:hover {
+    background-color: #228b22;
+}
+
+#khung-chua {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+#thong-tin {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#thong-tin h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#thong-tin label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+#thong-tin input[type="text"],
+#thong-tin input[type="email"],
+#thong-tin input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#thong-tin button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#nut-luu {
+    background-color:green;
+    display: flex;
+    float: right;
+
+}
+
+
+#nut-xoa {
+    background-color: red;
+
+}
+
+
+#khung-nguoi-dung {
+    margin-top: 20px;
+}
+
+.icon-loc {
+    margin-right: 5px;
+    color: darkgray;
+
+}
+
+.khung-loc {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+}
+
+#nut-loc
+{
+    border: none;
+    background-color: transparent;
+}
+
+#nut-dong {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#nut-dong:hover {
+    color: red;
+}
+
+#quyen {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+}
